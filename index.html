@@ -187,13 +187,13 @@
     <div><b>Early says nothing more</b><span>The tag is the whole message. No green line under the date explaining why. <span class="tag dec">Julia · Oct 5</span></span></div>
     <div><b>Late on the brand's side: the date moves</b><span>New date at normal size, no tag, and one amber line saying what is ready for them. The old date shows small and crossed out, but only up to Film: once filming starts the tile just shows the new date. <span class="tag dec">Julia · Oct 5</span></span></div>
     <div><b>Late on the creators' side: the date holds</b><span>No move and nothing crossed out. At most one grey line saying where things are. <span class="tag dec">Julia · Oct 5</span></span></div>
-    <div><b>Windows overlap, and review is 3 business days</b><span>The phases in the full timeline are wider and overlap: filming opens 6 days after shipping starts, and review starts as drafts come in. Each draft is reviewed within 3 business days. That number is an internal rule and is not shown; the Review row says feedback is given. <span class="tag dec">Julia · Oct 5</span></span></div>
+    <div><b>Windows overlap, and review is 3 business days</b><span>The phases in the full timeline are wider and overlap: filming opens 6 days after shipping starts, and review opens 10 days after filming and runs on while posts go live. Each draft is reviewed within 3 business days. That number is an internal rule and is not shown; the Review row says feedback is given. <span class="tag dec">Julia · Oct 5</span></span></div>
     <div><b>Now can sit on two phases</b><span>When some creators are filming and others are in review, both rows are marked Now. The date and the tag still follow the first creator. <span class="tag prop">Proposed</span></span></div>
     <div><b>Stragglers stay quiet</b><span>After week 8 the tile says "8 of 10 posts live." and nothing more. The last two are only mentioned inside the full timeline. <span class="tag dec">Julia · Oct 5</span></span></div>
   </div>
 
   <h2 id="play">The tile, live</h2>
-  <p class="lede">Campaign 1, launched Sep 10 with 10 creators. Planned: creators accepted by day 7, first order delivered by day 21, first draft by day 35, first post by day 42 (the week of Oct 19), last posts by day 56 (Nov 4). In the full timeline the phases overlap: filming opens 6 days after shipping starts, review about a week after that. Pick what happens, then drag the day or press play.</p>
+  <p class="lede">Campaign 1, launched Sep 10 with 10 creators. Planned: creators accepted by day 7, first order delivered by day 21, first draft by day 35, first post by day 42 (the week of Oct 19), last posts by day 56 (Nov 4). In the full timeline the phases overlap: filming opens 6 days after shipping starts, review 10 days after filming opens. Pick what happens, then drag the day or press play.</p>
   <!-- the dark bar sticks only while the live tile is on screen -->
   <div class="playbox">
     <div class="controls" id="controls"></div>
@@ -268,10 +268,10 @@ early       = monday(first_content_expected) &lt; monday(launch + 42)    <span c
 crossed_out = early || (later &amp;&amp; first order not delivered yet)       <span class="c"># later: only up to Film</span>
 
 <span class="c"># 4. the full timeline: windows overlap</span>
-opens = { ship: creators accepted, film: ship.start + 6, review: film.start + 8,
+opens = { ship: creators accepted, film: ship.start + 6, review: film.start + 10,
           post: first_content_expected }                 <span class="c"># + the brand's days on that step</span>
 phase.start = [reached_on(first creator), opens[phase]].min
-phase.end   = planned_end + brand_delay so far           <span class="c"># 7, 21, 35, 42, 56</span>
+phase.end   = planned_end + brand_delay so far           <span class="c"># 7, 21, 35, 49, 56</span>
 now(phase)  = phase is the furthest reached || (reached &amp;&amp; today &lt; phase.end)</pre>
     </div>
     <div class="box">
@@ -282,11 +282,11 @@ now(phase)  = phase is the furthest reached || (reached &amp;&amp; today &lt; ph
           <tr><td class="q" style="min-width:0">Match</td><td>Launch</td><td>Day 7</td><td class="num">Sep 10 to 16</td></tr>
           <tr><td class="q" style="min-width:0">Ship</td><td>Creators accepted, day 7</td><td>Day 21</td><td class="num">Sep 17 to 30</td></tr>
           <tr><td class="q" style="min-width:0">Film</td><td>6 days after shipping opens, day 13 <span class="tag dec">Julia · Oct 5</span></td><td>Day 35</td><td class="num">Sep 23 to Oct 14</td></tr>
-          <tr><td class="q" style="min-width:0">Review</td><td>About a week after filming opens, day 21 <span class="tag prop">Proposed</span></td><td>Day 42</td><td class="num">Oct 1 to 21</td></tr>
+          <tr><td class="q" style="min-width:0">Review</td><td>10 days after filming opens, day 23 <span class="tag dec">Julia · Oct 5</span></td><td>Day 49 <span class="tag prop">Proposed</span></td><td class="num">Oct 3 to 28</td></tr>
           <tr><td class="q" style="min-width:0">Post</td><td>First content expected, day 42</td><td>Day 56</td><td class="num">Oct 22 to Nov 4</td></tr>
         </tbody>
       </table></div>
-      <p class="note">Before this round the windows did not overlap: Film Oct 1 to 14, Review Oct 15 to 21 (7 days). Only the openings moved; the closing days are the same.</p>
+      <p class="note">Before this round the windows did not overlap: Film Oct 1 to 14, Review Oct 15 to 21 (7 days). Film and Review now open earlier, and Review closes a week later so that it overlaps Post (Julia, Oct 5: "post can overlap with review"). Post still opens on the day first content is expected, so the Post row never starts before the date on the tile.</p>
       <h3 style="margin-top:22px">What Nisarg needs from the data</h3>
       <div class="tablewrap" style="margin-top:8px"><table>
         <tbody>
@@ -386,7 +386,7 @@ now(phase)  = phase is the furthest reached || (reached &amp;&amp; today &lt; ph
     <thead><tr><th>Question</th><th>What the study assumes</th><th>Who</th></tr></thead>
     <tbody>
       <tr><td class="q">Now on two rows when creators are spread over two phases?</td><td>Yes. The furthest phase reached, plus any earlier one whose window is still open.</td><td>Julia</td></tr>
-      <tr><td class="q">When does Review open?</td><td>About a week after filming opens: Oct 1 on a Sep 10 launch. That number is mine.</td><td>Julia</td></tr>
+      <tr><td class="q">When does Review close?</td><td>At the end of week 7 (Oct 28), one week into Post. That number is mine.</td><td>Julia</td></tr>
       <tr><td class="q">Does 3 business days of review shorten the 6-week promise?</td><td>No. First draft to first post stays 7 days: 3 business days to review, then the creator posts.</td><td>Julia</td></tr>
       <tr><td class="q">"Started 7 days early." shows less often now.</td><td>Film opens Sep 23 on plan, so a first order on Sep 24 is no longer early for that row, even though it still earns the Early tag on the date.</td><td>Julia</td></tr>
       <tr><td class="q">On a creator-side delay the tile can show a week that has ended. Is that right?</td><td>Yes, always with one grey line under it. Example: "Week of Oct 19" still showing on Oct 26, with "First draft approved, posting next."</td><td>Julia</td></tr>
@@ -454,7 +454,8 @@ const shiftPosts = (first) => ON_PLAN_POSTS.map((d) => d - 42 + first);
 
 const DUR = { accepted: 7, delivered: 14, draft: 14 };               /* the time each step is given; review is counted in business days */
 const FILM_AFTER_SHIP = 6;      /* filming opens 6 days after shipping opens (Julia, Oct 5) */
-const REVIEW_AFTER_FILM = 8;    /* review opens about a week after filming opens (proposed) */
+const REVIEW_AFTER_FILM = 10;   /* review opens 10 days after filming opens (Julia, Oct 5) */
+const ENDS = [7, 21, 35, 49, 56];   /* when each window closes. Review runs a week into Post so the two overlap (Julia, Oct 5: "post can overlap with review") */
 const REVIEW_BIZ = 3;           /* each draft is reviewed within 3 business days (Julia, Oct 5) */
 const addBiz = (d, n) => { let x = d; for (let k = 0; k < n;) { x += 1; const wd = dateOf(x).getDay(); if (wd !== 0 && wd !== 6) k += 1; } return x; };
 /* who holds each step: the brand approves its creators / ships its own orders / reviews its own drafts */
@@ -510,7 +511,7 @@ function compute(sc, t, rule = 'split') {
   }
   open[4] = 42 + bd;                                                  /* Post opens on the day first content is expected */
   st.push(Math.max(Math.min(forecast, open[4]), st[3] + 1));
-  const en = PLAN_B.slice(1).map((b, i) => Math.max(b + cum[Math.min(i, 3)], st[i] + 1));
+  const en = ENDS.map((b, i) => Math.max(b + cum[Math.min(i, 3)], st[i] + 1));
   const ci = PLAN_B.findIndex((b, k) => k > 0 && t < b);
   const idx = rule === 'hold' ? Math.max(front, ci < 0 ? 4 : ci - 1) : front;
   if (brandHolds) en[idx] = Math.max(en[idx], t + 1);
