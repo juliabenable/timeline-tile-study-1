@@ -232,7 +232,7 @@
         <li><b>Late on the creators' side</b> (or ours, or the carrier's): the date holds. Nothing on this side ever moves it later.</li>
         <li><b>The tag</b> shows when the week on the tile is earlier than the week promised at launch. There is no opposite tag.</li>
         <li><b>The crossed-out date</b> shows with the tag whenever the week is earlier. When the brand's delay made it later, it shows up to Film: once the first order is delivered, the tile just shows the new date. It shows again while a draft waits on the brand's own review.</li>
-        <li><b>After the first post</b> the tile states the fact and counts posts. After the last one it says so.</li>
+        <li><b>After the first post</b> the tile states the fact and counts posts. After the last one it says so. <span class="tag dec">Julia · Oct 5</span></li>
       </ol>
       <h3 style="margin-top:22px">The full timeline, in words</h3>
       <ol class="steps">
@@ -314,7 +314,7 @@ now(phase)  = phase is the furthest reached || (reached &amp;&amp; today &lt; ph
       <tr><td class="q">A small gain flips the week</td><td>A gain of 4 days can move the Monday. The tag says "Early" and nothing about how much, so it never overstates.</td><td><span class="tag dec">Julia · Oct 5</span></td></tr>
       <tr><td class="q">The expected week is the current week</td><td>The tile keeps its format: "Week of Oct 19". "This week" was considered and dropped at the copy desk: it reads as a promise, and it would not match the crossed-out date beside it.</td><td><span class="tag prop">Proposed</span></td></tr>
       <tr><td class="q">The expected week ends with nothing live</td><td>Brand's side alone: cannot happen, the date moves with every day they take. Creators' side: the tile keeps the planned week after it has ended, and always carries one grey line in that state. This is the only time the tile shows a week that has gone.</td><td><span class="tag dec">Julia · Oct 5</span></td></tr>
-      <tr><td class="q">Early, then the next step is slow</td><td>The gain drains away day by day, back to the planned week, and stops there. The tag and the crossed-out date leave when it gets there. Scenario "Early, then filming drags".</td><td><span class="tag prop">Proposed</span></td></tr>
+      <tr><td class="q">Early, then the next step is slow</td><td>The gain drains away day by day, back to the planned week, and stops there. The tag and the crossed-out date leave when it gets there. Scenario "Early, then filming drags".</td><td><span class="tag dec">Julia · Oct 5</span></td></tr>
       <tr><td class="q">A brand delay, then a fast step</td><td>The date comes back earlier. The crossed-out date leaves if it returns to the week promised at launch.</td><td><span class="tag prop">Proposed</span></td></tr>
       <tr><td class="q">The date moved later</td><td>Only the brand can cause it. New week at normal size, no tag. The old date, small and crossed out, shows up to Film; once filming starts it goes and the tile just shows the new date. It shows again while a draft waits on the brand's own review. Amber line while they hold a step, grey line once they have acted.</td><td><span class="tag dec">Julia · Oct 5</span></td></tr>
       <tr><td class="q">Month name</td><td>Frozen at launch, even when first content now lands a month earlier or later.</td><td><span class="tag dec">Julia · Oct 2</span></td></tr>
@@ -340,12 +340,12 @@ now(phase)  = phase is the furthest reached || (reached &amp;&amp; today &lt; ph
       <tr><td class="q">A draft waits longer than 3 business days</td><td>On our side: nothing on the tile until first content would slip past the promised week, then one grey line. On the brand's side, after their own 3 business days: amber, and the date moves.</td><td><span class="tag prop">Proposed</span></td></tr>
 
       <tr class="grp"><td colspan="3">The end of the campaign</td></tr>
-      <tr><td class="q">Every post is live before week 8 ends</td><td>"All 10 posts are live · Oct 24" with the Early tag.</td><td><span class="tag prop">Proposed</span></td></tr>
+      <tr><td class="q">Every post is live before week 8 ends</td><td>"All 10 posts are live · Oct 24" with the Early tag.</td><td><span class="tag dec">Julia · Oct 5</span></td></tr>
       <tr><td class="q">The brand's delay moved the date</td><td>Every later end date, and the end of the campaign, moves later by the same days.</td><td><span class="tag dec">Julia · Oct 5</span></td></tr>
       <tr><td class="q">Creators ran late</td><td>The end of the campaign holds at the plan. Posts that land after it are the quiet tail.</td><td><span class="tag dec">Julia · Oct 5</span></td></tr>
       <tr><td class="q">Stragglers after week 8</td><td>The tile says "8 of 10 posts live." No amber, no count of what is missing. The full timeline's last row says "Any last posts go live." The follow-up is logged but not shown.</td><td><span class="tag dec">Julia · Oct 5</span></td></tr>
       <tr><td class="q">A straggler never posts</td><td>The tile keeps "9 of 10 posts live." for as long as the campaign is open. It never turns into a warning. How and when the campaign closes is the NPS study's question, not the tile's.</td><td><span class="tag open">Julia, Tony</span></td></tr>
-      <tr><td class="q">The first post goes live, then nothing for weeks</td><td>"1 of 10 posts live." The date on the tile is a fact by then and does not move.</td><td><span class="tag prop">Proposed</span></td></tr>
+      <tr><td class="q">The first post goes live, then nothing for weeks</td><td>"1 of 10 posts live." The date on the tile is a fact by then and does not move.</td><td><span class="tag dec">Julia · Oct 5</span></td></tr>
       <tr><td class="q">The campaign is completed</td><td>The tile stays as the record: "All 10 posts are live" and the dates.</td><td><span class="tag prop">Proposed</span></td></tr>
 
       <tr class="grp"><td colspan="3">People</td></tr>
@@ -729,7 +729,7 @@ function renderLines() {
     row('n', 'A draft is inside its 3 business days of review, past day 42', COPY.n_review, 'Holds'),
     row('n', 'The first draft is approved, the post is not live', COPY.n_approved, 'Holds'),
     row('n', 'After the first post', COPY.n_count(3, 10), 'A fact'),
-    row('n', 'After week 8 with posts still to come (stragglers)', `${COPY.n_count(8, 10)} Nothing else on the tile.`, 'A fact'),
+    row('n', 'After week 8 with posts still to come (stragglers). The tile adds nothing about the missing posts', COPY.n_count(8, 10), 'A fact'),
     row('n', 'Every post is live', COPY.n_first('Oct 22'), 'A fact'),
     row('n', 'The campaign is paused', COPY.n_paused('Oct 3'), 'Moves on resume'),
   ].join('');
