@@ -122,6 +122,8 @@
   .shot .cap { margin-top: 8px; font-size: 12.5px; color: var(--ink2); }
   .shot .cap b { color: var(--ink); font-weight: 600; }
   .shot .when { font-size: 11.5px; color: var(--mute); margin-bottom: 6px; font-variant-numeric: tabular-nums; }
+  .shot .side { font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--warn); margin-bottom: 4px; }
+  .shot .side.hold { color: var(--mute); }
   .cell .same { font-size: 12.5px; color: var(--mute); padding: 10px 0; }
 
   table { width: 100%; border-collapse: collapse; font-size: 13px; background: var(--card); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; }
@@ -175,15 +177,16 @@
   <h1>The tile that moves: the Campaign timeline at every stage, early and late</h1>
   <p class="intro">Julia, Oct 5: the tile "should dynamically update the numbers if things come earlier", then "let's keep C and H, so now think through every single stage of the campaign and what it should look like, and every edge case, including early and late", and "including the stragglers at the very end of campaign, but don't want to draw too much attention to those."</p>
   <p class="intro">So this page now does three things. It shows the one tile that was kept, live. It walks that tile through every stage of a campaign in three columns: early, on plan, late. And it lists the edge cases with what the tile does in each.</p>
-  <div class="toc"><a href="#kept">What is kept</a><a href="#play">The tile, live</a><a href="#stages">Every stage</a><a href="#lines">The line under the date</a><a href="#rule">The rule</a><a href="#edges">Edge cases</a><a href="#dropped">Considered and dropped</a><a href="#open">Open questions</a></div>
+  <div class="toc"><a href="#kept">What is decided</a><a href="#play">The tile, live</a><a href="#stages">Every stage</a><a href="#lines">The line under the date</a><a href="#rule">The rule</a><a href="#edges">Edge cases</a><a href="#dropped">Considered and dropped</a><a href="#open">Open questions</a></div>
 
-  <h2 id="kept">What is kept</h2>
+  <h2 id="kept">What is decided</h2>
+  <p class="lede">Julia, Oct 5, after the first pass of this page: "let's not do quiet late move then if the delay is on creators' side? If it's because the brand has yet to review I'm ok with that. We can just have the old date crossed in small and the new date normal."</p>
   <div class="answer">
     <div><b>The tile: new date, old date crossed out, an "Early" tag</b><span>Versions C and H of the first round, which are the same tile. <span class="tag dec">Julia · Oct 5</span></span></div>
-    <div><b>Only the front moves</b><span>One creator being early moves "first content expected". It never moves the end of a phase or of the campaign. <span class="tag dec">Julia · Oct 5</span></span></div>
-    <div><b>Late: the date moves too, quietly</b><span>No tag, no crossed-out date, no red. The date is never in the past and never one we already know we will miss. <span class="tag prop">Proposed</span> Tony took lateness out on Sep 8, so this needs his yes.</span></div>
+    <div><b>Only the front moves, on the first creator</b><span>One creator being early moves "first content expected". It never moves the end of a phase or of the campaign. On a big campaign the tag will show almost every time, and that is fine. <span class="tag dec">Julia · Oct 5</span></span></div>
     <div><b>Early says nothing more</b><span>The tag is the whole message. No green line under the date explaining why. <span class="tag dec">Julia · Oct 5</span></span></div>
-    <div><b>One line under the date, only when late</b><span>Grey when we are waiting. Amber only when it is the brand's move. <span class="tag prop">Proposed</span></span></div>
+    <div><b>Late on the brand's side: the date moves</b><span>New date at normal size, the old date small and crossed out, no tag, and one amber line saying what is ready for them. <span class="tag dec">Julia · Oct 5</span></span></div>
+    <div><b>Late on the creators' side: the date holds</b><span>No move and nothing crossed out. At most one grey line saying where things are. <span class="tag dec">Julia · Oct 5</span></span></div>
     <div><b>Stragglers stay quiet</b><span>After week 8 the tile says "8 of 10 posts live." and nothing more. The last two are only mentioned inside the full timeline. <span class="tag dec">Julia · Oct 5</span></span></div>
   </div>
 
@@ -200,18 +203,19 @@
   </div>
 
   <h2 id="stages">Every stage</h2>
-  <p class="lede">Each tile below is drawn by the same rule as the live one, frozen on one day of one campaign. Read across: the same stage when things came early, on plan, and late.</p>
+  <p class="lede">Each tile below is drawn by the same rule as the live one, frozen on one day of one campaign. Read across: the same stage when things came early, on plan, and late. Late has two kinds: the brand's side, where the date moves, and the creators' side, where it holds.</p>
   <div class="board" id="board"></div>
 
   <h2 id="lines">The line under the date</h2>
-  <p class="lede">One line, at most, and only when the date is later than planned. It answers "why does it say that?" and nothing else. The wording went through the copy desk on Oct 5 and is <span class="tag prop">Proposed</span>; "First content expected" is the label already agreed (Tony, Sep 8).</p>
+  <p class="lede">One line, at most, and only when something is later than planned. Having grey and amber lines is decided (Julia, Oct 5: "grey lines ok", "yes amber"). The wording went through the copy desk on Oct 5 and is <span class="tag prop">Proposed</span>; "First content expected" is the label already agreed (Tony, Sep 8).</p>
   <div class="tablewrap"><table>
-    <thead><tr><th>Tone</th><th>When</th><th>The line</th></tr></thead>
+    <thead><tr><th>Tone</th><th>When</th><th>The line</th><th>The date</th></tr></thead>
     <tbody id="lines-body"></tbody>
   </table></div>
-  <p class="note">No line at all is the normal state: a campaign that is on plan or early shows the date and nothing under it. A line only appears once the date has moved past the plan.</p>
+  <p class="note">No line at all is the normal state: a campaign that is on plan or early shows the date and nothing under it.</p>
   <p class="note">There is no green line. An early date carries the Early tag and nothing else: the line "The first order was delivered 7 days early." was removed. <span class="tag dec">Julia · Oct 5</span></p>
-  <p class="note">* These two say the team is doing something. They only show when the log backs it up (a message sent, a call logged). With no log, there is no line.</p>
+  <p class="note">* These say the team is doing something. They only show when the log backs it up (a message sent, a call logged). With no log, there is no line.</p>
+  <p class="note">** New wording from this round, not yet through the copy desk. It exists so the tile never shows a week that has ended with nothing under it.</p>
   <p class="note">Amber never says "waiting on you" (cut as a nag in earlier rounds). It gives the count and what is ready.</p>
 
   <h2 id="rule">The rule</h2>
@@ -222,29 +226,38 @@
         <li><b>The plan</b> counts days from launch: creators accepted by 7, first order delivered by 21, first draft in by 35, first post live by 42, last posts by 56.</li>
         <li><b>Each step is about the first creator to get there</b>, because the tile is about first content.</li>
         <li><b>Early:</b> when the first order, the first draft or the first post lands early, "first content expected" moves earlier by the same number of days. Creators accepting early does not move it.</li>
-        <li><b>Late:</b> the date is the later of two things: what the last step implies, and today plus the time the remaining steps need (21 days after an order arrives, 7 after a draft). So it slides later only when it has to. <span class="tag prop">Proposed</span></li>
+        <li><b>Late on the brand's side:</b> every day the brand holds a step past its time is added to the date. Three steps can be theirs: approving creators (7 days from launch), shipping their own orders (14 days from acceptance), reviewing their own drafts (7 days from the draft). The date stays moved after they act.</li>
+        <li><b>Late on the creators' side</b> (or ours, or the carrier's): the date holds. Nothing on this side ever moves it later.</li>
         <li><b>The tag</b> shows when the week on the tile is earlier than the week promised at launch. There is no opposite tag.</li>
-        <li><b>The crossed-out date</b> shows with the tag, only for good news.</li>
-        <li><b>The tail:</b> early never moves an end date. Late moves the ends later by the same number of days.</li>
+        <li><b>The crossed-out date</b> shows whenever the week on the tile is not the week promised at launch, earlier or later.</li>
+        <li><b>The tail:</b> early never moves an end date. A brand-side delay moves every later end by the same number of days. A creator-side delay moves nothing.</li>
         <li><b>After the first post</b> the tile states the fact and counts posts. After the last one it says so.</li>
       </ol>
 <pre><span class="c"># the plan, in days from launch</span>
-PLAN   = { accepted: 7, delivered: 21, first_draft: 35, first_post: 42, last_post: 56 }
-REMAIN = { accepted: 35, delivered: 21, first_draft: 7, first_post: 0 }   <span class="c"># to first content</span>
-
+PLAN    = { accepted: 7, delivered: 21, first_draft: 35, first_post: 42, last_post: 56 }
+REMAIN  = { accepted: 35, delivered: 21, first_draft: 7, first_post: 0 }    <span class="c"># days to first content</span>
+ALLOWED = { accepted: 7, delivered: 14, first_draft: 14, first_post: 7 }   <span class="c"># time each step is given</span>
 <span class="c"># reached_on(step) = the day the FIRST creator got there</span>
-latest = last of [delivered, first_draft] reached        <span class="c"># accepted never pulls the date earlier</span>
-base   = latest ? reached_on(latest) + REMAIN[latest]
-                : [42, reached_on(:accepted) + 35].max   <span class="c"># a slow match can only push later</span>
-floor  = today + REMAIN[next step not yet reached]       <span class="c"># what is still physically possible</span>
 
+<span class="c"># 1. days lost while the ball was with the brand</span>
+brand_delay = 0
+for step in [accepted, delivered, first_post] when the brand owns it:
+  <span class="c"># owns = approves its creators / ships its own orders / reviews its own drafts</span>
+  due          = [PLAN[step] + brand_delay, reached_on(previous step) + ALLOWED[step]].max
+  brand_delay += [(reached_on(step) || today) - due, 0].max
+
+<span class="c"># 2. the realistic date, from the first creator</span>
+latest    = last of [delivered, first_draft] reached     <span class="c"># accepted never pulls the date earlier</span>
+base      = latest ? reached_on(latest) + REMAIN[latest] : [42, reached_on(:accepted) + 35].max
+floor     = today + REMAIN[next step not yet reached]
+realistic = [base, floor].max
+
+<span class="c"># 3. what the tile shows: early pulls it in, only the brand pushes it out</span>
 first_content_expected = first_post_reached ? reached_on(:first_post)
-                                            : [base, floor].max
-early      = monday(first_content_expected) &lt; monday(launch + 42)   <span class="c"># tag + crossed-out date</span>
-late_by    = [first_content_expected - 42, 0].max
-
-phase.starts = reached ? reached_on : first_content_expected - REMAIN_AT_START
-phase.ends   = planned_end + late_by        <span class="c"># early never moves an end; late moves all of them</span></pre>
+                                            : [realistic, 42 + brand_delay].min
+early = monday(first_content_expected) &lt;  monday(launch + 42)    <span class="c"># the tag</span>
+moved = monday(first_content_expected) != monday(launch + 42)    <span class="c"># the crossed-out old date</span>
+phase.ends = planned_end + brand_delay so far                    <span class="c"># nothing else moves an end</span></pre>
     </div>
     <div class="box">
       <h3>What Nisarg needs from the data</h3>
@@ -252,14 +265,14 @@ phase.ends   = planned_end + late_by        <span class="c"># early never moves 
         <tbody>
           <tr><td class="q">Four dates per campaign</td><td>The first creator accepted, the first order delivered, the first draft submitted, the first post live.</td></tr>
           <tr><td class="q">Two counts</td><td>Creators on the campaign, posts live.</td></tr>
-          <tr><td class="q">Three flags</td><td>Who ships (Shopify or the brand), who reviews drafts (Benable or the brand), and whether creators are waiting for the brand's approval. They only choose between a grey line and an amber one.</td></tr>
+          <tr><td class="q">Three flags</td><td>Who approves creators, who ships (Shopify or the brand), who reviews drafts (Benable or the brand). They now decide whether the date moves, not only the colour of the line.</td></tr>
           <tr><td class="q">Where it shows</td><td>The tile, the full timeline inside it, and the campaign card on the overview. One computed value feeds all three.</td></tr>
         </tbody>
       </table></div>
       <h3 style="margin-top:22px">What does not change</h3>
       <p class="note" style="margin-top:0">The campaign's month name stays frozen at launch. "Week 4 of 8" stays a calendar count. Local and gift card campaigns have no tile.</p>
-      <h3 style="margin-top:22px">Hold the plan, for comparison</h3>
-      <p class="note" style="margin-top:0">The RULE switch in the live tile has a second setting: "Hold the plan when late". That is the Sep 8 position: good news moves the date, a late step changes nothing. Try it with "Shipping is slow" and drag past Oct 25 to see the tile promise a week that has gone.</p>
+      <h3 style="margin-top:22px">Sep 8, for comparison</h3>
+      <p class="note" style="margin-top:0">The RULE switch in the live tile has a second setting: "Nothing moves later (Sep 8)". That is Tony's position from Sep 8: good news moves the date, nothing else does, and there is no line. Try it with "Slow to approve creators" to see the difference. Tony has not seen the brand-side move yet.</p>
     </div>
   </div>
 
@@ -271,26 +284,29 @@ phase.ends   = planned_end + late_by        <span class="c"># early never moves 
       <tr><td class="q">Early by a few days only</td><td>The date is shown by week, so a small gain often stays in the same week. No tag, no crossed-out date: the tile does not change.</td><td><span class="tag prop">Proposed</span></td></tr>
       <tr><td class="q">A small gain flips the week</td><td>A gain of 4 days can move the Monday. The tag says "Early" and nothing about how much, so it never overstates.</td><td><span class="tag dec">Julia · Oct 5</span></td></tr>
       <tr><td class="q">The expected week is the current week</td><td>The tile keeps its format: "Week of Oct 19". "This week" was considered and dropped at the copy desk: it reads as a promise, and it would not match the crossed-out date beside it.</td><td><span class="tag prop">Proposed</span></td></tr>
-      <tr><td class="q">The expected week passes with nothing live</td><td>Cannot happen under the proposed rule: the date is never earlier than today. On the next Monday the tile reads the new week, with one grey line saying where things are.</td><td><span class="tag prop">Proposed</span></td></tr>
-      <tr><td class="q">Early, then the next step is slow</td><td>The gain drains away day by day as the next step fails to arrive, back to the planned week. The tag and the crossed-out date leave when it gets there. Scenario "Early, then filming drags".</td><td><span class="tag prop">Proposed</span></td></tr>
-      <tr><td class="q">Late, then a fast step</td><td>The date comes back earlier, toward the plan. It gets the tag only if it ends up before the week promised at launch.</td><td><span class="tag prop">Proposed</span></td></tr>
-      <tr><td class="q">The date moved later</td><td>New week, no tag, no crossed-out old date, one grey line with the reason. Nothing is red.</td><td><span class="tag prop">Proposed</span></td></tr>
+      <tr><td class="q">The expected week ends with nothing live</td><td>Brand's side: cannot happen, the date moves with every day they take. Creators' side: the tile keeps the planned week after it has ended, and always carries one grey line in that state. This is the only time the tile shows a week that has gone.</td><td><span class="tag open">Julia</span></td></tr>
+      <tr><td class="q">Early, then the next step is slow</td><td>The gain drains away day by day, back to the planned week, and stops there. The tag and the crossed-out date leave when it gets there. Scenario "Early, then filming drags".</td><td><span class="tag prop">Proposed</span></td></tr>
+      <tr><td class="q">A brand delay, then a fast step</td><td>The date comes back earlier. The crossed-out date leaves if it returns to the week promised at launch.</td><td><span class="tag prop">Proposed</span></td></tr>
+      <tr><td class="q">The date moved later</td><td>Only the brand can cause it. New week at normal size, the old date small and crossed out, no tag. Amber line while they hold the step, grey line once they have acted.</td><td><span class="tag dec">Julia · Oct 5</span></td></tr>
       <tr><td class="q">Month name</td><td>Frozen at launch, even when first content now lands a month earlier or later.</td><td><span class="tag dec">Julia · Oct 2</span></td></tr>
       <tr><td class="q">"Week 4 of 8"</td><td>A calendar count from launch. Early and late change dates, never the week number.</td><td><span class="tag prop">Proposed</span></td></tr>
       <tr><td class="q">Midnight</td><td>Dates change at midnight in the brand's time zone (the one the cadence already uses), not the browser's.</td><td><span class="tag prop">Proposed</span></td></tr>
 
       <tr class="grp"><td colspan="3">Who we are waiting on</td></tr>
-      <tr><td class="q">The brand has not approved its creators</td><td>Amber: "10 creators are ready for your review." The date slides a day for every day past day 7.</td><td><span class="tag prop">Proposed</span></td></tr>
-      <tr><td class="q">Creators have not all accepted</td><td>Grey: "Katie's team is filling the last spots." The date does not move unless the first acceptance itself is past day 7.</td><td><span class="tag prop">Proposed</span></td></tr>
-      <tr><td class="q">The brand ships its own orders and has not shipped</td><td>Amber: "10 orders are ready for you to ship." The clearest case where the brand can stop the date sliding by acting.</td><td><span class="tag prop">Proposed</span></td></tr>
-      <tr><td class="q">The carrier is slow</td><td>Grey: "The first order is on its way." Only once an order has actually shipped.</td><td><span class="tag prop">Proposed</span></td></tr>
-      <tr><td class="q">No draft after the filming window</td><td>Grey: "Katie's team is checking in with your creators." Only when the log shows it.</td><td><span class="tag prop">Proposed</span></td></tr>
-      <tr><td class="q">A draft is in review, or was sent back for a change</td><td>Grey: "Katie's team is reviewing the first draft." The date holds for 7 days after the draft arrives, then slides.</td><td><span class="tag prop">Proposed</span></td></tr>
-      <tr><td class="q">The brand reviews its own drafts</td><td>Amber: "1 draft is ready for your review."</td><td><span class="tag prop">Proposed</span></td></tr>
-      <tr><td class="q">Approved but not posted yet</td><td>Grey: "First draft approved, posting next."</td><td><span class="tag prop">Proposed</span></td></tr>
+      <tr><td class="q">The brand has not approved its creators</td><td>Amber: "10 creators are ready for your review." The date moves a day for every day past day 7.</td><td><span class="tag dec">Julia · Oct 5</span></td></tr>
+      <tr><td class="q">The brand ships its own orders and has not shipped</td><td>Amber: "10 orders are ready for you to ship." The date moves.</td><td><span class="tag dec">Julia · Oct 5</span></td></tr>
+      <tr><td class="q">The brand reviews its own drafts and one is waiting</td><td>Amber: "1 draft is ready for your review." The date moves once the draft has waited past day 42.</td><td><span class="tag dec">Julia · Oct 5</span></td></tr>
+      <tr><td class="q">Matching is still on us after week 1</td><td>Grey: "Katie's team is filling the last spots." The date holds.</td><td><span class="tag dec">Julia · Oct 5</span></td></tr>
+      <tr><td class="q">The carrier is slow</td><td>Grey: "The first order is on its way." Only once an order has actually shipped. The date holds.</td><td><span class="tag dec">Julia · Oct 5</span></td></tr>
+      <tr><td class="q">No draft after the filming window</td><td>Grey: "Katie's team is checking in with your creators." Only when the log shows it. The date holds.</td><td><span class="tag dec">Julia · Oct 5</span></td></tr>
+      <tr><td class="q">A draft is in review, or was sent back for a change</td><td>Grey: "Katie's team is reviewing the first draft." The date holds.</td><td><span class="tag dec">Julia · Oct 5</span></td></tr>
+      <tr><td class="q">Approved but not posted yet</td><td>Grey: "First draft approved, posting next." The date holds.</td><td><span class="tag dec">Julia · Oct 5</span></td></tr>
+      <tr><td class="q">Both sides are late</td><td>Only the brand's days are added. If creators accept 5 days late and the brand then ships 4 days past its own 14, the date moves 4 days, not 9.</td><td><span class="tag prop">Proposed</span></td></tr>
 
       <tr class="grp"><td colspan="3">The end of the campaign</td></tr>
       <tr><td class="q">Every post is live before week 8 ends</td><td>"All 10 posts are live · Oct 24" with the Early tag.</td><td><span class="tag prop">Proposed</span></td></tr>
+      <tr><td class="q">The brand's delay moved the date</td><td>Every later end date, and the end of the campaign, moves later by the same days.</td><td><span class="tag dec">Julia · Oct 5</span></td></tr>
+      <tr><td class="q">Creators ran late</td><td>The end of the campaign holds at the plan. Posts that land after it are the quiet tail.</td><td><span class="tag dec">Julia · Oct 5</span></td></tr>
       <tr><td class="q">Stragglers after week 8</td><td>The tile says "8 of 10 posts live." No amber, no count of what is missing. The full timeline's last row says "Katie's team is following up on the last 2." and stays grey.</td><td><span class="tag dec">Julia · Oct 5</span></td></tr>
       <tr><td class="q">A straggler never posts</td><td>The tile keeps "9 of 10 posts live." for as long as the campaign is open. It never turns into a warning. How and when the campaign closes is the NPS study's question, not the tile's.</td><td><span class="tag open">Julia, Tony</span></td></tr>
       <tr><td class="q">The first post goes live, then nothing for weeks</td><td>"1 of 10 posts live." The date on the tile is a fact by then and does not move.</td><td><span class="tag prop">Proposed</span></td></tr>
@@ -299,12 +315,12 @@ phase.ends   = planned_end + late_by        <span class="c"># early never moves 
       <tr class="grp"><td colspan="3">People</td></tr>
       <tr><td class="q">The first creator stalls or drops out</td><td>The date they earned drains back toward the plan until someone else reaches the next step.</td><td><span class="tag prop">Proposed</span></td></tr>
       <tr><td class="q">A replacement joins in week 3</td><td>They run on their own clock. The tile's end dates do not move for one creator; "After week 8" covers them.</td><td><span class="tag prop">Proposed</span></td></tr>
-      <tr><td class="q">A campaign of 100 creators</td><td>With 100, the first of each step is almost always early, so the tag would be on nearly every time. For big campaigns the anchor may need to be the 5th creator, not the 1st.</td><td><span class="tag open">Julia</span></td></tr>
+      <tr><td class="q">A campaign of 100 creators</td><td>The first creator anchors every step, so the Early tag will show on almost every big campaign. That is fine.</td><td><span class="tag dec">Julia · Oct 5</span></td></tr>
       <tr><td class="q">A campaign of 1 creator</td><td>The same rule. First and last are the same person, so "All posts are live" follows the first post directly.</td><td><span class="tag prop">Proposed</span></td></tr>
 
       <tr class="grp"><td colspan="3">Campaign state and data</td></tr>
-      <tr><td class="q">Paused</td><td>Grey: "Paused Oct 3. The date updates when you resume." Every date moves later by the length of the pause.</td><td><span class="tag prop">Proposed</span></td></tr>
-      <tr><td class="q">No delivery signal</td><td>A brand that ships without tracking gives us no delivery date. That step is skipped: the date can next move when the first draft comes in.</td><td><span class="tag open">Nisarg</span></td></tr>
+      <tr><td class="q">Paused</td><td>Grey: "Paused Oct 3. The date updates when you resume." Every date moves later by the length of the pause: a pause is the brand's own delay.</td><td><span class="tag prop">Proposed</span></td></tr>
+      <tr><td class="q">No delivery signal</td><td>A brand that ships without tracking gives us no delivery date. That step is skipped: the date can next move when the first draft comes in, and a late shipment cannot be counted against the brand.</td><td><span class="tag open">Nisarg</span></td></tr>
       <tr><td class="q">Campaigns already running when this ships</td><td>Computed from their own history the first time the tile loads. A campaign that was early before the feature existed shows as early.</td><td><span class="tag prop">Proposed</span></td></tr>
       <tr><td class="q">Before the Dashboard exists</td><td>In week 1 the campaign page is still the launch confirmation. Its timeline card is static: nothing has happened that could move a date.</td><td><span class="tag prop">Proposed</span></td></tr>
       <tr><td class="q">Local and gift card campaigns</td><td>No tile (months are product only).</td><td><span class="tag dec">Julia · Oct 1</span></td></tr>
@@ -323,6 +339,7 @@ phase.ends   = planned_end + late_by        <span class="c"># early never moves 
       <tr><td class="q">Tag in the card head, tinted card, tick on the line, its own tile</td><td>All further from the date than the tag beside it.</td></tr>
       <tr><td class="q">"1 week early" on the tag</td><td>Can overstate: the date is shown by week.</td></tr>
       <tr><td class="q">A green line under the date saying why</td><td>"The first order was delivered 7 days early." Removed by Julia, Oct 5. The tag is enough.</td></tr>
+      <tr><td class="q">Every delay moves the date later, quietly</td><td>The first pass of this page: any late step moved the date, with nothing crossed out. Dropped by Julia, Oct 5: a delay on the creators' side must not move the date, and when the brand's delay moves it, the old date is shown crossed out.</td></tr>
       <tr><td class="q">A "Late" tag</td><td>Never. Late is carried by the date and one grey or amber line.</td></tr>
     </tbody>
   </table></div>
@@ -333,14 +350,13 @@ phase.ends   = planned_end + late_by        <span class="c"># early never moves 
   <div class="tablewrap"><table>
     <thead><tr><th>Question</th><th>What the study assumes</th><th>Who</th></tr></thead>
     <tbody>
-      <tr><td class="q">Does the date move later when a step is late?</td><td>Yes, quietly: no tag, no crossed-out date, no red. This reverses "no lateness" from Sep 8.</td><td>Tony</td></tr>
-      <tr><td class="q">Amber when it is the brand's move?</td><td>Yes, for three cases: approving creators, shipping orders, reviewing a draft.</td><td>Julia</td></tr>
-      <tr><td class="q">"Order delivered" or "product arrived"?</td><td>"The first order is on its way." and "after the first delivery". They match the tracker stage "Order delivered".</td><td>Julia</td></tr>
-      <tr><td class="q">"This week" instead of a date?</td><td>No. Always "Week of Oct 19".</td><td>Julia</td></tr>
-      <tr><td class="q">How quiet are stragglers?</td><td>"8 of 10 posts live." on the tile, the detail only in the full timeline.</td><td>Julia</td></tr>
-      <tr><td class="q">Does creators accepting early move the date?</td><td>No.</td><td>Julia</td></tr>
-      <tr><td class="q">Big campaigns: the 1st creator or the 5th?</td><td>The 1st, for now.</td><td>Julia</td></tr>
+      <tr><td class="q">On a creator-side delay the tile can show a week that has ended. Is that right?</td><td>Yes, always with one grey line under it. Example: "Week of Oct 19" still showing on Oct 26, with "First draft approved, posting next."</td><td>Julia</td></tr>
+      <tr><td class="q">Tony has not seen the brand-side move.</td><td>It narrows his Sep 8 "no lateness": the date now moves later, but only when the brand is the cause.</td><td>Tony</td></tr>
+      <tr><td class="q">Which log backs "checking in" and "following up"?</td><td>Those grey lines only show when a message or call is logged.</td><td>Nisarg, Katie</td></tr>
       <tr><td class="q">Do we store the day each creator reached each step?</td><td>Yes, since the Dashboard's stage history shows dates. To confirm.</td><td>Nisarg</td></tr>
+      <tr><td class="q">Brands that ship without tracking</td><td>No delivery date, so that step is skipped and a late shipment cannot move the date.</td><td>Nisarg</td></tr>
+      <tr><td class="q">Does creators accepting early move the date?</td><td>No.</td><td>Julia</td></tr>
+      <tr><td class="q">"Your creators are filming."</td><td>New line, not yet through the copy desk.</td><td>Julia</td></tr>
     </tbody>
   </table></div>
 </div>
@@ -379,6 +395,7 @@ const COPY = {
   n_film: "Katie's team is checking in with your creators.",
   n_review: "Katie's team is reviewing the first draft.",
   n_approved: 'First draft approved, posting next.',
+  n_filming: 'Your creators are filming.',
   n_updated: (date, what) => `Updated ${date}, after ${what}.`,
   n_count: (a, n) => `${a} of ${n} posts live.`,
   n_first: (a) => `First content landed ${a}.`,
@@ -394,7 +411,13 @@ const ON_PLAN_POSTS = [42, 44, 45, 47, 48, 49, 51, 52, 54, 55];
 const mk = (o = {}) => ({ acc: 7, del: 21, draft: 35, posts: ON_PLAN_POSTS, n: 10, matchOwner: 'benable', ships: 'auto', reviewer: 'benable', ...o });
 const shiftPosts = (first) => ON_PLAN_POSTS.map((d) => d - 42 + first);
 
-function compute(sc, t, rule = 'honest') {
+const DUR = { accepted: 7, delivered: 14, draft: 14, post: 7 };      /* the time each step is given */
+/* who holds each step: the brand approves its creators / ships its own orders / reviews its own drafts */
+const ownerOf = (sc, k) => (k === 'accepted' ? sc.matchOwner : k === 'delivered' ? sc.ships : k === 'post' ? sc.reviewer : 'creator');
+
+/* rule 'split' (Julia, Oct 5): early moves the date in, only the brand's own delay moves it out.
+   rule 'hold' (Sep 8): nothing moves it later, and there is no line. */
+function compute(sc, t, rule = 'split') {
   const firstPost = Math.min(...sc.posts);
   const ev = { accepted: sc.acc, delivered: sc.del, draft: sc.draft, post: firstPost };
   const done = (k) => ev[k] != null && ev[k] <= t;
@@ -402,29 +425,40 @@ function compute(sc, t, rule = 'honest') {
   const next = ORDER.find((k) => !done(k)) || null;
   const movers = reached.filter((k) => k !== 'accepted');
   const latest = movers[movers.length - 1] || null;
-  const ahead = latest ? PLAN[latest] - ev[latest] : 0;
   const posted = done('post');
   const live = sc.posts.filter((d) => d <= t).length;
   const lastPost = Math.max(...sc.posts);
   const allLive = Number.isFinite(lastPost) && lastPost <= t;
-  let forecast, waiting = false;
-  if (posted) forecast = ev.post;
-  else if (rule === 'hold') forecast = 42 - Math.max(0, ahead);                       /* Sep 8: good news only */
-  else {
-    const base = latest ? ev[latest] + REMAIN[latest] : Math.max(42, done('accepted') ? ev.accepted + REMAIN.accepted : 42);
-    const floor = t + REMAIN[next];                                                   /* what is still possible */
-    forecast = Math.max(base, floor);
-    waiting = floor > base;                                                           /* the next step is what holds the date */
-  }
-  const lateBy = Math.max(0, forecast - 42);
+
+  /* 1. days lost while the ball was with the brand; cum[i] = the total after step i */
+  let bd = 0, brandHolds = null, brandStep = null;
+  const cum = ORDER.map((k, i) => {
+    if (rule !== 'hold' && ownerOf(sc, k) === 'brand' && (i === 0 || done(ORDER[i - 1]))) {
+      const due = Math.max(PLAN[k] + bd, (i ? ev[ORDER[i - 1]] : 0) + DUR[k]);
+      const over = Math.max(0, (done(k) ? ev[k] : t) - due);
+      if (over) { bd += over; if (done(k)) brandStep = k; else brandHolds = k; }
+    }
+    return bd;
+  });
+
+  /* 2. the realistic date, from the first creator */
+  const base = latest ? ev[latest] + REMAIN[latest] : Math.max(42, done('accepted') ? ev.accepted + REMAIN.accepted : 42);
+  const floor = posted ? ev.post : t + REMAIN[next];
+  const realistic = Math.max(base, floor);
+  const overdue = !posted && floor > base && realistic > 42;          /* the next step has run past its time */
+
+  /* 3. what the tile shows: early pulls it in, only the brand pushes it out */
+  const forecast = posted ? ev.post : Math.min(realistic, 42 + bd);
   const early = mondayOf(forecast) < mondayOf(42);
-  /* phase windows: the front follows the first creator, the tail follows the plan (later only when late) */
+  const stale = !posted && mondayOf(t) > mondayOf(forecast);          /* the week on the tile has ended */
+
+  /* phase windows: the front follows the first creator, ends follow the plan plus the brand's days */
   const st = [0];
   for (let i = 1; i <= 4; i += 1) {
     const k = ORDER[i - 1];
-    st.push(done(k) ? (rule === 'hold' ? Math.min(ev[k], PLAN_B[i]) : ev[k]) : Math.max(forecast - OPENS[i], st[i - 1] + 1));
+    st.push(Math.max(done(k) ? Math.min(ev[k], PLAN_B[i] + cum[i - 1]) : Math.min(forecast, 42 + bd) - OPENS[i], st[i - 1] + 1));
   }
-  const en = PLAN_B.slice(1).map((b, i) => Math.max(b + lateBy, st[i] + 1));
+  const en = PLAN_B.slice(1).map((b, i) => Math.max(b + cum[Math.min(i, 3)], st[i] + 1));
   const ci = PLAN_B.findIndex((b, k) => k > 0 && t < b);
   const idx = rule === 'hold' ? Math.max(reached.length, ci < 0 ? 4 : ci - 1) : reached.length;
   const after = t >= en[4];
@@ -443,18 +477,16 @@ function compute(sc, t, rule = 'honest') {
   } else {
     value = weekOf(forecast);
     tag = early;
-    if (early) was = fmt(mondayOf(42));
-    /* at most one line, and only when the date is past the plan: what holds it, or the step that moved it.
-       Early carries the tag and nothing under the date (Julia, Oct 5: the green reason line is removed) */
-    if (waiting && forecast > 42) {
-      line = next === 'accepted' ? (sc.matchOwner === 'brand' ? ['you', COPY.y_approve(sc.n)] : ['note', COPY.n_match])
-        : next === 'delivered' ? (sc.ships === 'brand' ? ['you', COPY.y_ship(sc.n)] : ['note', COPY.n_ship])
-          : next === 'draft' ? ['note', COPY.n_film]
-            : sc.reviewer === 'brand' ? ['you', COPY.y_review(1)] : ['note', t - ev.draft >= 4 ? COPY.n_approved : COPY.n_review];
-    } else if (rule !== 'hold' && latest && ahead < 0 && forecast > 42) line = ['note', COPY.n_updated(fmt(ev[latest]), WHAT[latest])];
-    else if (rule !== 'hold' && !latest && done('accepted') && ev.accepted > 7 && forecast > 42) line = ['note', COPY.n_updated(fmt(ev.accepted), WHAT.accepted)];
+    /* the old date, small and crossed out, whenever the week moved: earlier (with the tag) or later (brand's delay) */
+    if (mondayOf(forecast) !== mondayOf(42)) was = fmt(mondayOf(42));
+    /* at most one line. Amber: the brand holds the step and the date is moving. Grey: a step on our side or the
+       creators' side is past its time, or the week on the tile has ended. Early has no line (Julia, Oct 5). */
+    if (rule === 'hold') line = null;
+    else if (brandHolds) line = ['you', brandHolds === 'accepted' ? COPY.y_approve(sc.n) : brandHolds === 'delivered' ? COPY.y_ship(sc.n) : COPY.y_review(1)];
+    else if (overdue || stale) line = ['note', next === 'accepted' ? COPY.n_match : next === 'delivered' ? COPY.n_ship : next === 'draft' ? (overdue ? COPY.n_film : COPY.n_filming) : (t - ev.draft >= 4 ? COPY.n_approved : COPY.n_review)];
+    else if (brandStep && WHAT[brandStep] && mondayOf(forecast) > mondayOf(42)) line = ['note', COPY.n_updated(fmt(ev[brandStep]), WHAT[brandStep])];
   }
-  return { sc, t, ev, done, reached, next, latest, ahead, posted, live, allLive, lastPost, forecast, lateBy, early, st, en, idx, after, pct, week: Math.floor(t / 7) + 1, label, value, was, tag, line };
+  return { sc, t, ev, done, reached, next, latest, posted, live, allLive, lastPost, forecast, realistic, bd, brandHolds, lateBy: bd, early, stale, st, en, idx, after, pct, week: Math.floor(t / 7) + 1, label, value, was, tag, line };
 }
 
 /* ---------- drawing ---------- */
@@ -509,15 +541,16 @@ const SCENARIOS = [
   { key: 'ship', group: 'Early', label: 'First order early', sc: mk({ del: 14, draft: 28, posts: shiftPosts(35) }), say: 'The first order arrives after one week instead of two.' },
   { key: 'all', label: 'Everything early', sc: mk({ acc: 3, del: 12, draft: 24, posts: [31, 33, 35, 36, 38, 39, 40, 41, 43, 44] }), say: 'Fast match, fast shipping, fast filming, and every post is live in week 7.' },
   { key: 'drag', label: 'Early, then filming drags', sc: mk({ del: 14, draft: 33, posts: shiftPosts(40) }), say: 'The first order is 7 days early, the first draft only 2.' },
-  { key: 'approve', group: 'Late', label: 'Brand slow to approve', sc: mk({ acc: 14, del: 28, draft: 42, posts: shiftPosts(49), matchOwner: 'brand' }), say: 'Creators wait a week for the brand to approve them.' },
-  { key: 'slow', label: 'Shipping is slow', sc: mk({ del: 30, draft: 44, posts: shiftPosts(51) }), say: 'The first order arrives nine days after plan.' },
-  { key: 'brandship', label: 'Brand ships late', sc: mk({ del: 30, draft: 44, posts: shiftPosts(51), ships: 'brand' }), say: 'The brand ships its own orders and does it late.' },
+  { key: 'approve', group: 'Brand late', label: 'Slow to approve creators', sc: mk({ acc: 14, del: 28, draft: 42, posts: shiftPosts(49), matchOwner: 'brand' }), say: 'Creators wait a week for the brand to approve them.' },
+  { key: 'brandship', label: 'Ships its orders late', sc: mk({ del: 30, draft: 44, posts: shiftPosts(51), ships: 'brand' }), say: 'The brand ships its own orders, nine days late.' },
+  { key: 'brandreview', label: 'Slow to review a draft', sc: mk({ posts: shiftPosts(49), reviewer: 'brand' }), say: 'The brand reviews its own drafts and takes a week longer.' },
+  { key: 'slow', group: 'Creators late', label: 'Shipping is slow', sc: mk({ del: 30, draft: 44, posts: shiftPosts(51) }), say: 'The carrier delivers the first order nine days after plan.' },
   { key: 'film', label: 'First draft is slow', sc: mk({ draft: 43, posts: shiftPosts(50) }), say: 'No draft until day 43.' },
   { key: 'post', label: 'Approved, not posted', sc: mk({ posts: shiftPosts(49) }), say: 'The first draft is approved on time; the first post takes another week.' },
   { key: 'strag', group: 'The end', label: 'Two stragglers', sc: mk({ posts: [42, 44, 45, 47, 48, 49, 51, 52, 63, Infinity] }), say: 'Eight posts by week 8. One comes a week later, one never does.' },
 ];
-const RULES = [['honest', 'Early and late (proposed)'], ['hold', 'Hold the plan when late (Sep 8)']];
-const S = { scen: 'ship', day: 16, rule: 'honest', playing: false };
+const RULES = [['split', 'Only the brand moves it later (decided)'], ['hold', 'Nothing moves later (Sep 8)']];
+const S = { scen: 'ship', day: 16, rule: 'split', playing: false };
 const MAXDAY = 70;
 const cur = () => compute(SCENARIOS.find((x) => x.key === S.scen).sc, S.day, S.rule);
 const EVLABEL = { accepted: 'Creators accepted', delivered: 'First order delivered', draft: 'First draft in', post: 'First post live' };
@@ -572,58 +605,71 @@ document.addEventListener('change', (e) => { if (e.target.id === 'day') renderCo
    EVERY STAGE: one frozen day per cell, drawn by the same compute()
    ================================================================== */
 const shot = (sc, t, cap, opts = {}) => ({ sc, t, cap, ...opts });
+const SIDE = { brand: "Brand's side · the date moves", creator: "Creators' side · the date holds", ours: 'Our side · the date holds' };
+const EARLY_SC = { del: 14, draft: 28, posts: shiftPosts(35) };
+const LATE_SC = { del: 30, draft: 44, posts: shiftPosts(51) };
+const STRAG_SC = { posts: [42, 44, 45, 47, 48, 49, 51, 52, 63, Infinity] };
 const BOARD = [
-  { stage: 'Week 1 · Match', sub: 'Creators are matched, approved and accepted', early: [shot(mk({ acc: 3 }), 4, 'Creators accepted on day 3. The line moves on to Ship. <b>The date does not move:</b> nothing has shipped yet.')],
-    plan: [shot(mk(), 3, 'The tile as it is at launch. No line under the date.')],
-    late: [shot(mk({ acc: 16, matchOwner: 'brand' }), 13, 'Creators have waited six days for the brand. <b>Amber:</b> it is the brand\'s move, and the date has slid a week.'),
-      shot(mk({ acc: 16 }), 13, 'The same delay when the wait is on our side. Grey, and only if the log shows the team is on it.')] },
-  { stage: 'Weeks 2 to 3 · Ship', sub: 'Product travels to creators', early: [shot(mk({ del: 14 }), 15, 'The first order arrived a week early. New date, old date crossed out, the tag. Nothing under the date.')],
+  { stage: 'Week 1 · Match', sub: 'Creators are matched, approved and accepted',
+    early: [shot(mk({ acc: 3 }), 4, 'Creators accepted on day 3. The line moves on to Ship. <b>The date does not move:</b> nothing has shipped yet.')],
+    plan: [shot(mk(), 3, 'The tile as it is at launch. Nothing under the date.')],
+    late: [shot(mk({ acc: 16, matchOwner: 'brand' }), 13, 'Creators have waited six days for approval. The date moves: new date, old date crossed out, and one amber line with what is ready.', { side: 'brand' }),
+      shot(mk({ acc: 16 }), 13, 'The same six days when matching is still on us. The date holds. One grey line, only if the log backs it.', { side: 'ours' })] },
+  { stage: 'Weeks 2 to 3 · Ship', sub: 'Product travels to creators',
+    early: [shot(mk({ del: 14 }), 15, 'The first order arrived a week early. New date, old date crossed out, the tag. Nothing under the date.')],
     plan: [shot(mk(), 14, 'Shipping, on plan. Nothing to say.')],
-    late: [shot(mk({ del: 32 }), 26, 'Day 26 and no order has arrived. The date now reads a week later, with one grey line.'),
-      shot(mk({ del: 32, ships: 'brand' }), 26, 'The brand ships its own orders. Same date, but the line is amber and names what to do.')] },
-  { stage: 'Weeks 4 to 5 · Film', sub: 'Creators have 10 days from delivery', early: [shot(mk({ draft: 28 }), 29, 'The first draft came in a week early.')],
+    late: [shot(mk({ del: 32, ships: 'brand' }), 26, 'The brand ships its own orders and has not. The date moves a day for every day, and the line names what to do.', { side: 'brand' }),
+      shot(mk({ del: 32 }), 26, 'The carrier is slow. The date holds, with one grey line.', { side: 'creator' })] },
+  { stage: 'Weeks 4 to 5 · Film', sub: 'Creators have 10 days from delivery',
+    early: [shot(mk({ draft: 28 }), 29, 'The first draft came in a week early.')],
     plan: [shot(mk(), 28, 'Filming, on plan.')],
-    late: [shot(mk({ draft: 46 }), 41, 'No draft after the filming window. The date slides and the line says who is on it.'),
-      shot(mk({ del: 30 }), 31, 'The order did arrive, nine days after plan. The date was updated that day; the line records it without calling it late.')] },
-  { stage: 'Week 6 · Review', sub: 'Drafts are checked, first posts go live', early: [shot(mk({ del: 14, draft: 28 }), 33, 'The first draft is in a week early. The date and the tag hold while it is reviewed.')],
+    late: [shot(mk({ del: 30, ships: 'brand' }), 31, 'The brand shipped nine days late and the order has now arrived. The date it moved to stays, with the old one crossed out. The line turns grey.', { side: 'brand' }),
+      shot(mk({ draft: 46 }), 41, 'No draft after the filming window. The date holds and the line says who is on it.', { side: 'creator' })] },
+  { stage: 'Week 6 · Review', sub: 'Drafts are checked, first posts go live',
+    early: [shot(mk({ del: 14, draft: 28 }), 33, 'The first draft is in a week early. The date and the tag hold while it is reviewed.')],
     plan: [shot(mk(), 40, 'Review, on plan. Still nothing under the date.')],
-    late: [shot(mk({ posts: shiftPosts(52) }), 46, 'The draft is approved but the post has not gone live. The date moves to the current week and the line says what is next.'),
-      shot(mk({ posts: shiftPosts(52), reviewer: 'brand' }), 46, 'When the brand reviews its own drafts, the same wait is amber.')] },
-  { stage: 'The first post', sub: 'The forecast becomes a fact', early: [shot(mk({ del: 14, draft: 28, posts: shiftPosts(35) }), 36, 'Live a week before the plan. The tag stays, as a fact.')],
+    late: [shot(mk({ posts: shiftPosts(52), reviewer: 'brand' }), 46, 'The brand reviews its own drafts and one has waited past its time. The date moves with every day it waits.', { side: 'brand' }),
+      shot(mk({ posts: shiftPosts(52) }), 46, 'The draft is approved but the post is not live. <b>The date holds even though that week has just ended.</b> The grey line is what carries it.', { side: 'creator' })] },
+  { stage: 'The first post', sub: 'The forecast becomes a fact',
+    early: [shot(mk(EARLY_SC), 36, 'Live a week before the plan. The tag stays, as a fact.')],
     plan: [shot(mk(), 43, 'The label changes and the line starts counting posts.')],
-    late: [shot(mk({ del: 30, draft: 44, posts: shiftPosts(51) }), 52, 'Live nine days after the plan. The tile states the date and counts. No tag, no comment.')] },
-  { stage: 'Weeks 7 to 8 · Post', sub: 'The rest of the posts go live', early: [shot(mk({ del: 14, draft: 28, posts: shiftPosts(35) }), 45, 'The front was early; the others post on their own clock. The end of the campaign has not moved.', { open: true })],
+    late: [shot(mk(LATE_SC), 52, 'Live nine days after the plan, whoever caused it. The tile states the date and counts. No tag, nothing crossed out, no comment.')] },
+  { stage: 'Weeks 7 to 8 · Post', sub: 'The rest of the posts go live',
+    early: [shot(mk(EARLY_SC), 45, 'The front was early; the others post on their own clock. The end of the campaign has not moved.', { open: true })],
     plan: [shot(mk(), 50, 'Six of ten live in week 8.')],
-    late: [shot(mk({ del: 30, draft: 44, posts: shiftPosts(51) }), 58, 'A late start moves the end later by the same nine days, so week 8 is not over for this campaign.', { open: true })] },
-  { stage: 'The end', sub: 'Last posts, and stragglers', early: [shot(mk({ acc: 3, del: 12, draft: 24, posts: [31, 33, 35, 36, 38, 39, 40, 41, 43, 44] }), 46, 'Every post live in week 7. The label says so and the tag marks it.')],
+    late: [shot(mk({ ...LATE_SC, ships: 'brand' }), 58, 'The brand shipped nine days late, so every later end date is nine days later too. Week 8 is not over for this campaign.', { open: true, side: 'brand' }),
+      shot(mk(LATE_SC), 54, 'The same nine days on the creators\' side. The end of the campaign holds at Nov 4. Posts after it are the quiet tail below.', { open: true, side: 'creator' })] },
+  { stage: 'The end', sub: 'Last posts, and stragglers',
+    early: [shot(mk({ acc: 3, del: 12, draft: 24, posts: [31, 33, 35, 36, 38, 39, 40, 41, 43, 44] }), 46, 'Every post live in week 7. The label says so and the tag marks it.')],
     plan: [shot(mk(), 56, 'All ten live by the end of week 8.')],
-    late: [shot(mk({ posts: [42, 44, 45, 47, 48, 49, 51, 52, 63, Infinity] }), 58, '<b>Stragglers, kept quiet.</b> The tile only says how many are live. No amber, no "missing".'),
-      shot(mk({ posts: [42, 44, 45, 47, 48, 49, 51, 52, 63, Infinity] }), 58, 'The last two are mentioned only inside the full timeline, in grey, as something the team is doing.', { open: true })] },
+    late: [shot(mk(STRAG_SC), 58, '<b>Stragglers, kept quiet.</b> The tile only says how many are live. No amber, no "missing".'),
+      shot(mk(STRAG_SC), 58, 'The last two are mentioned only inside the full timeline, in grey, as something the team is doing.', { open: true })] },
 ];
 function renderBoard() {
   const cell = (list, cls, name) => `<div class="cell"><span class="which ${cls}">${name}</span>${list.map((s) => {
-    const c = compute(s.sc, s.t, 'honest');
-    return `<div class="shot"><div class="when">${fmt(s.t)} · day ${s.t}</div>${tileHtml(c, { open: !!s.open })}<p class="cap">${s.cap}</p></div>`;
+    const c = compute(s.sc, s.t, 'split');
+    return `<div class="shot">${s.side ? `<div class="side${s.side === 'brand' ? '' : ' hold'}">${SIDE[s.side]}</div>` : ''}<div class="when">${fmt(s.t)} · day ${s.t}</div>${tileHtml(c, { open: !!s.open })}<p class="cap">${s.cap}</p></div>`;
   }).join('')}</div>`;
   document.getElementById('board').innerHTML = `<div class="colhead"><span></span><span class="c-early">Early</span><span>On plan</span><span class="c-late">Late</span></div>`
     + BOARD.map((r) => `<div class="brow"><div class="stagename"><b>${r.stage}</b><span>${r.sub}</span></div>${cell(r.early, 'c-early', 'Early')}${cell(r.plan, '', 'On plan')}${cell(r.late, 'c-late', 'Late')}</div>`).join('');
 }
 function renderLines() {
-  const row = (tone, when, text) => `<tr><td class="q"><span class="dot ${tone}"></span>${tone === 'y' ? 'Amber' : 'Grey'}</td><td>${when}</td><td>${text}</td></tr>`;
+  const row = (tone, when, text, date) => `<tr><td class="q"><span class="dot ${tone}"></span>${tone === 'y' ? 'Amber' : 'Grey'}</td><td>${when}</td><td>${text}</td><td>${date}</td></tr>`;
   document.getElementById('lines-body').innerHTML = [
-    row('n', 'Week 1 has run over and the team is still matching *', COPY.n_match),
-    row('n', 'An order has shipped and none has arrived by day 21', COPY.n_ship),
-    row('n', 'No draft by day 35 *', COPY.n_film),
-    row('n', 'A draft is in and being checked, past day 42', COPY.n_review),
-    row('n', 'The first draft is approved, the post is not live', COPY.n_approved),
-    row('n', 'A step landed after its planned day and moved the date', COPY.n_updated('Oct 10', WHAT.delivered)),
-    row('n', 'After the first post', COPY.n_count(3, 10)),
-    row('n', 'After week 8 with posts still to come (stragglers)', `${COPY.n_count(8, 10)} Nothing else on the tile.`),
-    row('n', 'Every post is live', COPY.n_first('Oct 22')),
-    row('n', 'The campaign is paused', COPY.n_paused('Oct 3')),
-    row('y', 'Creators are ready and the brand has not approved them, past day 7', COPY.y_approve(10)),
-    row('y', 'The brand ships its own orders and has not shipped, past day 21', COPY.y_ship(10)),
-    row('y', 'The brand reviews its own drafts and one is waiting, past day 42', COPY.y_review(1)),
+    row('y', 'Creators are ready and the brand has not approved them, past day 7', COPY.y_approve(10), 'Moves'),
+    row('y', 'The brand ships its own orders and has not shipped in time', COPY.y_ship(10), 'Moves'),
+    row('y', 'The brand reviews its own drafts and one has waited past day 42', COPY.y_review(1), 'Moves'),
+    row('n', 'The brand\'s delay moved the date and the brand has since acted', COPY.n_updated('Oct 10', WHAT.delivered), 'Stays moved'),
+    row('n', 'Week 1 has run over and the team is still matching *', COPY.n_match, 'Holds'),
+    row('n', 'An order has shipped and none has arrived by day 21', COPY.n_ship, 'Holds'),
+    row('n', 'No draft 14 days after the first delivery *', COPY.n_film, 'Holds'),
+    row('n', 'The week on the tile has ended and creators are still inside their filming time **', COPY.n_filming, 'Holds'),
+    row('n', 'A draft is in and being checked, past day 42', COPY.n_review, 'Holds'),
+    row('n', 'The first draft is approved, the post is not live', COPY.n_approved, 'Holds'),
+    row('n', 'After the first post', COPY.n_count(3, 10), 'A fact'),
+    row('n', 'After week 8 with posts still to come (stragglers)', `${COPY.n_count(8, 10)} Nothing else on the tile.`, 'A fact'),
+    row('n', 'Every post is live', COPY.n_first('Oct 22'), 'A fact'),
+    row('n', 'The campaign is paused', COPY.n_paused('Oct 3'), 'Moves on resume'),
   ].join('');
 }
 const q = new URLSearchParams(location.search);
