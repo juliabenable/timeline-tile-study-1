@@ -187,7 +187,7 @@
     <div><b>Early says nothing more</b><span>The tag is the whole message. No green line under the date explaining why. <span class="tag dec">Julia · Oct 5</span></span></div>
     <div><b>Late on the brand's side: the date moves</b><span>New date at normal size, no tag, and one amber line saying what is ready for them. The old date shows small and crossed out, but only up to Film: once filming starts the tile just shows the new date. It shows again while a draft waits on the brand's own review. <span class="tag dec">Julia · Oct 5</span></span></div>
     <div><b>Late on the creators' side: the date holds</b><span>No move and nothing crossed out. At most one grey line saying where things are. <span class="tag dec">Julia · Oct 5</span></span></div>
-    <div><b>Windows overlap, and review is 3 business days</b><span>The phases in the full timeline are wider and overlap: filming opens 6 days after shipping starts, and review opens 10 days after filming and runs on while posts go live. Each draft is reviewed within 3 business days. That number is an internal rule and is not shown; the Review row says feedback is given. <span class="tag dec">Julia · Oct 5</span></span></div>
+    <div><b>Windows overlap, and review is 3 business days</b><span>The phases in the full timeline are wider and overlap: filming opens 6 days after shipping starts, and review opens 10 days after filming and runs on while posts go live. Each draft is reviewed within 3 business days. When the brand does the final review, that is 3 business days for Katie's team and then 3 for the brand. These numbers are internal and are not shown; the Review row says feedback is given. <span class="tag dec">Julia · Oct 5</span></span></div>
     <div><b>Now can sit on two phases</b><span>When some creators are filming and others are in review, both rows are marked Now. The date and the tag still follow the first creator. <span class="tag dec">Julia · Oct 5</span></span></div>
     <div><b>Stragglers stay quiet</b><span>After week 8 the tile says "8 of 10 posts live." and nothing more. The team's follow-up on the last two is logged but not shown anywhere. <span class="tag dec">Julia · Oct 5</span></span></div>
   </div>
@@ -228,7 +228,7 @@
         <li><b>The plan</b> counts days from launch: creators accepted by 7, first order delivered by 21, first draft in by 35, first post live by 42, last posts by 56.</li>
         <li><b>Each step is about the first creator to get there</b>, because the tile is about first content.</li>
         <li><b>Early:</b> when the first order, the first draft or the first post lands early, "first content expected" moves earlier by the same number of days. Creators accepting early does not move it.</li>
-        <li><b>Late on the brand's side:</b> every day the brand holds a step past its time is added to the date. Three steps can be theirs: approving creators (7 days from launch), shipping their own orders (14 days from acceptance), reviewing their own drafts (3 business days from the draft). The date stays moved after they act.</li>
+        <li><b>Late on the brand's side:</b> every day the brand holds a step past its time is added to the date. Three steps can be theirs: approving creators (7 days from launch), shipping their own orders (14 days from acceptance), reviewing their own drafts (3 business days for Katie's team to pre-check, then 3 business days for the brand; once they are past those, every day the draft has been with them counts). The date stays moved after they act.</li>
         <li><b>Late on the creators' side</b> (or ours, or the carrier's): the date holds. Nothing on this side ever moves it later.</li>
         <li><b>The tag</b> shows when the week on the tile is earlier than the week promised at launch. There is no opposite tag.</li>
         <li><b>The crossed-out date</b> shows with the tag whenever the week is earlier. When the brand's delay made it later, it shows up to Film: once the first order is delivered, the tile just shows the new date. It shows again while a draft waits on the brand's own review.</li>
@@ -239,13 +239,14 @@
         <li><b>Windows overlap.</b> A phase opens when its first creators can start and closes on the plan's end, so some creators film while orders are still arriving, and reviewing starts while others film.</li>
         <li><b>A start follows the first creator</b> when they get there before the planned opening. Then the row says "Started 4 days early."</li>
         <li><b>An end never moves earlier.</b> It moves later only by the brand's own days.</li>
-        <li><b>Review is 3 business days per draft, as an internal rule.</b> The brand never sees the number. The Review row only says feedback is given: "Katie's team sends each creator feedback on their draft." When the brand reviews its own drafts the row reads "Katie's team pre-checks each draft, then you approve it or send feedback."  The forecast keeps 7 days from first draft to first post: 3 business days to review, then the creator posts.</li>
+        <li><b>Review is 3 business days per draft, as an internal rule.</b> The brand never sees the number. The Review row only says feedback is given: "Katie's team sends each creator feedback on their draft." When the brand does the final review the row reads "Katie's team pre-checks each draft, then you approve it or send feedback." and the allowance is 3 business days for Katie's team plus 3 for the brand. The forecast keeps 7 days from first draft to first post: 3 business days to review, then the creator posts.</li>
         <li><b>Now can be on more than one row:</b> the furthest phase the first creator has reached, plus any earlier phase whose window is still open. When a window closes its Now goes, so one creator still filming in week 7 does not keep Film lit. <span class="tag dec">Julia · Oct 5</span></li>
       </ol>
 <pre><span class="c"># the plan, in days from launch</span>
 PLAN    = { accepted: 7, delivered: 21, first_draft: 35, first_post: 42, last_post: 56 }
 REMAIN  = { accepted: 35, delivered: 21, first_draft: 7, first_post: 0 }    <span class="c"># days to first content</span>
-ALLOWED = { accepted: 7.days, delivered: 14.days, first_draft: 14.days, review: 3.business_days }
+ALLOWED = { accepted: 7.days, delivered: 14.days, first_draft: 14.days,
+            review: 3.business_days }   <span class="c"># + 3.business_days when the brand does the final review</span>
 <span class="c"># reached_on(step) = the day the FIRST creator got there</span>
 
 <span class="c"># 1. days lost while the ball was with the brand</span>
@@ -312,7 +313,7 @@ now(phase)  = phase is the furthest reached || (reached &amp;&amp; today &lt; ph
       <tr><td class="q">Early by a few days only</td><td>The date is shown by week, so a small gain often stays in the same week. No tag, no crossed-out date: the tile does not change.</td><td><span class="tag prop">Proposed</span></td></tr>
       <tr><td class="q">A small gain flips the week</td><td>A gain of 4 days can move the Monday. The tag says "Early" and nothing about how much, so it never overstates.</td><td><span class="tag dec">Julia · Oct 5</span></td></tr>
       <tr><td class="q">The expected week is the current week</td><td>The tile keeps its format: "Week of Oct 19". "This week" was considered and dropped at the copy desk: it reads as a promise, and it would not match the crossed-out date beside it.</td><td><span class="tag prop">Proposed</span></td></tr>
-      <tr><td class="q">The expected week ends with nothing live</td><td>Brand's side: cannot happen, the date moves with every day they take. Creators' side: the tile keeps the planned week after it has ended, and always carries one grey line in that state. This is the only time the tile shows a week that has gone.</td><td><span class="tag dec">Julia · Oct 5</span></td></tr>
+      <tr><td class="q">The expected week ends with nothing live</td><td>Brand's side alone: cannot happen, the date moves with every day they take. Creators' side: the tile keeps the planned week after it has ended, and always carries one grey line in that state. This is the only time the tile shows a week that has gone.</td><td><span class="tag dec">Julia · Oct 5</span></td></tr>
       <tr><td class="q">Early, then the next step is slow</td><td>The gain drains away day by day, back to the planned week, and stops there. The tag and the crossed-out date leave when it gets there. Scenario "Early, then filming drags".</td><td><span class="tag prop">Proposed</span></td></tr>
       <tr><td class="q">A brand delay, then a fast step</td><td>The date comes back earlier. The crossed-out date leaves if it returns to the week promised at launch.</td><td><span class="tag prop">Proposed</span></td></tr>
       <tr><td class="q">The date moved later</td><td>Only the brand can cause it. New week at normal size, no tag. The old date, small and crossed out, shows up to Film; once filming starts it goes and the tile just shows the new date. It shows again while a draft waits on the brand's own review. Amber line while they hold a step, grey line once they have acted.</td><td><span class="tag dec">Julia · Oct 5</span></td></tr>
@@ -323,7 +324,7 @@ now(phase)  = phase is the furthest reached || (reached &amp;&amp; today &lt; ph
       <tr class="grp"><td colspan="3">Who we are waiting on</td></tr>
       <tr><td class="q">The brand has not approved its creators</td><td>Amber: "10 creators are ready for your review." The date moves a day for every day past day 7.</td><td><span class="tag dec">Julia · Oct 5</span></td></tr>
       <tr><td class="q">The brand ships its own orders and has not shipped</td><td>Amber: "10 orders are ready for you to ship." The date moves.</td><td><span class="tag dec">Julia · Oct 5</span></td></tr>
-      <tr><td class="q">The brand reviews its own drafts and one is waiting</td><td>Amber: "1 draft is ready for your review." The date moves once the draft has waited 3 business days and day 42 has passed, and the old date shows crossed out while the draft waits.</td><td><span class="tag dec">Julia · Oct 5</span></td></tr>
+      <tr><td class="q">The brand reviews its own drafts and one is waiting</td><td>Amber: "1 draft is ready for your review." The brand gets 3 business days after Katie's team's 3-business-day pre-check. Past that, and past day 42, the date moves to today and keeps moving, and the old date shows crossed out while the draft waits. The amber line can show a little earlier, as soon as the draft is with them and the promised week is at risk.</td><td><span class="tag dec">Julia · Oct 5</span></td></tr>
       <tr><td class="q">Matching is still on us after week 1</td><td>Grey: "Katie's team is filling the last spots." The date holds.</td><td><span class="tag dec">Julia · Oct 5</span></td></tr>
       <tr><td class="q">The carrier is slow</td><td>Grey: "The first order is on its way." Only once an order has actually shipped. The date holds.</td><td><span class="tag dec">Julia · Oct 5</span></td></tr>
       <tr><td class="q">No draft after the filming window</td><td>Grey: "Your creators are filming." The date holds. The team's check-ins are logged but not shown.</td><td><span class="tag dec">Julia · Oct 5</span></td></tr>
@@ -336,7 +337,7 @@ now(phase)  = phase is the furthest reached || (reached &amp;&amp; today &lt; ph
       <tr><td class="q">A window is open but nobody is in it yet</td><td>No Now. Film shows Sep 23 to Oct 14 from launch, but it is only marked Now once the first order is delivered.</td><td><span class="tag dec">Julia · Oct 5</span></td></tr>
       <tr><td class="q">One creator is still filming in week 7</td><td>Film's window closed on Oct 14, so Film is no longer marked Now. That creator is part of the quiet tail.</td><td><span class="tag dec">Julia · Oct 5</span></td></tr>
       <tr><td class="q">Nobody has moved on and the window has closed</td><td>The furthest phase reached is always Now, even past its window, so the tile never shows no Now at all before the campaign ends.</td><td><span class="tag dec">Julia · Oct 5</span></td></tr>
-      <tr><td class="q">A draft waits longer than 3 business days</td><td>On our side: nothing on the tile until first content would slip past the promised week, then one grey line. On the brand's side: amber, and the date moves.</td><td><span class="tag prop">Proposed</span></td></tr>
+      <tr><td class="q">A draft waits longer than 3 business days</td><td>On our side: nothing on the tile until first content would slip past the promised week, then one grey line. On the brand's side, after their own 3 business days: amber, and the date moves.</td><td><span class="tag prop">Proposed</span></td></tr>
 
       <tr class="grp"><td colspan="3">The end of the campaign</td></tr>
       <tr><td class="q">Every post is live before week 8 ends</td><td>"All 10 posts are live · Oct 24" with the Early tag.</td><td><span class="tag prop">Proposed</span></td></tr>
@@ -387,7 +388,6 @@ now(phase)  = phase is the furthest reached || (reached &amp;&amp; today &lt; ph
   <div class="tablewrap"><table>
     <thead><tr><th>Question</th><th>What the study assumes</th><th>Who</th></tr></thead>
     <tbody>
-      <tr><td class="q">Do the 3 business days also cover the pre-check when the brand reviews its own drafts?</td><td>Not stated. It only matters for when a waiting draft starts to count as the brand's delay.</td><td>Julia, Katie</td></tr>
       <tr><td class="q">The prototype and the months handoff page still show the old phases.</td><td>v47 and Nisarg's page say Match 1, Ship 2 to 3, Film 4 to 5, Review 6, Post 7 to 8, with no overlap. Not changed yet.</td><td>Julia</td></tr>
       <tr><td class="q">Do we store the day each creator reached each step?</td><td>Yes, since the Dashboard's stage history shows dates. To confirm.</td><td>Nisarg</td></tr>
       <tr><td class="q">Brands that ship without tracking</td><td>No delivery date, so that step is skipped and a late shipment cannot move the date.</td><td>Nisarg</td></tr>
@@ -448,7 +448,8 @@ const DUR = { accepted: 7, delivered: 14, draft: 14 };               /* the time
 const FILM_AFTER_SHIP = 6;      /* filming opens 6 days after shipping opens (Julia, Oct 5) */
 const REVIEW_AFTER_FILM = 10;   /* review opens 10 days after filming opens (Julia, Oct 5) */
 const ENDS = [7, 21, 35, 49, 56];   /* when each window closes. Review runs a week into Post so the two overlap (Julia, Oct 5: "post can overlap with review") */
-const REVIEW_BIZ = 3;           /* each draft is reviewed within 3 business days (Julia, Oct 5) */
+const REVIEW_BIZ = 3;           /* Katie's team reviews (or pre-checks) each draft within 3 business days (Julia, Oct 5) */
+const BRAND_REVIEW_BIZ = 3;     /* when the brand does the final review it gets 3 more business days (Julia, Oct 5) */
 const addBiz = (d, n) => { let x = d; for (let k = 0; k < n;) { x += 1; const wd = dateOf(x).getDay(); if (wd !== 0 && wd !== 6) k += 1; } return x; };
 /* who holds each step: the brand approves its creators / ships its own orders / reviews its own drafts */
 const ownerOf = (sc, k) => (k === 'accepted' ? sc.matchOwner : k === 'delivered' ? sc.ships : k === 'post' ? sc.reviewer : 'creator');
@@ -474,8 +475,14 @@ function compute(sc, t, rule = 'split') {
   const cum = ORDER.map((k, i) => {
     if (rule !== 'hold' && ownerOf(sc, k) === 'brand' && (i === 0 || done(ORDER[i - 1]))) {
       const prev = i ? ev[ORDER[i - 1]] : 0;
-      const due = Math.max(PLAN[k] + bd, k === 'post' ? addBiz(prev, REVIEW_BIZ) : prev + DUR[k]);
-      const over = Math.max(0, (done(k) ? ev[k] : t) - due);
+      const end = done(k) ? ev[k] : t;
+      let over;
+      if (k === 'post') {
+        /* the draft is with the brand once Katie's team has pre-checked it. The brand has 3 business days of its
+           own; once past them, every day the draft has been with the brand counts */
+        const withBrand = addBiz(prev, REVIEW_BIZ);
+        over = end > addBiz(prev, REVIEW_BIZ + BRAND_REVIEW_BIZ) ? Math.max(0, end - Math.max(PLAN[k] + bd, withBrand)) : 0;
+      } else over = Math.max(0, end - Math.max(PLAN[k] + bd, prev + DUR[k]));
       if (over) { bd += over; if (done(k)) brandStep = k; else brandHolds = k; }
     }
     return bd;
@@ -535,7 +542,11 @@ function compute(sc, t, rule = 'split') {
        creators' side is past its time, or the week on the tile has ended. Early has no line (Julia, Oct 5). */
     if (rule === 'hold') line = null;
     else if (brandHolds) line = ['you', brandHolds === 'accepted' ? COPY.y_approve(sc.n) : brandHolds === 'delivered' ? COPY.y_ship(sc.n) : COPY.y_review(1)];
-    else if (overdue || stale) line = ['note', next === 'accepted' ? COPY.n_match : next === 'delivered' ? COPY.n_ship : next === 'draft' ? COPY.n_filming : (t >= addBiz(ev.draft, REVIEW_BIZ) ? COPY.n_approved : COPY.n_review)];
+    else if (overdue || stale) {
+      const checked = next === 'post' && t >= addBiz(ev.draft, REVIEW_BIZ);            /* Katie's team has had its 3 business days */
+      line = next === 'post' && checked && sc.reviewer === 'brand' ? ['you', COPY.y_review(1)]   /* with the brand, still inside its own 3 days */
+        : ['note', next === 'accepted' ? COPY.n_match : next === 'delivered' ? COPY.n_ship : next === 'draft' ? COPY.n_filming : checked ? COPY.n_approved : COPY.n_review];
+    }
     else if (was && !early && brandStep && WHAT[brandStep]) line = ['note', COPY.n_updated(fmt(ev[brandStep]), WHAT[brandStep])];
   }
   return { sc, t, ev, done, reached, front, next, latest, posted, live, allLive, lastPost, forecast, realistic, bd, brandHolds, lateBy: bd, early, stale, open, st, en, earlyBy, idx, now, after, pct, week: Math.floor(t / 7) + 1, label, value, was, tag, line };
@@ -593,7 +604,7 @@ const SCENARIOS = [
   { key: 'drag', label: 'Early, then filming drags', sc: mk({ del: 14, draft: 33, posts: shiftPosts(40) }), say: 'The first order is 7 days early, the first draft only 2.' },
   { key: 'approve', group: 'Brand late', label: 'Slow to approve creators', sc: mk({ acc: 14, del: 28, draft: 42, posts: shiftPosts(49), matchOwner: 'brand' }), say: 'Creators wait a week for the brand to approve them.' },
   { key: 'brandship', label: 'Ships its orders late', sc: mk({ del: 30, draft: 44, posts: shiftPosts(51), ships: 'brand' }), say: 'The brand ships its own orders, nine days late.' },
-  { key: 'brandreview', label: 'Slow to review a draft', sc: mk({ posts: shiftPosts(49), reviewer: 'brand' }), say: 'The brand reviews its own drafts and takes a week longer.' },
+  { key: 'brandreview', label: 'Slow to review a draft', sc: mk({ posts: shiftPosts(52), reviewer: 'brand' }), say: 'The brand does the final review and sits on the first draft well past its 3 business days.' },
   { key: 'slow', group: 'Creators late', label: 'Shipping is slow', sc: mk({ del: 30, draft: 44, posts: shiftPosts(51) }), say: 'The carrier delivers the first order nine days after plan.' },
   { key: 'film', label: 'First draft is slow', sc: mk({ draft: 43, posts: shiftPosts(50) }), say: 'No draft until day 43.' },
   { key: 'post', label: 'Approved, not posted', sc: mk({ posts: shiftPosts(49) }), say: 'The first draft is approved on time; the first post takes another week.' },
@@ -680,7 +691,7 @@ const BOARD = [
   { stage: 'Review', sub: 'Each draft is reviewed within 3 business days (not shown to the brand), with feedback',
     early: [shot(mk({ del: 14, draft: 28 }), 33, 'The first draft is in a week early. The date and the tag hold while it is reviewed.')],
     plan: [shot(mk(), 40, 'Review, on plan. Still nothing under the date.')],
-    late: [shot(mk({ posts: shiftPosts(52), reviewer: 'brand' }), 46, 'The brand reviews its own drafts and one has waited past its 3 business days. The date moves with every day it waits, and the old date shows crossed out while it waits.', { side: 'brand' }),
+    late: [shot(mk({ posts: shiftPosts(52), reviewer: 'brand' }), 48, 'The brand does the final review: 3 business days for Katie\'s team, then 3 for the brand. This draft has waited past both. The date moves with every day it waits, and the old date shows crossed out while it waits.', { side: 'brand' }),
       shot(mk({ posts: shiftPosts(52) }), 46, 'The draft is approved but the post is not live. <b>The date holds even though that week has just ended.</b> The grey line is what carries it.', { side: 'creator' })] },
   { stage: 'The first post', sub: 'The forecast becomes a fact',
     early: [shot(mk(EARLY_SC), 36, 'Live a week before the plan. The tag stays, as a fact.')],
@@ -710,7 +721,7 @@ function renderLines() {
   document.getElementById('lines-body').innerHTML = [
     row('y', 'Creators are ready and the brand has not approved them, past day 7', COPY.y_approve(10), 'Moves'),
     row('y', 'The brand ships its own orders and has not shipped in time', COPY.y_ship(10), 'Moves'),
-    row('y', 'The brand reviews its own drafts and one has waited past day 42', COPY.y_review(1), 'Moves'),
+    row('y', 'The brand does the final review and the draft is with them, past day 42', COPY.y_review(1), 'Moves after their 3 business days'),
     row('n', 'The brand\'s delay moved the date, the brand has since acted, and filming has not started', COPY.n_updated('Sep 24', WHAT.accepted), 'Stays moved'),
     row('n', 'Week 1 has run over and the team is still matching *', COPY.n_match, 'Holds'),
     row('n', 'An order has shipped and none has arrived by day 21', COPY.n_ship, 'Holds'),
