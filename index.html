@@ -356,7 +356,8 @@ now(phase)  = phase is the furthest reached || (reached &amp;&amp; today &lt; ph
       <tr><td class="q">Stragglers after week 8</td><td>The tile says "8 of 10 posts live." No amber, no count of what is missing. The full timeline's last row says "Any last posts go live." The follow-up is logged but not shown.</td><td><span class="tag dec">Julia · Oct 5</span></td></tr>
       <tr><td class="q">A straggler never posts</td><td>The tile keeps "9 of 10 posts live." for as long as the campaign is open. It never turns into a warning. How and when the campaign closes is the NPS study's question, not the tile's.</td><td><span class="tag open">Julia, Tony</span></td></tr>
       <tr><td class="q">The first post goes live, then nothing for weeks</td><td>"1 of 10 posts live." The date on the tile is a fact by then and does not move.</td><td><span class="tag dec">Julia · Oct 5</span></td></tr>
-      <tr><td class="q">The campaign is completed</td><td>The tile becomes the record: "Campaign completed" and the date, with "All 10 posts are live." or "8 of 10 posts live." under it. Nothing is marked Now and the "After week 8" row is gone. Production completes a campaign when every creator is thanked, or when the team completes it by hand.</td><td><span class="tag prop">Proposed</span></td></tr>
+      <tr><td class="q">The campaign is completed</td><td>The tile becomes the record: "Campaign completed" and the date, with "All 10 posts are live." or "8 of 10 posts live." under it. Nothing is marked Now and the "After week 8" row is gone. Production completes a campaign when every creator is thanked, or when the team completes it by hand. The overview card reads "8 of 10 live · completed Nov 12". The word is always "completed", never "closed".</td><td><span class="tag prop">Proposed</span></td></tr>
+      <tr><td class="q">Completed by hand with no post live</td><td>Label and date only. The line is hidden, because the tile never shows a zero. The overview card reads "Completed Nov 7".</td><td><span class="tag prop">Proposed</span></td></tr>
 
       <tr class="grp"><td colspan="3">People</td></tr>
       <tr><td class="q">The first creator stalls or drops out</td><td>The date they earned drains back toward the plan until someone else reaches the next step.</td><td><span class="tag prop">Proposed</span></td></tr>
@@ -400,6 +401,7 @@ now(phase)  = phase is the furthest reached || (reached &amp;&amp; today &lt; ph
     <thead><tr><th>Question</th><th>What the study assumes</th><th>Who</th></tr></thead>
     <tbody>
       <tr><td class="q">The prototype and the months handoff page still show the old phases.</td><td>v47 and Nisarg's page say Match 1, Ship 2 to 3, Film 4 to 5, Review 6, Post 7 to 8, with no overlap. Not changed yet.</td><td>Julia</td></tr>
+      <tr><td class="q">Does "100% · Campaign complete" still show on the campaign page?</td><td>If it does, "complete" and "completed" would sit side by side there. The tile follows the Completed pill.</td><td>Julia</td></tr>
       <tr><td class="q">Do we store the day each creator reached each step?</td><td>Yes, since the Dashboard's stage history shows dates. To confirm.</td><td>Nisarg</td></tr>
       <tr><td class="q">Brands that ship without tracking</td><td>No delivery date, so that step is skipped and a late shipment cannot move the date.</td><td>Nisarg</td></tr>
       <tr><td class="q">Does creators accepting early move the date?</td><td>No.</td><td>Julia</td></tr>
@@ -538,7 +540,7 @@ function compute(sc, t) {
     /* the record: no Now, no tail row, and nothing about posts that never came */
     label = COPY.completed; value = fmt(sc.completed);
     tag = allLive && mondayOf(lastPost) < mondayOf(55);
-    line = ['note', allLive ? COPY.n_all(sc.n) : COPY.n_count(live, sc.n)];
+    line = live ? ['note', allLive ? COPY.n_all(sc.n) : COPY.n_count(live, sc.n)] : null;   /* a row never shows a zero */
   } else if (allLive) {
     label = COPY.allLive(sc.n); value = fmt(lastPost);
     tag = mondayOf(lastPost) < mondayOf(55);
@@ -601,7 +603,7 @@ function tileHtml(c, { open = false, flashKey = null } = {}) {
 function ovwHtml(c) {
   const tag = c.tag ? `<span class="tl-early">${COPY.tag}</span>` : '';
   const wk = c.week <= 8 ? `Week ${c.week} of 8` : `Week ${c.week}`;
-  const meta = c.completed ? `<b>Completed ${fmt(c.sc.completed)}</b> · ${c.live} of ${c.sc.n} live`
+  const meta = c.completed ? (c.live ? `<b>${c.live} of ${c.sc.n} live</b> · completed ${fmt(c.sc.completed)}` : `<b>Completed ${fmt(c.sc.completed)}</b>`)
     : c.allLive ? `<b>${c.sc.n} of ${c.sc.n} live</b> · last on ${fmt(c.lastPost)}${tag}`
     : c.posted ? `<b>${c.live} of ${c.sc.n} live</b> · first on ${fmt(c.ev.post)}${tag}`
       : `<b>${wk}</b> · first content expected the week of ${fmt(mondayOf(c.forecast))}${tag}`;
