@@ -188,8 +188,8 @@
     <div><b>Late on the brand's side: the date moves</b><span>New date at normal size, no tag, and one amber line saying what is ready for them. The old date shows small and crossed out, but only up to Film: once filming starts the tile just shows the new date. <span class="tag dec">Julia · Oct 5</span></span></div>
     <div><b>Late on the creators' side: the date holds</b><span>No move and nothing crossed out. At most one grey line saying where things are. <span class="tag dec">Julia · Oct 5</span></span></div>
     <div><b>Windows overlap, and review is 3 business days</b><span>The phases in the full timeline are wider and overlap: filming opens 6 days after shipping starts, and review opens 10 days after filming and runs on while posts go live. Each draft is reviewed within 3 business days. That number is an internal rule and is not shown; the Review row says feedback is given. <span class="tag dec">Julia · Oct 5</span></span></div>
-    <div><b>Now can sit on two phases</b><span>When some creators are filming and others are in review, both rows are marked Now. The date and the tag still follow the first creator. <span class="tag prop">Proposed</span></span></div>
-    <div><b>Stragglers stay quiet</b><span>After week 8 the tile says "8 of 10 posts live." and nothing more. The last two are only mentioned inside the full timeline. <span class="tag dec">Julia · Oct 5</span></span></div>
+    <div><b>Now can sit on two phases</b><span>When some creators are filming and others are in review, both rows are marked Now. The date and the tag still follow the first creator. <span class="tag dec">Julia · Oct 5</span></span></div>
+    <div><b>Stragglers stay quiet</b><span>After week 8 the tile says "8 of 10 posts live." and nothing more. The team's follow-up on the last two is logged but not shown anywhere. <span class="tag dec">Julia · Oct 5</span></span></div>
   </div>
 
   <h2 id="play">The tile, live</h2>
@@ -216,8 +216,8 @@
   </table></div>
   <p class="note">No line at all is the normal state: a campaign that is on plan or early shows the date and nothing under it.</p>
   <p class="note">There is no green line. An early date carries the Early tag and nothing else: the line "The first order was delivered 7 days early." was removed. <span class="tag dec">Julia · Oct 5</span></p>
-  <p class="note">* These say the team is doing something. They only show when the log backs it up (a message sent, a call logged). With no log, there is no line.</p>
-  <p class="note">** Added this round so the tile never shows a week that has ended with nothing under it. The copy desk kept the wording.</p>
+  <p class="note">* This one says the team is doing something, so it only shows when the log backs it up.</p>
+  <p class="note">The team's check-ins and follow-ups are logged but never shown on the tile. "Katie's team is checking in with your creators." and "Katie's team is following up on the last 2." were removed. <span class="tag dec">Julia · Oct 5</span></p>
   <p class="note">Amber never says "waiting on you" (cut as a nag in earlier rounds). It gives the count and what is ready.</p>
 
   <h2 id="rule">The rule</h2>
@@ -240,7 +240,7 @@
         <li><b>A start follows the first creator</b> when they get there before the planned opening. Then the row says "Started 4 days early."</li>
         <li><b>An end never moves earlier.</b> It moves later only by the brand's own days.</li>
         <li><b>Review is 3 business days per draft, as an internal rule.</b> The brand never sees the number. The Review row only says feedback is given: "Katie's team sends each creator feedback on their draft." When the brand reviews its own drafts the row reads "Katie's team pre-checks each draft, then you approve it or send feedback."  The forecast keeps 7 days from first draft to first post: 3 business days to review, then the creator posts.</li>
-        <li><b>Now can be on more than one row:</b> the furthest phase the first creator has reached, plus any earlier phase whose window is still open. When a window closes its Now goes, so one creator still filming in week 7 does not keep Film lit. <span class="tag prop">Proposed</span></li>
+        <li><b>Now can be on more than one row:</b> the furthest phase the first creator has reached, plus any earlier phase whose window is still open. When a window closes its Now goes, so one creator still filming in week 7 does not keep Film lit. <span class="tag dec">Julia · Oct 5</span></li>
       </ol>
 <pre><span class="c"># the plan, in days from launch</span>
 PLAN    = { accepted: 7, delivered: 21, first_draft: 35, first_post: 42, last_post: 56 }
@@ -282,11 +282,11 @@ now(phase)  = phase is the furthest reached || (reached &amp;&amp; today &lt; ph
           <tr><td class="q" style="min-width:0">Match</td><td>Launch</td><td>Day 7</td><td class="num">Sep 10 to 16</td></tr>
           <tr><td class="q" style="min-width:0">Ship</td><td>Creators accepted, day 7</td><td>Day 21</td><td class="num">Sep 17 to 30</td></tr>
           <tr><td class="q" style="min-width:0">Film</td><td>6 days after shipping opens, day 13 <span class="tag dec">Julia · Oct 5</span></td><td>Day 35</td><td class="num">Sep 23 to Oct 14</td></tr>
-          <tr><td class="q" style="min-width:0">Review</td><td>10 days after filming opens, day 23 <span class="tag dec">Julia · Oct 5</span></td><td>Day 49 <span class="tag prop">Proposed</span></td><td class="num">Oct 3 to 28</td></tr>
+          <tr><td class="q" style="min-width:0">Review</td><td>10 days after filming opens, day 23 <span class="tag dec">Julia · Oct 5</span></td><td>Day 49 <span class="tag dec">Julia · Oct 5</span></td><td class="num">Oct 3 to 28</td></tr>
           <tr><td class="q" style="min-width:0">Post</td><td>First content expected, day 42</td><td>Day 56</td><td class="num">Oct 22 to Nov 4</td></tr>
         </tbody>
       </table></div>
-      <p class="note">Before this round the windows did not overlap: Film Oct 1 to 14, Review Oct 15 to 21 (7 days). Film and Review now open earlier, and Review closes a week later so that it overlaps Post (Julia, Oct 5: "post can overlap with review"). Post still opens on the day first content is expected, so the Post row never starts before the date on the tile.</p>
+      <p class="note">Before this round the windows did not overlap: Film Oct 1 to 14, Review Oct 15 to 21 (7 days). Film and Review now open earlier, and Review closes a week later, on Oct 28, so that it overlaps Post (Julia, Oct 5: "post can overlap with review", and the Oct 28 close confirmed the same day). "Started 4 days early." is measured against these openings, so it shows less often than before; that is accepted too. Post still opens on the day first content is expected, so the Post row never starts before the date on the tile.</p>
       <h3 style="margin-top:22px">What Nisarg needs from the data</h3>
       <div class="tablewrap" style="margin-top:8px"><table>
         <tbody>
@@ -297,9 +297,9 @@ now(phase)  = phase is the furthest reached || (reached &amp;&amp; today &lt; ph
         </tbody>
       </table></div>
       <h3 style="margin-top:22px">What does not change</h3>
-      <p class="note" style="margin-top:0">The 6-week promise for first content and the campaign's month name, frozen at launch. "Week 4 of 8" stays a calendar count. Local and gift card campaigns have no tile.</p>
+      <p class="note" style="margin-top:0">The 6-week promise for first content (confirmed by Julia on Oct 5: review at 3 business days does not shorten it) and the campaign's month name, frozen at launch. "Week 4 of 8" stays a calendar count. Local and gift card campaigns have no tile.</p>
       <h3 style="margin-top:22px">Sep 8, for comparison</h3>
-      <p class="note" style="margin-top:0">The RULE switch in the live tile has a second setting: "Nothing moves later (Sep 8)". That is Tony's position from Sep 8: good news moves the date, nothing else does, and there is no line. Try it with "Slow to approve creators" to see the difference. Tony has not seen the brand-side move yet.</p>
+      <p class="note" style="margin-top:0">The RULE switch in the live tile has a second setting: "Nothing moves later (Sep 8)". That is Tony's position from Sep 8: good news moves the date, nothing else does, and there is no line. Try it with "Slow to approve creators" to see the difference. Julia closed the question on Oct 5: the date may move later when the brand is the cause, and first content at week 6 stands.</p>
     </div>
   </div>
 
@@ -325,23 +325,23 @@ now(phase)  = phase is the furthest reached || (reached &amp;&amp; today &lt; ph
       <tr><td class="q">The brand reviews its own drafts and one is waiting</td><td>Amber: "1 draft is ready for your review." The date moves once the draft has waited 3 business days and day 42 has passed. No crossed-out date this far in.</td><td><span class="tag dec">Julia · Oct 5</span></td></tr>
       <tr><td class="q">Matching is still on us after week 1</td><td>Grey: "Katie's team is filling the last spots." The date holds.</td><td><span class="tag dec">Julia · Oct 5</span></td></tr>
       <tr><td class="q">The carrier is slow</td><td>Grey: "The first order is on its way." Only once an order has actually shipped. The date holds.</td><td><span class="tag dec">Julia · Oct 5</span></td></tr>
-      <tr><td class="q">No draft after the filming window</td><td>Grey: "Katie's team is checking in with your creators." Only when the log shows it. The date holds.</td><td><span class="tag dec">Julia · Oct 5</span></td></tr>
+      <tr><td class="q">No draft after the filming window</td><td>Grey: "Your creators are filming." The date holds. The team's check-ins are logged but not shown.</td><td><span class="tag dec">Julia · Oct 5</span></td></tr>
       <tr><td class="q">A draft is in review, or was sent back for a change</td><td>Grey: "Katie's team is reviewing the first draft." The date holds.</td><td><span class="tag dec">Julia · Oct 5</span></td></tr>
       <tr><td class="q">Approved but not posted yet</td><td>Grey: "First draft approved, posting next." The date holds.</td><td><span class="tag dec">Julia · Oct 5</span></td></tr>
       <tr><td class="q">Both sides are late</td><td>Only the brand's days are added. If creators accept 5 days late and the brand then ships 4 days past its own 14, the date moves 4 days, not 9.</td><td><span class="tag prop">Proposed</span></td></tr>
 
       <tr class="grp"><td colspan="3">Several phases at once</td></tr>
-      <tr><td class="q">Some creators are filming while others are in review</td><td>Both rows are marked Now and both names are bold on the tile's bar. The date and the tag follow the first creator.</td><td><span class="tag prop">Proposed</span></td></tr>
-      <tr><td class="q">A window is open but nobody is in it yet</td><td>No Now. Film shows Sep 23 to Oct 14 from launch, but it is only marked Now once the first order is delivered.</td><td><span class="tag prop">Proposed</span></td></tr>
-      <tr><td class="q">One creator is still filming in week 7</td><td>Film's window closed on Oct 14, so Film is no longer marked Now. That creator is part of the quiet tail.</td><td><span class="tag prop">Proposed</span></td></tr>
-      <tr><td class="q">Nobody has moved on and the window has closed</td><td>The furthest phase reached is always Now, even past its window, so the tile never shows no Now at all before the campaign ends.</td><td><span class="tag prop">Proposed</span></td></tr>
+      <tr><td class="q">Some creators are filming while others are in review</td><td>Both rows are marked Now and both names are bold on the tile's bar. The date and the tag follow the first creator.</td><td><span class="tag dec">Julia · Oct 5</span></td></tr>
+      <tr><td class="q">A window is open but nobody is in it yet</td><td>No Now. Film shows Sep 23 to Oct 14 from launch, but it is only marked Now once the first order is delivered.</td><td><span class="tag dec">Julia · Oct 5</span></td></tr>
+      <tr><td class="q">One creator is still filming in week 7</td><td>Film's window closed on Oct 14, so Film is no longer marked Now. That creator is part of the quiet tail.</td><td><span class="tag dec">Julia · Oct 5</span></td></tr>
+      <tr><td class="q">Nobody has moved on and the window has closed</td><td>The furthest phase reached is always Now, even past its window, so the tile never shows no Now at all before the campaign ends.</td><td><span class="tag dec">Julia · Oct 5</span></td></tr>
       <tr><td class="q">A draft waits longer than 3 business days</td><td>On our side: nothing on the tile until first content would slip past the promised week, then one grey line. On the brand's side: amber, and the date moves.</td><td><span class="tag prop">Proposed</span></td></tr>
 
       <tr class="grp"><td colspan="3">The end of the campaign</td></tr>
       <tr><td class="q">Every post is live before week 8 ends</td><td>"All 10 posts are live · Oct 24" with the Early tag.</td><td><span class="tag prop">Proposed</span></td></tr>
       <tr><td class="q">The brand's delay moved the date</td><td>Every later end date, and the end of the campaign, moves later by the same days.</td><td><span class="tag dec">Julia · Oct 5</span></td></tr>
       <tr><td class="q">Creators ran late</td><td>The end of the campaign holds at the plan. Posts that land after it are the quiet tail.</td><td><span class="tag dec">Julia · Oct 5</span></td></tr>
-      <tr><td class="q">Stragglers after week 8</td><td>The tile says "8 of 10 posts live." No amber, no count of what is missing. The full timeline's last row says "Katie's team is following up on the last 2." and stays grey.</td><td><span class="tag dec">Julia · Oct 5</span></td></tr>
+      <tr><td class="q">Stragglers after week 8</td><td>The tile says "8 of 10 posts live." No amber, no count of what is missing. The full timeline's last row says "Any last posts go live." The follow-up is logged but not shown.</td><td><span class="tag dec">Julia · Oct 5</span></td></tr>
       <tr><td class="q">A straggler never posts</td><td>The tile keeps "9 of 10 posts live." for as long as the campaign is open. It never turns into a warning. How and when the campaign closes is the NPS study's question, not the tile's.</td><td><span class="tag open">Julia, Tony</span></td></tr>
       <tr><td class="q">The first post goes live, then nothing for weeks</td><td>"1 of 10 posts live." The date on the tile is a fact by then and does not move.</td><td><span class="tag prop">Proposed</span></td></tr>
       <tr><td class="q">The campaign is completed</td><td>The tile stays as the record: "All 10 posts are live" and the dates.</td><td><span class="tag prop">Proposed</span></td></tr>
@@ -375,6 +375,7 @@ now(phase)  = phase is the furthest reached || (reached &amp;&amp; today &lt; ph
       <tr><td class="q">A green line under the date saying why</td><td>"The first order was delivered 7 days early." Removed by Julia, Oct 5. The tag is enough.</td></tr>
       <tr><td class="q">Every delay moves the date later, quietly</td><td>The first pass of this page: any late step moved the date, with nothing crossed out. Dropped by Julia, Oct 5: a delay on the creators' side must not move the date, and when the brand's delay moves it, the old date is shown crossed out.</td></tr>
       <tr><td class="q">"Within 3 business days" in the Review row</td><td>Removed by Julia, Oct 5. The 3 business days stay as an internal rule; the row does not mention them.</td></tr>
+      <tr><td class="q">Lines about the team's follow-ups</td><td>"Katie's team is checking in with your creators." and "Katie's team is following up on the last 2." Hidden by Julia, Oct 5: the follow-ups happen and are logged, the tile does not show them.</td></tr>
       <tr><td class="q">A "Late" tag</td><td>Never. Late is carried by the date and one grey or amber line.</td></tr>
     </tbody>
   </table></div>
@@ -385,16 +386,10 @@ now(phase)  = phase is the furthest reached || (reached &amp;&amp; today &lt; ph
   <div class="tablewrap"><table>
     <thead><tr><th>Question</th><th>What the study assumes</th><th>Who</th></tr></thead>
     <tbody>
-      <tr><td class="q">Now on two rows when creators are spread over two phases?</td><td>Yes. The furthest phase reached, plus any earlier one whose window is still open.</td><td>Julia</td></tr>
-      <tr><td class="q">When does Review close?</td><td>At the end of week 7 (Oct 28), one week into Post. That number is mine.</td><td>Julia</td></tr>
-      <tr><td class="q">Does 3 business days of review shorten the 6-week promise?</td><td>No. First draft to first post stays 7 days: 3 business days to review, then the creator posts.</td><td>Julia</td></tr>
-      <tr><td class="q">"Started 7 days early." shows less often now.</td><td>Film opens Sep 23 on plan, so a first order on Sep 24 is no longer early for that row, even though it still earns the Early tag on the date.</td><td>Julia</td></tr>
+      <tr><td class="q">A brand that is slow to review a draft: cross out the old date too?</td><td>No. The crossed-out date stops at Film, and reviewing a draft comes after Film. So the date moves and the amber line shows, with nothing crossed out. Your rule was written for slow creator approval; applying it here is my reading.</td><td>Julia</td></tr>
       <tr><td class="q">On a creator-side delay the tile can show a week that has ended. Is that right?</td><td>Yes, always with one grey line under it. Example: "Week of Oct 19" still showing on Oct 26, with "First draft approved, posting next."</td><td>Julia</td></tr>
-      <tr><td class="q">Can Katie's team hold 3 business days on every draft?</td><td>Assumed yes. It is an internal rule only: the brand never sees the number.</td><td>Katie</td></tr>
       <tr><td class="q">Do the 3 business days also cover the pre-check when the brand reviews its own drafts?</td><td>Not stated. It only matters for when a waiting draft starts to count as the brand's delay.</td><td>Julia, Katie</td></tr>
-      <tr><td class="q">Tony has not seen the brand-side move.</td><td>It narrows his Sep 8 "no lateness": the date now moves later, but only when the brand is the cause.</td><td>Tony</td></tr>
       <tr><td class="q">The prototype and the months handoff page still show the old phases.</td><td>v47 and Nisarg's page say Match 1, Ship 2 to 3, Film 4 to 5, Review 6, Post 7 to 8, with no overlap. Not changed yet.</td><td>Julia</td></tr>
-      <tr><td class="q">Which log backs "checking in" and "following up"?</td><td>Those grey lines only show when a message or call is logged.</td><td>Nisarg, Katie</td></tr>
       <tr><td class="q">Do we store the day each creator reached each step?</td><td>Yes, since the Dashboard's stage history shows dates. To confirm.</td><td>Nisarg</td></tr>
       <tr><td class="q">Brands that ship without tracking</td><td>No delivery date, so that step is skipped and a late shipment cannot move the date.</td><td>Nisarg</td></tr>
       <tr><td class="q">Does creators accepting early move the date?</td><td>No.</td><td>Julia</td></tr>
@@ -432,7 +427,6 @@ const COPY = {
   allLive: (n) => `All ${n} posts are live`, tag: 'Early',
   n_match: "Katie's team is filling the last spots.",
   n_ship: 'The first order is on its way.',
-  n_film: "Katie's team is checking in with your creators.",
   n_review: "Katie's team is reviewing the first draft.",
   n_approved: 'First draft approved, posting next.',
   n_filming: 'Your creators are filming.',
@@ -444,7 +438,6 @@ const COPY = {
   y_approve: (n) => `${n} creator${n === 1 ? ' is' : 's are'} ready for your review.`,
   y_ship: (n) => `${n} order${n === 1 ? ' is' : 's are'} ready for you to ship.`,
   y_review: (n) => `${n} draft${n === 1 ? ' is' : 's are'} ready for your review.`,
-  tail_wait: (k) => `Katie's team is following up on the last ${k === 1 ? 'one' : k}.`,
 };
 const WHAT = { accepted: 'creators accepted', delivered: 'the first delivery', draft: 'the first draft' };
 const ON_PLAN_POSTS = [42, 44, 45, 47, 48, 49, 51, 52, 54, 55];
@@ -542,7 +535,7 @@ function compute(sc, t, rule = 'split') {
        creators' side is past its time, or the week on the tile has ended. Early has no line (Julia, Oct 5). */
     if (rule === 'hold') line = null;
     else if (brandHolds) line = ['you', brandHolds === 'accepted' ? COPY.y_approve(sc.n) : brandHolds === 'delivered' ? COPY.y_ship(sc.n) : COPY.y_review(1)];
-    else if (overdue || stale) line = ['note', next === 'accepted' ? COPY.n_match : next === 'delivered' ? COPY.n_ship : next === 'draft' ? (overdue ? COPY.n_film : COPY.n_filming) : (t >= addBiz(ev.draft, REVIEW_BIZ) ? COPY.n_approved : COPY.n_review)];
+    else if (overdue || stale) line = ['note', next === 'accepted' ? COPY.n_match : next === 'delivered' ? COPY.n_ship : next === 'draft' ? COPY.n_filming : (t >= addBiz(ev.draft, REVIEW_BIZ) ? COPY.n_approved : COPY.n_review)];
     else if (was && !early && brandStep && WHAT[brandStep]) line = ['note', COPY.n_updated(fmt(ev[brandStep]), WHAT[brandStep])];
   }
   return { sc, t, ev, done, reached, front, next, latest, posted, live, allLive, lastPost, forecast, realistic, bd, brandHolds, lateBy: bd, early, stale, open, st, en, earlyBy, idx, now, after, pct, week: Math.floor(t / 7) + 1, label, value, was, tag, line };
@@ -565,9 +558,8 @@ function tileHtml(c, { open = false, flashKey = null } = {}) {
       return `<li class="${st}"><span class="tl-dot"></span><div><div class="tl-row"><b>${p.name}</b>${st === 'cur' ? '<span class="tl-nowpill">Now</span>' : ''}<span class="tl-dates">${range(c.st[i], c.en[i] - 1)}</span></div><p>${i === 3 && c.sc.reviewer === 'brand' ? COPY.review_brand : p.line}${startedEarly}</p></div></li>`;
     }).join('');
     const tailNow = c.after && !c.allLive;
-    const left = c.sc.n - c.live;
-    /* stragglers are named here and nowhere else, in grey (Julia, Oct 5: do not draw attention to them) */
-    steps += `<li class="${c.allLive ? 'done' : tailNow ? 'cur' : 'next'}"><span class="tl-dot"></span><div><div class="tl-row"><b>${c.lateBy > 0 ? 'After that' : 'After week 8'}</b>${tailNow ? '<span class="tl-nowpill">Now</span>' : ''}<span class="tl-dates">From ${fmt(c.en[4])}</span></div><p>${c.allLive ? 'Every post is live.' : tailNow && left > 0 ? COPY.tail_wait(left) : 'Any last posts go live.'}</p></div></li>`;
+    /* stragglers get no mention: the team's follow-ups are logged but never shown (Julia, Oct 5) */
+    steps += `<li class="${c.allLive ? 'done' : tailNow ? 'cur' : 'next'}"><span class="tl-dot"></span><div><div class="tl-row"><b>${c.lateBy > 0 ? 'After that' : 'After week 8'}</b>${tailNow ? '<span class="tl-nowpill">Now</span>' : ''}<span class="tl-dates">From ${fmt(c.en[4])}</span></div><p>${c.allLive ? 'Every post is live.' : 'Any last posts go live.'}</p></div></li>`;
   }
   return `<section class="am-card" aria-label="Campaign timeline">
     <div class="am-card-head"><span class="am-card-title">Campaign timeline</span></div>
@@ -684,7 +676,7 @@ const BOARD = [
     early: [shot(mk({ draft: 28 }), 29, 'The first draft came in a week early, so Review is Now. <b>Film stays Now too:</b> the others are still filming until its window ends.', { open: true })],
     plan: [shot(mk(), 28, 'Filming, on plan.')],
     late: [shot(mk(LATE_APPROVE), 30, 'The same campaign once filming has started. <b>The crossed-out date is gone:</b> from Film on, the tile just shows the new date.', { side: 'brand' }),
-      shot(mk({ draft: 46 }), 41, 'No draft after the filming window. The date holds and the line says who is on it.', { side: 'creator' })] },
+      shot(mk({ draft: 46 }), 41, 'No draft after the filming window. The date holds, with one neutral grey line. The team\'s check-ins are not shown.', { side: 'creator' })] },
   { stage: 'Review', sub: 'Each draft is reviewed within 3 business days (not shown to the brand), with feedback',
     early: [shot(mk({ del: 14, draft: 28 }), 33, 'The first draft is in a week early. The date and the tag hold while it is reviewed.')],
     plan: [shot(mk(), 40, 'Review, on plan. Still nothing under the date.')],
@@ -703,7 +695,7 @@ const BOARD = [
     early: [shot(mk({ acc: 3, del: 12, draft: 24, posts: [31, 33, 35, 36, 38, 39, 40, 41, 43, 44] }), 46, 'Every post live in week 7. The label says so and the tag marks it.')],
     plan: [shot(mk(), 56, 'All ten live by the end of week 8.')],
     late: [shot(mk(STRAG_SC), 58, '<b>Stragglers, kept quiet.</b> The tile only says how many are live. No amber, no "missing".'),
-      shot(mk(STRAG_SC), 58, 'The last two are mentioned only inside the full timeline, in grey, as something the team is doing.', { open: true })] },
+      shot(mk(STRAG_SC), 58, 'Inside the full timeline the last row is Now and says only "Any last posts go live." The follow-up on the last two is not shown.', { open: true })] },
 ];
 function renderBoard() {
   const cell = (list, cls, name) => `<div class="cell"><span class="which ${cls}">${name}</span>${list.map((s) => {
@@ -722,8 +714,7 @@ function renderLines() {
     row('n', 'The brand\'s delay moved the date, the brand has since acted, and filming has not started', COPY.n_updated('Sep 24', WHAT.accepted), 'Stays moved'),
     row('n', 'Week 1 has run over and the team is still matching *', COPY.n_match, 'Holds'),
     row('n', 'An order has shipped and none has arrived by day 21', COPY.n_ship, 'Holds'),
-    row('n', 'No draft 14 days after the first delivery *', COPY.n_film, 'Holds'),
-    row('n', 'The week on the tile has ended and creators are still inside their filming time **', COPY.n_filming, 'Holds'),
+    row('n', 'No draft yet, and either the filming time has run out or the week on the tile has ended', COPY.n_filming, 'Holds'),
     row('n', 'A draft is inside its 3 business days of review, past day 42', COPY.n_review, 'Holds'),
     row('n', 'The first draft is approved, the post is not live', COPY.n_approved, 'Holds'),
     row('n', 'After the first post', COPY.n_count(3, 10), 'A fact'),
