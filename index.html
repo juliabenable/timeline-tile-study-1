@@ -355,7 +355,7 @@ now(phase)  = phase is the furthest reached || (reached &amp;&amp; today &lt; ph
       <tr><td class="q">A campaign of 1 creator</td><td>The same rule. First and last are the same person, so "All posts are live" follows the first post directly.</td><td><span class="tag prop">Proposed</span></td></tr>
 
       <tr class="grp"><td colspan="3">Campaign state and data</td></tr>
-      <tr><td class="q">Paused</td><td>Grey: "Paused Oct 3. The date updates when you resume." Every date moves later by the length of the pause: a pause is the brand's own delay.</td><td><span class="tag prop">Proposed</span></td></tr>
+      <tr><td class="q">Paused</td><td>No line and no rule. The backend has a "paused" campaign status, but a brand cannot pause or resume a campaign today: the only thing that sets it is an automatic Shopify data-removal request. If a pause control is ever built, this needs deciding then.</td><td><span class="tag open">Julia</span></td></tr>
       <tr><td class="q">No delivery signal</td><td>A brand that ships without tracking gives us no delivery date. That step is skipped: the date can next move when the first draft comes in, and a late shipment cannot be counted against the brand.</td><td><span class="tag open">Nisarg</span></td></tr>
       <tr><td class="q">Campaigns already running when this ships</td><td>Computed from their own history the first time the tile loads. A campaign that was early before the feature existed shows as early.</td><td><span class="tag prop">Proposed</span></td></tr>
       <tr><td class="q">Before the Dashboard exists</td><td>In week 1 the campaign page is still the launch confirmation. Its timeline card is static: nothing has happened that could move a date.</td><td><span class="tag prop">Proposed</span></td></tr>
@@ -378,6 +378,7 @@ now(phase)  = phase is the furthest reached || (reached &amp;&amp; today &lt; ph
       <tr><td class="q">Every delay moves the date later, quietly</td><td>The first pass of this page: any late step moved the date, with nothing crossed out. Dropped by Julia, Oct 5: a delay on the creators' side must not move the date, and when the brand's delay moves it, the old date is shown crossed out.</td></tr>
       <tr><td class="q">"Within 3 business days" in the Review row</td><td>Removed by Julia, Oct 5. The 3 business days stay as an internal rule; the row does not mention them.</td></tr>
       <tr><td class="q">Lines about the team's follow-ups</td><td>"Katie's team is checking in with your creators." and "Katie's team is following up on the last 2." Hidden by Julia, Oct 5: the follow-ups happen and are logged, the tile does not show them.</td></tr>
+      <tr><td class="q">"Paused Oct 3. The date updates when you resume."</td><td>Removed Oct 5. It promised a resume the brand cannot do: there is no pause control in the portal.</td></tr>
       <tr><td class="q">A "Late" tag</td><td>Never. Late is carried by the date and one grey or amber line.</td></tr>
     </tbody>
   </table></div>
@@ -433,7 +434,6 @@ const COPY = {
   n_updated: (date, what) => `Updated ${date}, after ${what}.`,
   n_count: (a, n) => `${a} of ${n} posts live.`,
   n_first: (a) => `First content landed ${a}.`,
-  n_paused: (a) => `Paused ${a}. The date updates when you resume.`,
   y_approve: (n) => `${n} creator${n === 1 ? ' is' : 's are'} ready for your review.`,
   y_ship: (n) => `${n} order${n === 1 ? ' is' : 's are'} ready for you to ship.`,
   y_review: (n) => `${n} draft${n === 1 ? ' is' : 's are'} ready for your review.`,
@@ -731,7 +731,6 @@ function renderLines() {
     row('n', 'After the first post', COPY.n_count(3, 10), 'A fact'),
     row('n', 'After week 8 with posts still to come (stragglers). The tile adds nothing about the missing posts', COPY.n_count(8, 10), 'A fact'),
     row('n', 'Every post is live', COPY.n_first('Oct 22'), 'A fact'),
-    row('n', 'The campaign is paused', COPY.n_paused('Oct 3'), 'Moves on resume'),
   ].join('');
 }
 const q = new URLSearchParams(location.search);
