@@ -217,7 +217,7 @@
   <p class="note">No line at all is the normal state: a campaign that is on plan or early shows the date and nothing under it.</p>
   <p class="note">There is no green line. An early date carries the Early tag and nothing else: the line "The first order was delivered 7 days early." was removed. <span class="tag dec">Julia · Oct 5</span></p>
   <p class="note">* These say the team is doing something. They only show when the log backs it up (a message sent, a call logged). With no log, there is no line.</p>
-  <p class="note">** New wording from this round, not yet through the copy desk. It exists so the tile never shows a week that has ended with nothing under it.</p>
+  <p class="note">** Added this round so the tile never shows a week that has ended with nothing under it. The copy desk kept the wording.</p>
   <p class="note">Amber never says "waiting on you" (cut as a nag in earlier rounds). It gives the count and what is ready.</p>
 
   <h2 id="rule">The rule</h2>
@@ -239,7 +239,7 @@
         <li><b>Windows overlap.</b> A phase opens when its first creators can start and closes on the plan's end, so some creators film while orders are still arriving, and reviewing starts while others film.</li>
         <li><b>A start follows the first creator</b> when they get there before the planned opening. Then the row says "Started 4 days early."</li>
         <li><b>An end never moves earlier.</b> It moves later only by the brand's own days.</li>
-        <li><b>Review is 3 business days per draft.</b> The Review row says so, with the feedback. The forecast keeps 7 days from first draft to first post: 3 business days to review, then the creator posts.</li>
+        <li><b>Review is 3 business days per draft.</b> The Review row says so, with the feedback: "Katie's team sends each creator feedback on their draft within 3 business days." When the brand reviews its own drafts the row reads "Katie's team pre-checks each draft, then you approve it or send feedback."  The forecast keeps 7 days from first draft to first post: 3 business days to review, then the creator posts.</li>
         <li><b>Now can be on more than one row:</b> the furthest phase the first creator has reached, plus any earlier phase whose window is still open. When a window closes its Now goes, so one creator still filming in week 7 does not keep Film lit. <span class="tag prop">Proposed</span></li>
       </ol>
 <pre><span class="c"># the plan, in days from launch</span>
@@ -389,6 +389,8 @@ now(phase)  = phase is the furthest reached || (reached &amp;&amp; today &lt; ph
       <tr><td class="q">Does 3 business days of review shorten the 6-week promise?</td><td>No. First draft to first post stays 7 days: 3 business days to review, then the creator posts.</td><td>Julia</td></tr>
       <tr><td class="q">"Started 7 days early." shows less often now.</td><td>Film opens Sep 23 on plan, so a first order on Sep 24 is no longer early for that row, even though it still earns the Early tag on the date.</td><td>Julia</td></tr>
       <tr><td class="q">On a creator-side delay the tile can show a week that has ended. Is that right?</td><td>Yes, always with one grey line under it. Example: "Week of Oct 19" still showing on Oct 26, with "First draft approved, posting next."</td><td>Julia</td></tr>
+      <tr><td class="q">Can Katie's team hold 3 business days on every draft?</td><td>Yes. Once shipped, the Review row is a promise the brand can read.</td><td>Katie</td></tr>
+      <tr><td class="q">Do the 3 business days also cover the pre-check when the brand reviews its own drafts?</td><td>Not stated: that row leaves the number out.</td><td>Julia, Katie</td></tr>
       <tr><td class="q">Tony has not seen the brand-side move.</td><td>It narrows his Sep 8 "no lateness": the date now moves later, but only when the brand is the cause.</td><td>Tony</td></tr>
       <tr><td class="q">The prototype and the months handoff page still show the old phases.</td><td>v47 and Nisarg's page say Match 1, Ship 2 to 3, Film 4 to 5, Review 6, Post 7 to 8, with no overlap. Not changed yet.</td><td>Julia</td></tr>
       <tr><td class="q">Which log backs "checking in" and "following up"?</td><td>Those grey lines only show when a message or call is logged.</td><td>Nisarg, Katie</td></tr>
@@ -420,8 +422,8 @@ const PHASES = [
   { name: 'Match', line: "Katie's team matches creators for you to approve." },
   { name: 'Ship', line: 'Product ships to creators.' },
   { name: 'Film', line: 'Creators film with your product.' },
-  { name: 'Review', line: "Katie's team reviews each draft within 3 business days and sends feedback to the creator." },
-  { name: 'Post', line: 'Approved posts go live.' },
+  { name: 'Review', line: "Katie's team sends each creator feedback on their draft within 3 business days." },
+  { name: 'Post', line: 'Creators post once their draft is approved.' },
 ];
 /* every string on the tile lives here */
 const COPY = {
@@ -433,6 +435,7 @@ const COPY = {
   n_review: "Katie's team is reviewing the first draft.",
   n_approved: 'First draft approved, posting next.',
   n_filming: 'Your creators are filming.',
+  review_brand: "Katie's team pre-checks each draft, then you approve it or send feedback.",   /* Review row when the brand reviews its own drafts */
   n_updated: (date, what) => `Updated ${date}, after ${what}.`,
   n_count: (a, n) => `${a} of ${n} posts live.`,
   n_first: (a) => `First content landed ${a}.`,
@@ -557,7 +560,7 @@ function tileHtml(c, { open = false, flashKey = null } = {}) {
       const st = c.now.includes(i) ? 'cur' : c.allLive || c.after || i < c.idx ? 'done' : 'next';
       /* early = earlier than this row's own planned opening */
       const startedEarly = c.earlyBy[i] ? ` <span class="early">Started ${daysWord(c.earlyBy[i])} early.</span>` : '';
-      return `<li class="${st}"><span class="tl-dot"></span><div><div class="tl-row"><b>${p.name}</b>${st === 'cur' ? '<span class="tl-nowpill">Now</span>' : ''}<span class="tl-dates">${range(c.st[i], c.en[i] - 1)}</span></div><p>${p.line}${startedEarly}</p></div></li>`;
+      return `<li class="${st}"><span class="tl-dot"></span><div><div class="tl-row"><b>${p.name}</b>${st === 'cur' ? '<span class="tl-nowpill">Now</span>' : ''}<span class="tl-dates">${range(c.st[i], c.en[i] - 1)}</span></div><p>${i === 3 && c.sc.reviewer === 'brand' ? COPY.review_brand : p.line}${startedEarly}</p></div></li>`;
     }).join('');
     const tailNow = c.after && !c.allLive;
     const left = c.sc.n - c.live;
