@@ -177,7 +177,7 @@
   <h1>The tile that moves: the Campaign timeline at every stage, early and late</h1>
   <p class="intro">Julia, Oct 5: the tile "should dynamically update the numbers if things come earlier", then "let's keep C and H, so now think through every single stage of the campaign and what it should look like, and every edge case, including early and late", and "including the stragglers at the very end of campaign, but don't want to draw too much attention to those."</p>
   <p class="intro">So this page now does three things. It shows the one tile that was kept, live. It walks that tile through every stage of a campaign in three columns: early, on plan, late. And it lists the edge cases with what the tile does in each.</p>
-  <div class="toc"><a href="#kept">What is decided</a><a href="#play">The tile, live</a><a href="#stages">Every stage</a><a href="#lines">The line under the date</a><a href="#rule">The rule</a><a href="#edges">Edge cases</a><a href="#dropped">Considered and dropped</a><a href="#open">Open questions</a></div>
+  <div class="toc"><a href="#kept">What is decided</a><a href="#play">The tile, live</a><a href="#stages">Every stage</a><a href="#lines">The words on the tile</a><a href="#rule">The rule</a><a href="#edges">Edge cases</a><a href="#dropped">Considered and dropped</a><a href="#open">Open questions</a></div>
 
   <h2 id="kept">What is decided</h2>
   <p class="lede">Julia, Oct 5, after the first pass of this page: "let's not do quiet late move then if the delay is on creators' side? If it's because the brand has yet to review I'm ok with that. We can just have the old date crossed in small and the new date normal."</p>
@@ -208,7 +208,18 @@
   <p class="lede">Each tile below is drawn by the same rule as the live one, frozen on one day of one campaign. Read across: the same stage when things came early, on plan, and late. Late has two kinds: the brand's side, where the date moves, and the creators' side, where it holds.</p>
   <div class="board" id="board"></div>
 
-  <h2 id="lines">The line under the date</h2>
+  <h2 id="lines">The words on the tile</h2>
+  <p class="lede">First the label above the date, then the one line that can sit under it.</p>
+  <div class="tablewrap"><table>
+    <thead><tr><th>When</th><th>Label</th><th>Value</th><th></th></tr></thead>
+    <tbody>
+      <tr><td class="q">Before the first post</td><td>First content expected</td><td class="num">Week of Oct 19</td><td><span class="tag dec">Tony · Sep 8</span></td></tr>
+      <tr><td class="q">After the first post</td><td>First content landed</td><td class="num">Oct 22</td><td><span class="tag dec">Julia · Oct 5</span></td></tr>
+      <tr><td class="q">Every post is live</td><td>All 10 posts are live</td><td class="num">Nov 4</td><td><span class="tag dec">Julia · Oct 5</span></td></tr>
+      <tr><td class="q">The campaign is completed</td><td>Campaign completed</td><td class="num">Nov 7</td><td><span class="tag prop">Proposed</span></td></tr>
+    </tbody>
+  </table></div>
+  <h3 style="margin-top:28px">The line under the date</h3>
   <p class="lede">One line, at most, and only when something is later than planned. Having grey and amber lines is decided (Julia, Oct 5: "grey lines ok", "yes amber"). The wording went through the copy desk on Oct 5 and is <span class="tag prop">Proposed</span>; "First content expected" is the label already agreed (Tony, Sep 8).</p>
   <div class="tablewrap"><table>
     <thead><tr><th>Tone</th><th>When</th><th>The line</th><th>The date</th></tr></thead>
@@ -233,6 +244,7 @@
         <li><b>The tag</b> shows when the week on the tile is earlier than the week promised at launch. There is no opposite tag.</li>
         <li><b>The crossed-out date</b> shows with the tag whenever the week is earlier. When the brand's delay made it later, it shows up to Film: once the first order is delivered, the tile just shows the new date. It shows again while a draft waits on the brand's own review.</li>
         <li><b>After the first post</b> the tile states the fact and counts posts. After the last one it says so. <span class="tag dec">Julia · Oct 5</span></li>
+        <li><b>Completed:</b> once the campaign's status is completed, the tile reads "Campaign completed" and the date, with the post count under it. <span class="tag prop">Proposed</span></li>
       </ol>
       <h3 style="margin-top:22px">The full timeline, in words</h3>
       <ol class="steps">
@@ -300,8 +312,6 @@ now(phase)  = phase is the furthest reached || (reached &amp;&amp; today &lt; ph
       </table></div>
       <h3 style="margin-top:22px">What does not change</h3>
       <p class="note" style="margin-top:0">The 6-week promise for first content (confirmed by Julia on Oct 5: review at 3 business days does not shorten it) and the campaign's month name, frozen at launch. "Week 4 of 8" stays a calendar count. Local and gift card campaigns have no tile.</p>
-      <h3 style="margin-top:22px">Sep 8, for comparison</h3>
-      <p class="note" style="margin-top:0">The RULE switch in the live tile has a second setting: "Nothing moves later (Sep 8)". That is Tony's position from Sep 8: good news moves the date, nothing else does, and there is no line. Try it with "Slow to approve creators" to see the difference. Julia closed the question on Oct 5: the date may move later when the brand is the cause, and first content at week 6 stands.</p>
     </div>
   </div>
 
@@ -346,13 +356,13 @@ now(phase)  = phase is the furthest reached || (reached &amp;&amp; today &lt; ph
       <tr><td class="q">Stragglers after week 8</td><td>The tile says "8 of 10 posts live." No amber, no count of what is missing. The full timeline's last row says "Any last posts go live." The follow-up is logged but not shown.</td><td><span class="tag dec">Julia · Oct 5</span></td></tr>
       <tr><td class="q">A straggler never posts</td><td>The tile keeps "9 of 10 posts live." for as long as the campaign is open. It never turns into a warning. How and when the campaign closes is the NPS study's question, not the tile's.</td><td><span class="tag open">Julia, Tony</span></td></tr>
       <tr><td class="q">The first post goes live, then nothing for weeks</td><td>"1 of 10 posts live." The date on the tile is a fact by then and does not move.</td><td><span class="tag dec">Julia · Oct 5</span></td></tr>
-      <tr><td class="q">The campaign is completed</td><td>The tile stays as the record: "All 10 posts are live" and the dates.</td><td><span class="tag prop">Proposed</span></td></tr>
+      <tr><td class="q">The campaign is completed</td><td>The tile becomes the record: "Campaign completed" and the date, with "All 10 posts are live." or "8 of 10 posts live." under it. Nothing is marked Now and the "After week 8" row is gone. Production completes a campaign when every creator is thanked, or when the team completes it by hand.</td><td><span class="tag prop">Proposed</span></td></tr>
 
       <tr class="grp"><td colspan="3">People</td></tr>
       <tr><td class="q">The first creator stalls or drops out</td><td>The date they earned drains back toward the plan until someone else reaches the next step.</td><td><span class="tag prop">Proposed</span></td></tr>
       <tr><td class="q">A replacement joins in week 3</td><td>They run on their own clock. The tile's end dates do not move for one creator; "After week 8" covers them.</td><td><span class="tag prop">Proposed</span></td></tr>
       <tr><td class="q">A campaign of 100 creators</td><td>The first creator anchors every step, so the Early tag will show on almost every big campaign. That is fine.</td><td><span class="tag dec">Julia · Oct 5</span></td></tr>
-      <tr><td class="q">A campaign of 1 creator</td><td>The same rule. First and last are the same person, so "All posts are live" follows the first post directly.</td><td><span class="tag prop">Proposed</span></td></tr>
+      <tr><td class="q">A campaign of 1 creator</td><td>The same rule. First and last are the same person, so the tile goes straight from "First content expected" to "The post is live".</td><td><span class="tag prop">Proposed</span></td></tr>
 
       <tr class="grp"><td colspan="3">Campaign state and data</td></tr>
       <tr><td class="q">Paused</td><td>No line and no rule. The backend has a "paused" campaign status, but a brand cannot pause or resume a campaign today: the only thing that sets it is an automatic Shopify data-removal request. If a pause control is ever built, this needs deciding then.</td><td><span class="tag open">Julia</span></td></tr>
@@ -411,7 +421,6 @@ const weekOf = (d) => `Week of ${fmt(mondayOf(d))}`;
 const daysWord = (n) => `${n} day${n === 1 ? '' : 's'}`;
 const range = (a, b) => { const x = dateOf(a), y = dateOf(b); return x.getMonth() === y.getMonth() ? `${fmt(a)} to ${y.getDate()}` : `${fmt(a)} to ${fmt(b)}`; };
 const PLAN = { accepted: 7, delivered: 21, draft: 35, post: 42, end: 56 };
-const PLAN_B = [0, 7, 21, 35, 42, 56];
 const ORDER = ['accepted', 'delivered', 'draft', 'post'];
 const REMAIN = { accepted: 35, delivered: 21, draft: 7, post: 0 };   /* days from that step to first content */
 const PHASES = [
@@ -423,8 +432,8 @@ const PHASES = [
 ];
 /* every string on the tile lives here */
 const COPY = {
-  expected: 'First content expected', landed: 'First content landed',
-  allLive: (n) => `All ${n} posts are live`, tag: 'Early',
+  expected: 'First content expected', landed: 'First content landed', completed: 'Campaign completed',
+  allLive: (n) => (n === 1 ? 'The post is live' : `All ${n} posts are live`), tag: 'Early',
   n_match: "Katie's team is filling the last spots.",
   n_ship: 'The first order is on its way.',
   n_review: "Katie's team is reviewing the first draft.",
@@ -434,6 +443,7 @@ const COPY = {
   n_updated: (date, what) => `Updated ${date}, after ${what}.`,
   n_count: (a, n) => `${a} of ${n} posts live.`,
   n_first: (a) => `First content landed ${a}.`,
+  n_all: (n) => (n === 1 ? 'The post is live.' : `All ${n} posts are live.`),
   y_approve: (n) => `${n} creator${n === 1 ? ' is' : 's are'} ready for your review.`,
   y_ship: (n) => `${n} order${n === 1 ? ' is' : 's are'} ready for you to ship.`,
   y_review: (n) => `${n} draft${n === 1 ? ' is' : 's are'} ready for your review.`,
@@ -441,7 +451,7 @@ const COPY = {
 const WHAT = { accepted: 'creators accepted', delivered: 'the first delivery', draft: 'the first draft' };
 const ON_PLAN_POSTS = [42, 44, 45, 47, 48, 49, 51, 52, 54, 55];
 /* a campaign: when each step really happened (null = never, within this story) and who holds the ball */
-const mk = (o = {}) => ({ acc: 7, del: 21, draft: 35, posts: ON_PLAN_POSTS, n: 10, matchOwner: 'benable', ships: 'auto', reviewer: 'benable', ...o });
+const mk = (o = {}) => ({ acc: 7, del: 21, draft: 35, posts: ON_PLAN_POSTS, n: 10, matchOwner: 'benable', ships: 'auto', reviewer: 'benable', completed: null, ...o });
 const shiftPosts = (first) => ON_PLAN_POSTS.map((d) => d - 42 + first);
 
 const DUR = { accepted: 7, delivered: 14, draft: 14 };               /* the time each step is given; review is counted in business days */
@@ -454,9 +464,8 @@ const addBiz = (d, n) => { let x = d; for (let k = 0; k < n;) { x += 1; const wd
 /* who holds each step: the brand approves its creators / ships its own orders / reviews its own drafts */
 const ownerOf = (sc, k) => (k === 'accepted' ? sc.matchOwner : k === 'delivered' ? sc.ships : k === 'post' ? sc.reviewer : 'creator');
 
-/* rule 'split' (Julia, Oct 5): early moves the date in, only the brand's own delay moves it out.
-   rule 'hold' (Sep 8): nothing moves it later, and there is no line. */
-function compute(sc, t, rule = 'split') {
+/* the one rule (Julia, Oct 5): early moves the date in, only the brand's own delay moves it out */
+function compute(sc, t) {
   const firstPost = Math.min(...sc.posts);
   const ev = { accepted: sc.acc, delivered: sc.del, draft: sc.draft, post: firstPost };
   const done = (k) => ev[k] != null && ev[k] <= t;
@@ -469,11 +478,13 @@ function compute(sc, t, rule = 'split') {
   const live = sc.posts.filter((d) => d <= t).length;
   const lastPost = Math.max(...sc.posts);
   const allLive = Number.isFinite(lastPost) && lastPost <= t;
+  /* production marks a campaign completed when every creator is thanked, or when the team completes it by hand */
+  const completed = sc.completed != null && t >= sc.completed;
 
   /* 1. days lost while the ball was with the brand; cum[i] = the total after step i */
   let bd = 0, brandHolds = null, brandStep = null;
   const cum = ORDER.map((k, i) => {
-    if (rule !== 'hold' && ownerOf(sc, k) === 'brand' && (i === 0 || done(ORDER[i - 1]))) {
+    if (ownerOf(sc, k) === 'brand' && (i === 0 || done(ORDER[i - 1]))) {
       const prev = i ? ev[ORDER[i - 1]] : 0;
       const end = done(k) ? ev[k] : t;
       let over;
@@ -511,20 +522,24 @@ function compute(sc, t, rule = 'split') {
   open[4] = 42 + bd;                                                  /* Post opens on the day first content is expected */
   st.push(Math.max(Math.min(forecast, open[4]), st[3] + 1));
   const en = ENDS.map((b, i) => Math.max(b + cum[Math.min(i, 3)], st[i] + 1));
-  const ci = PLAN_B.findIndex((b, k) => k > 0 && t < b);
-  const idx = rule === 'hold' ? Math.max(front, ci < 0 ? 4 : ci - 1) : front;
+  const idx = front;
   if (brandHolds) en[idx] = Math.max(en[idx], t + 1);
   const earlyBy = st.map((d, i) => (i && done(ORDER[i - 1]) && open[i] - d >= 2 ? open[i] - d : 0));
   const after = t >= en[4];
   /* Now can sit on more than one phase (proposed): the furthest one reached, plus any earlier phase whose
      window is still open, because the other creators are still in it. A closed window loses its Now. */
-  const now = allLive || after ? [] : [0, 1, 2, 3, 4].filter((i) => i === idx || (i < idx && t < en[i]));
+  const now = completed || allLive || after ? [] : [0, 1, 2, 3, 4].filter((i) => i === idx || (i < idx && t < en[i]));
   const frac = Math.min(.9, Math.max(.1, (t - st[idx]) / Math.max(1, en[idx] - st[idx])));
-  const pct = allLive || after ? 100 : Math.round((idx + frac) * 20);
+  const pct = completed || allLive || after ? 100 : Math.round((idx + frac) * 20);
 
   /* ---- what the tile says ---- */
   let label = COPY.expected, value, was = '', tag = false, line = null;
-  if (allLive) {
+  if (completed) {
+    /* the record: no Now, no tail row, and nothing about posts that never came */
+    label = COPY.completed; value = fmt(sc.completed);
+    tag = allLive && mondayOf(lastPost) < mondayOf(55);
+    line = ['note', allLive ? COPY.n_all(sc.n) : COPY.n_count(live, sc.n)];
+  } else if (allLive) {
     label = COPY.allLive(sc.n); value = fmt(lastPost);
     tag = mondayOf(lastPost) < mondayOf(55);
     line = ['note', COPY.n_first(fmt(ev.post))];
@@ -540,8 +555,7 @@ function compute(sc, t, rule = 'split') {
     if (early || (mondayOf(forecast) > mondayOf(42) && (front < 2 || brandHolds === 'post'))) was = fmt(mondayOf(42));
     /* at most one line. Amber: the brand holds the step and the date is moving. Grey: a step on our side or the
        creators' side is past its time, or the week on the tile has ended. Early has no line (Julia, Oct 5). */
-    if (rule === 'hold') line = null;
-    else if (brandHolds) line = ['you', brandHolds === 'accepted' ? COPY.y_approve(sc.n) : brandHolds === 'delivered' ? COPY.y_ship(sc.n) : COPY.y_review(1)];
+    if (brandHolds) line = ['you', brandHolds === 'accepted' ? COPY.y_approve(sc.n) : brandHolds === 'delivered' ? COPY.y_ship(sc.n) : COPY.y_review(1)];
     else if (overdue || stale) {
       const checked = next === 'post' && t >= addBiz(ev.draft, REVIEW_BIZ);            /* Katie's team has had its 3 business days */
       line = next === 'post' && checked && sc.reviewer === 'brand' ? ['you', COPY.y_review(1)]   /* with the brand, still inside its own 3 days */
@@ -549,7 +563,7 @@ function compute(sc, t, rule = 'split') {
     }
     else if (was && !early && brandStep && WHAT[brandStep]) line = ['note', COPY.n_updated(fmt(ev[brandStep]), WHAT[brandStep])];
   }
-  return { sc, t, ev, done, reached, front, next, latest, posted, live, allLive, lastPost, forecast, realistic, bd, brandHolds, lateBy: bd, early, stale, open, st, en, earlyBy, idx, now, after, pct, week: Math.floor(t / 7) + 1, label, value, was, tag, line };
+  return { sc, t, ev, done, reached, front, next, latest, posted, live, allLive, completed, lastPost, forecast, realistic, bd, brandHolds, lateBy: bd, early, stale, open, st, en, earlyBy, idx, now, after, pct, week: Math.floor(t / 7) + 1, label, value, was, tag, line };
 }
 
 /* ---------- drawing ---------- */
@@ -563,14 +577,14 @@ function tileHtml(c, { open = false, flashKey = null } = {}) {
   let steps = '';
   if (open) {
     steps = PHASES.map((p, i) => {
-      const st = c.now.includes(i) ? 'cur' : c.allLive || c.after || i < c.idx ? 'done' : 'next';
+      const st = c.now.includes(i) ? 'cur' : c.completed || c.allLive || c.after || i < c.idx ? 'done' : 'next';
       /* early = earlier than this row's own planned opening */
       const startedEarly = c.earlyBy[i] ? ` <span class="early">Started ${daysWord(c.earlyBy[i])} early.</span>` : '';
       return `<li class="${st}"><span class="tl-dot"></span><div><div class="tl-row"><b>${p.name}</b>${st === 'cur' ? '<span class="tl-nowpill">Now</span>' : ''}<span class="tl-dates">${range(c.st[i], c.en[i] - 1)}</span></div><p>${i === 3 && c.sc.reviewer === 'brand' ? COPY.review_brand : p.line}${startedEarly}</p></div></li>`;
     }).join('');
     const tailNow = c.after && !c.allLive;
     /* stragglers get no mention: the team's follow-ups are logged but never shown (Julia, Oct 5) */
-    steps += `<li class="${c.allLive ? 'done' : tailNow ? 'cur' : 'next'}"><span class="tl-dot"></span><div><div class="tl-row"><b>${c.lateBy > 0 ? 'After that' : 'After week 8'}</b>${tailNow ? '<span class="tl-nowpill">Now</span>' : ''}<span class="tl-dates">From ${fmt(c.en[4])}</span></div><p>${c.allLive ? 'Every post is live.' : 'Any last posts go live.'}</p></div></li>`;
+    if (!c.completed) steps += `<li class="${c.allLive ? 'done' : tailNow ? 'cur' : 'next'}"><span class="tl-dot"></span><div><div class="tl-row"><b>${c.lateBy > 0 ? 'After that' : 'After week 8'}</b>${tailNow ? '<span class="tl-nowpill">Now</span>' : ''}<span class="tl-dates">From ${fmt(c.en[4])}</span></div><p>${c.allLive ? 'Every post is live.' : 'Any last posts go live.'}</p></div></li>`;
   }
   return `<section class="am-card" aria-label="Campaign timeline">
     <div class="am-card-head"><span class="am-card-title">Campaign timeline</span></div>
@@ -587,7 +601,8 @@ function tileHtml(c, { open = false, flashKey = null } = {}) {
 function ovwHtml(c) {
   const tag = c.tag ? `<span class="tl-early">${COPY.tag}</span>` : '';
   const wk = c.week <= 8 ? `Week ${c.week} of 8` : `Week ${c.week}`;
-  const meta = c.allLive ? `<b>${c.sc.n} of ${c.sc.n} live</b> · last on ${fmt(c.lastPost)}${tag}`
+  const meta = c.completed ? `<b>Completed ${fmt(c.sc.completed)}</b> · ${c.live} of ${c.sc.n} live`
+    : c.allLive ? `<b>${c.sc.n} of ${c.sc.n} live</b> · last on ${fmt(c.lastPost)}${tag}`
     : c.posted ? `<b>${c.live} of ${c.sc.n} live</b> · first on ${fmt(c.ev.post)}${tag}`
       : `<b>${wk}</b> · first content expected the week of ${fmt(mondayOf(c.forecast))}${tag}`;
   const pct = c.posted ? Math.round((c.live / c.sc.n) * 100) : Math.min(100, Math.round((Math.min(c.week, 8) / 8) * 100));
@@ -609,11 +624,12 @@ const SCENARIOS = [
   { key: 'film', label: 'First draft is slow', sc: mk({ draft: 43, posts: shiftPosts(50) }), say: 'No draft until day 43.' },
   { key: 'post', label: 'Approved, not posted', sc: mk({ posts: shiftPosts(49) }), say: 'The first draft is approved on time; the first post takes another week.' },
   { key: 'strag', group: 'The end', label: 'Two stragglers', sc: mk({ posts: [42, 44, 45, 47, 48, 49, 51, 52, 63, Infinity] }), say: 'Eight posts by week 8. One comes a week later, one never does.' },
+  { key: 'done', label: 'Completed, all live', sc: mk({ completed: 58 }), say: 'Every post is live by Nov 4 and the campaign is completed on Nov 7.' },
+  { key: 'closed', label: 'Completed with 8 of 10', sc: mk({ posts: [42, 44, 45, 47, 48, 49, 51, 52, Infinity, Infinity], completed: 63 }), say: 'Two creators never post. The team completes the campaign on Nov 12.' },
 ];
-const RULES = [['split', 'Only the brand moves it later (decided)'], ['hold', 'Nothing moves later (Sep 8)']];
-const S = { scen: 'ship', day: 16, rule: 'split', playing: false };
+const S = { scen: 'ship', day: 16, playing: false };
 const MAXDAY = 70;
-const cur = () => compute(SCENARIOS.find((x) => x.key === S.scen).sc, S.day, S.rule);
+const cur = () => compute(SCENARIOS.find((x) => x.key === S.scen).sc, S.day);
 const EVLABEL = { accepted: 'Creators accepted', delivered: 'First order delivered', draft: 'First draft in', post: 'First post live' };
 const happenedHtml = (c) => ORDER.map((k) => {
   const a = PLAN[k] - c.ev[k];
@@ -630,7 +646,6 @@ function renderControls() {
     <div class="row"><span class="k">Today</span><button type="button" class="play" data-play aria-label="${S.playing ? 'Pause' : 'Play the campaign'}">${S.playing ? '❚❚' : '▶'}</button>
       <div class="scrub"><input type="range" min="0" max="${MAXDAY}" step="1" value="${S.day}" id="day" aria-label="Day of the campaign"><div class="marks">${marksHtml(c)}</div></div>
       <span class="readout">${readoutHtml(c)}</span></div>
-    <div class="row"><span class="k">Rule</span>${RULES.map(([k, l]) => `<button type="button" data-rule="${k}" class="${S.rule === k ? 'is-on' : ''}">${l}</button>`).join('')}</div>
     <div class="happened">${happenedHtml(c)}</div>`;
 }
 function renderLive() {
@@ -648,7 +663,6 @@ function play(on) {
 document.addEventListener('click', (e) => {
   const t = e.target; let x;
   if ((x = t.closest('[data-scen]'))) { S.scen = x.dataset.scen; renderControls(); renderLive(); return; }
-  if ((x = t.closest('[data-rule]'))) { S.rule = x.dataset.rule; renderControls(); renderLive(); return; }
   if ((x = t.closest('[data-play]'))) { play(!S.playing); }
 });
 document.addEventListener('input', (e) => {
@@ -707,10 +721,14 @@ const BOARD = [
     plan: [shot(mk(), 56, 'All ten live by the end of week 8.')],
     late: [shot(mk(STRAG_SC), 58, '<b>Stragglers, kept quiet.</b> The tile only says how many are live. No amber, no "missing".'),
       shot(mk(STRAG_SC), 58, 'Inside the full timeline the last row is Now and says only "Any last posts go live." The follow-up on the last two is not shown.', { open: true })] },
+  { stage: 'Completed', sub: 'Every creator thanked, or completed by the team',
+    early: [shot(mk({ acc: 3, del: 12, draft: 24, posts: [31, 33, 35, 36, 38, 39, 40, 41, 43, 44], completed: 47 }), 50, 'Finished in week 7 and completed. The tile becomes the record and keeps the tag.')],
+    plan: [shot(mk({ completed: 58 }), 60, 'All ten live, campaign completed. Nothing is marked Now and the last row is gone.', { open: true })],
+    late: [shot(mk({ posts: [42, 44, 45, 47, 48, 49, 51, 52, Infinity, Infinity], completed: 63 }), 65, 'Completed with two posts that never came. The tile says how many are live and nothing about the rest.')] },
 ];
 function renderBoard() {
   const cell = (list, cls, name) => `<div class="cell"><span class="which ${cls}">${name}</span>${list.map((s) => {
-    const c = compute(s.sc, s.t, 'split');
+    const c = compute(s.sc, s.t);
     return `<div class="shot">${s.side ? `<div class="side${s.side === 'brand' ? '' : ' hold'}">${SIDE[s.side]}</div>` : ''}<div class="when">${fmt(s.t)} · day ${s.t}</div>${tileHtml(c, { open: !!s.open })}<p class="cap">${s.cap}</p></div>`;
   }).join('')}</div>`;
   document.getElementById('board').innerHTML = `<div class="colhead"><span></span><span class="c-early">Early</span><span>On plan</span><span class="c-late">Late</span></div>`
@@ -731,12 +749,13 @@ function renderLines() {
     row('n', 'After the first post', COPY.n_count(3, 10), 'A fact'),
     row('n', 'After week 8 with posts still to come (stragglers). The tile adds nothing about the missing posts', COPY.n_count(8, 10), 'A fact'),
     row('n', 'Every post is live', COPY.n_first('Oct 22'), 'A fact'),
+    row('n', 'The campaign is completed and every post is live', COPY.n_all(10), 'A fact'),
+    row('n', 'The campaign is completed and some posts never came', COPY.n_count(8, 10), 'A fact'),
   ].join('');
 }
 const q = new URLSearchParams(location.search);
 if (q.get('scen') && SCENARIOS.some((s) => s.key === q.get('scen'))) S.scen = q.get('scen');
 if (q.get('day')) S.day = Math.min(MAXDAY, Math.max(0, Number(q.get('day')) || 0));
-if (q.get('rule') === 'hold') S.rule = 'hold';
 renderControls(); renderLive(); renderBoard(); renderLines();
 </script>
 </body>
