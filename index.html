@@ -336,7 +336,7 @@ now(phase)  = phase is the furthest reached || (reached &amp;&amp; today &lt; ph
 
       <tr class="grp"><td colspan="3">Who we are waiting on</td></tr>
       <tr><td class="q">The brand has not approved its creators</td><td>Amber: "10 creators are ready for your review." The date moves a day for every day past day 7.</td><td><span class="tag dec">Julia · Oct 5</span></td></tr>
-      <tr><td class="q">A brand step held more than 4 weeks</td><td>The date stops: "5 weeks after you approve your creators", "3 weeks after your orders arrive", or "Once you approve the first draft", with the amber line under it and no crossed-out date. The overview card reads "Week 19 · 5 creators are ready for your review". Katie's team is flagged. Wording pending the copy desk.</td><td><span class="tag dec">Julia · Oct 6</span></td></tr>
+      <tr><td class="q">A brand step held more than 4 weeks</td><td>The date stops: "5 weeks after you approve your creators", "3 weeks after the first order is delivered", or "Once you approve the first draft", with the amber line under it and no crossed-out date. The overview card reads "Week 19 · 5 creators are ready for your review". Katie's team is flagged.</td><td><span class="tag dec">Julia · Oct 6</span></td></tr>
       <tr><td class="q">The brand ships its own orders and has not shipped</td><td>Amber: "10 orders are ready for you to ship." The date moves.</td><td><span class="tag dec">Julia · Oct 5</span></td></tr>
       <tr><td class="q">The brand reviews its own drafts and one is waiting</td><td>Amber: "1 draft is ready for your review." The brand gets 3 business days after Katie's team's 3-business-day pre-check. Past that, and past day 42, the date moves to today and keeps moving, and the old date shows crossed out while the draft waits. The amber line can show a little earlier, as soon as the draft is with them and the promised week is at risk.</td><td><span class="tag dec">Julia · Oct 5</span></td></tr>
       <tr><td class="q">Matching is still on us after week 1</td><td>Grey: "Katie's team is filling the last spots." The date holds.</td><td><span class="tag dec">Julia · Oct 5</span></td></tr>
@@ -445,7 +445,7 @@ const COPY = {
   n_review: "Katie's team is reviewing the first draft.",
   n_approved: 'First draft approved, posting next.',
   n_filming: 'Your creators are filming.',
-  wait: { accepted: '5 weeks after you approve your creators', delivered: '3 weeks after your orders arrive', post: 'Once you approve the first draft' },   /* no date, more than 4 weeks past a brand step (wording: copy desk pass pending) */
+  wait: { accepted: '5 weeks after you approve your creators', delivered: '3 weeks after the first order is delivered', post: 'Once you approve the first draft' },   /* no date, more than 4 weeks past a brand step (copy desk, Oct 6) */
   review_brand: "Katie's team pre-checks each draft, then you approve it or send feedback.",   /* Review row when the brand reviews its own drafts */
   n_updated: (date, what) => `Updated ${date}, after ${what}.`,
   n_count: (a, n) => `${a} of ${n} posts live.`,
