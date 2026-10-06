@@ -216,7 +216,7 @@
       <tr><td class="q">Before the first post</td><td>First content expected</td><td class="num">Week of Oct 19</td><td><span class="tag dec">Tony · Sep 8</span></td></tr>
       <tr><td class="q">After the first post</td><td>First content landed</td><td class="num">Oct 22</td><td><span class="tag dec">Julia · Oct 5</span></td></tr>
       <tr><td class="q">Every post is live</td><td>All 10 posts are live</td><td class="num">Nov 4</td><td><span class="tag dec">Julia · Oct 5</span></td></tr>
-      <tr><td class="q">The campaign is completed</td><td>Campaign completed</td><td class="num">Nov 7</td><td><span class="tag dec">Julia · Oct 6</span></td></tr>
+      <tr><td class="q">The campaign is complete</td><td>(none)</td><td class="num">Campaign complete</td><td><span class="tag dec">Julia · Oct 6</span></td></tr>
     </tbody>
   </table></div>
   <h3 style="margin-top:28px">The line under the date</h3>
@@ -244,7 +244,8 @@
         <li><b>The tag</b> shows when the week on the tile is earlier than the week promised at launch. There is no opposite tag.</li>
         <li><b>The crossed-out date</b> shows with the tag whenever the week is earlier. When the brand's delay made it later, it shows up to Film: once the first order is delivered, the tile just shows the new date. It shows again while a draft waits on the brand's own review.</li>
         <li><b>After the first post</b> the tile states the fact and counts posts. After the last one it says so. <span class="tag dec">Julia · Oct 5</span></li>
-        <li><b>Completed:</b> once the campaign's status is completed, the tile reads "Campaign completed" and the date, with the post count under it. <span class="tag dec">Julia · Oct 6</span></li>
+        <li><b>Complete:</b> once the campaign is completed, the tile reads "Campaign complete", with no date, and the post count under it. A campaign completes on its own 7 days after every post is live, when every creator is thanked, or when the team completes it by hand. <span class="tag dec">Julia · Oct 6</span></li>
+        <li><b>Past week 8 with posts missing:</b> the bar is full and Post stays marked Now until the campaign completes. <span class="tag dec">Julia · Oct 6</span></li>
       </ol>
       <h3 style="margin-top:22px">The full timeline, in words</h3>
       <ol class="steps">
@@ -353,11 +354,12 @@ now(phase)  = phase is the furthest reached || (reached &amp;&amp; today &lt; ph
       <tr><td class="q">Every post is live before week 8 ends</td><td>"All 10 posts are live · Oct 24" with the Early tag.</td><td><span class="tag dec">Julia · Oct 5</span></td></tr>
       <tr><td class="q">The brand's delay moved the date</td><td>Every later end date, and the end of the campaign, moves later by the same days.</td><td><span class="tag dec">Julia · Oct 5</span></td></tr>
       <tr><td class="q">Creators ran late</td><td>The end of the campaign holds at the plan. Posts that land after it are the quiet tail.</td><td><span class="tag dec">Julia · Oct 5</span></td></tr>
-      <tr><td class="q">Stragglers after week 8</td><td>The tile says "8 of 10 posts live." No amber, no count of what is missing. The full timeline's last row says "Any last posts go live." The follow-up is logged but not shown.</td><td><span class="tag dec">Julia · Oct 5</span></td></tr>
-      <tr><td class="q">A straggler never posts</td><td>The tile keeps "9 of 10 posts live." for as long as the campaign is open. It never turns into a warning. When the team completes the campaign, the tile reads "Campaign completed" with "9 posts live." When and how the team decides to complete it is the NPS study's question, not the tile's.</td><td><span class="tag dec">Julia · Oct 6</span></td></tr>
+      <tr><td class="q">Stragglers after week 8</td><td>The tile says "8 of 10 posts live." and Post stays marked Now (Julia, Oct 6). No amber, no count of what is missing. The full timeline's last row says "Any last posts go live." The follow-up is logged but not shown.</td><td><span class="tag dec">Julia · Oct 5</span></td></tr>
+      <tr><td class="q">A straggler never posts</td><td>The tile keeps "9 of 10 posts live." for as long as the campaign is open. It never turns into a warning. When the team completes the campaign, the tile reads "Campaign complete" with "9 posts live." When and how the team decides to complete it is the NPS study's question, not the tile's.</td><td><span class="tag dec">Julia · Oct 6</span></td></tr>
       <tr><td class="q">The first post goes live, then nothing for weeks</td><td>"1 of 10 posts live." The date on the tile is a fact by then and does not move.</td><td><span class="tag dec">Julia · Oct 5</span></td></tr>
-      <tr><td class="q">The campaign is completed</td><td>The tile becomes the record: "Campaign completed" and the date, with "All 10 posts are live." or "8 posts live." under it. Nothing is marked Now and the "After week 8" row is gone. Production completes a campaign when every creator is thanked, or when the team completes it by hand. The overview card reads "8 live · completed Nov 12", with no "of 10" (Julia, Oct 5). The word is always "completed", never "closed".</td><td><span class="tag dec">Julia · Oct 6</span></td></tr>
-      <tr><td class="q">Completed by hand with no post live</td><td>Label and date only. The line is hidden, because the tile never shows a zero. The overview card reads "Completed Nov 7".</td><td><span class="tag dec">Julia · Oct 6</span></td></tr>
+      <tr><td class="q">The campaign is complete</td><td>The tile becomes the record: "Campaign complete", no date, with "All 10 posts are live." or "8 posts live." under it. Nothing is marked Now and the "After week 8" row is gone. The overview card reads "8 live · campaign complete". The word is "complete" with no date; "closed" is never used.</td><td><span class="tag dec">Julia · Oct 6</span></td></tr>
+      <tr><td class="q">Completed by hand with no post live</td><td>"Campaign complete" and nothing under it, because the tile never shows a zero. The overview card reads "Campaign complete".</td><td><span class="tag dec">Julia · Oct 6</span></td></tr>
+      <tr><td class="q">Every post is live and nobody completes it</td><td>The campaign completes on its own 7 days after its last post. Production today completes a campaign only when every creator is thanked, or by hand, so campaigns where the brand never thanks stay active for months. A campaign with posts still missing never completes on its own.</td><td><span class="tag dec">Julia · Oct 6</span></td></tr>
 
       <tr class="grp"><td colspan="3">People</td></tr>
       <tr><td class="q">The first creator stalls or drops out</td><td>The date they earned drains back toward the plan until someone else reaches the next step.</td><td><span class="tag dec">Julia · Oct 5</span></td></tr>
@@ -433,7 +435,7 @@ const PHASES = [
 ];
 /* every string on the tile lives here */
 const COPY = {
-  expected: 'First content expected', landed: 'First content landed', completed: 'Campaign completed',
+  expected: 'First content expected', landed: 'First content landed', completed: 'Campaign complete',
   allLive: (n) => `All ${n} posts are live`, tag: 'Early',
   n_match: "Katie's team is filling the last spots.",
   n_ship: 'The first order is on its way.',
@@ -481,7 +483,8 @@ function compute(sc, t) {
   const lastPost = Math.max(...sc.posts);
   const allLive = Number.isFinite(lastPost) && lastPost <= t;
   /* production marks a campaign completed when every creator is thanked, or when the team completes it by hand */
-  const completed = sc.completed != null && t >= sc.completed;
+  /* completed by the team, when every creator is thanked, or on its own 7 days after every post is live (Julia, Oct 6) */
+  const completed = (sc.completed != null && t >= sc.completed) || (allLive && t >= lastPost + 7);
 
   /* 1. days lost while the ball was with the brand; cum[i] = the total after step i */
   let bd = 0, brandHolds = null, brandStep = null;
@@ -530,7 +533,8 @@ function compute(sc, t) {
   const after = t >= en[4];
   /* Now can sit on more than one phase (proposed): the furthest one reached, plus any earlier phase whose
      window is still open, because the other creators are still in it. A closed window loses its Now. */
-  const now = completed || allLive || after ? [] : [0, 1, 2, 3, 4].filter((i) => i === idx || (i < idx && t < en[i]));
+  /* past week 8 with posts missing, Post stays Now while the campaign is open (Julia, Oct 6) */
+  const now = completed || allLive ? [] : after ? [4] : [0, 1, 2, 3, 4].filter((i) => i === idx || (i < idx && t < en[i]));
   const frac = Math.min(.9, Math.max(.1, (t - st[idx]) / Math.max(1, en[idx] - st[idx])));
   const pct = completed || allLive || after ? 100 : Math.round((idx + frac) * 20);
 
@@ -538,7 +542,7 @@ function compute(sc, t) {
   let label = COPY.expected, value, was = '', tag = false, line = null;
   if (completed) {
     /* the record: no Now, no tail row, and nothing about posts that never came */
-    label = COPY.completed; value = fmt(sc.completed);
+    label = ''; value = COPY.completed;   /* no date (Julia, Oct 6) */
     tag = allLive && mondayOf(lastPost) < mondayOf(55);
     line = live ? ['note', allLive ? COPY.n_all(sc.n) : COPY.n_live(live)] : null;   /* a row never shows a zero */
   } else if (allLive) {
@@ -603,7 +607,7 @@ function tileHtml(c, { open = false, flashKey = null } = {}) {
 function ovwHtml(c) {
   const tag = c.tag ? `<span class="tl-early">${COPY.tag}</span>` : '';
   const wk = c.week <= 8 ? `Week ${c.week} of 8` : `Week ${c.week}`;
-  const meta = c.completed ? (c.live ? `<b>${c.live} live</b> · completed ${fmt(c.sc.completed)}` : `<b>Completed ${fmt(c.sc.completed)}</b>`)   /* no "of 10" once completed (Julia, Oct 5) */
+  const meta = c.completed ? (c.live ? `<b>${c.live} live</b> · campaign complete` : '<b>Campaign complete</b>')   /* no "of 10", no date (Julia, Oct 5 and 6) */
     : c.allLive ? `<b>${c.sc.n} of ${c.sc.n} live</b> · last on ${fmt(c.lastPost)}${tag}`
     : c.posted ? `<b>${c.live} of ${c.sc.n} live</b> · first on ${fmt(c.ev.post)}${tag}`
       : `<b>${wk}</b> · first content expected the week of ${fmt(mondayOf(c.forecast))}${tag}`;
@@ -723,7 +727,7 @@ const BOARD = [
     plan: [shot(mk(), 56, 'All ten live by the end of week 8.')],
     late: [shot(mk(STRAG_SC), 58, '<b>Stragglers, kept quiet.</b> The tile only says how many are live. No amber, no "missing".'),
       shot(mk(STRAG_SC), 58, 'Inside the full timeline the last row is Now and says only "Any last posts go live." The follow-up on the last two is not shown.', { open: true })] },
-  { stage: 'Completed', sub: 'Every creator thanked, or completed by the team',
+  { stage: 'Completed', sub: '7 days after every post is live, every creator thanked, or completed by the team',
     early: [shot(mk({ acc: 3, del: 12, draft: 24, posts: [31, 33, 35, 36, 38, 39, 40, 41, 43, 44], completed: 47 }), 50, 'Finished in week 7 and completed. The tile becomes the record and keeps the tag.')],
     plan: [shot(mk({ completed: 58 }), 60, 'All ten live, campaign completed. Nothing is marked Now and the last row is gone.', { open: true })],
     late: [shot(mk({ posts: [42, 44, 45, 47, 48, 49, 51, 52, Infinity, Infinity], completed: 63 }), 65, 'Completed with two posts that never came. The tile says how many are live and nothing about the rest.')] },
