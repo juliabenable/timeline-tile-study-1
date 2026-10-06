@@ -1,0 +1,519 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Timeline card answers</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root { --ink: #1a1a1a; --ink2: #4a4a4a; --mute: #777; --line: rgba(26,26,26,0.1); --paper: #f4f2ef; --card: #fff; --new: #6a4df0; --newwash: #f1eeff; --ok: #17663f; --okwash: #e2f3e9; --warn: #8a4a12; --warnwash: #fff0ce; --open: #9b2c2c; --openwash: #fde8e8; }
+  body { font-family: Inter, ui-sans-serif, system-ui, sans-serif; background: var(--paper); color: var(--ink); font-size: 14px; line-height: 1.55; padding: 48px 24px 120px; }
+  .wrap { max-width: 1320px; margin: 0 auto; }
+  .eyebrow { font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--new); margin-bottom: 10px; }
+  h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.3px; text-wrap: balance; }
+  h2 { font-size: 20px; font-weight: 700; letter-spacing: -0.2px; margin-top: 64px; padding-top: 28px; border-top: 1px solid var(--line); }
+  h3 { font-size: 15px; font-weight: 700; }
+  p { max-width: 820px; }
+  .intro, .lede { margin-top: 10px; color: var(--ink2); }
+  code, .mono { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 12.5px; }
+  code { background: rgba(26,26,26,0.06); padding: 1px 5px; border-radius: 5px; }
+  .tag { display: inline-block; padding: 1px 8px; border-radius: 999px; font-size: 11px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; white-space: nowrap; vertical-align: 1px; }
+  .tag.dec { background: var(--okwash); color: var(--ok); }
+  .tag.prop { background: var(--warnwash); color: var(--warn); }
+  .tag.open { background: var(--openwash); color: var(--open); }
+  .toc { margin-top: 20px; display: flex; flex-wrap: wrap; gap: 6px; }
+  .toc a { font-size: 12px; font-weight: 600; color: #444; background: #fff; border: 1px solid var(--line); border-radius: 999px; padding: 4px 11px; text-decoration: none; }
+  .toc a:hover { border-color: #b9b9b9; }
+  .answer { margin-top: 22px; display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 12px; }
+  .answer div { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 14px 16px; }
+  .answer b { display: block; font-size: 14px; }
+  .answer span { display: block; margin-top: 4px; color: var(--ink2); font-size: 13px; }
+  .answer span .tag { display: inline-block; margin-top: 0; }
+
+  /* ---------- playground controls ---------- */
+  .controls { position: sticky; top: 12px; z-index: 30; margin-top: 20px; background: #17171a; color: #e9e7e2; border-radius: 16px; padding: 14px 18px 16px; box-shadow: 0 10px 30px rgba(0,0,0,.18); }
+  .controls .row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .controls .row + .row { margin-top: 12px; }
+  .controls .k { font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #9b978e; width: 104px; flex: none; }
+  .controls button { font: 500 12.5px/1 Inter, sans-serif; height: 28px; padding: 0 12px; border-radius: 999px; border: 0; background: rgba(255,255,255,.09); color: #ddd; cursor: pointer; }
+  .controls button:hover { background: rgba(255,255,255,.17); }
+  .controls button.is-on { background: #fff; color: #111; }
+  .controls button.play { width: 28px; padding: 0; background: var(--new); color: #fff; font-size: 11px; }
+  .controls .grp { font-size: 10.5px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: #7d7a73; margin: 0 2px 0 8px; }
+  .scrub { flex: 1; min-width: 260px; position: relative; height: 34px; }
+  .scrub input { position: absolute; left: 0; right: 0; top: 2px; width: 100%; accent-color: #a995ff; }
+  .scrub .marks { position: absolute; left: 8px; right: 8px; top: 20px; height: 14px; }
+  .scrub .marks i { position: absolute; top: 0; width: 2px; height: 6px; background: #6f6b63; border-radius: 1px; transform: translateX(-1px); }
+  .scrub .marks span { position: absolute; top: 7px; transform: translateX(-50%); font-size: 10px; color: #9b978e; white-space: nowrap; }
+  .scrub .marks i.done { background: #8fe3b3; }
+  .readout { font-size: 13px; font-weight: 600; color: #fff; min-width: 170px; text-align: right; font-variant-numeric: tabular-nums; }
+  .readout small { display: block; font-size: 11px; font-weight: 500; color: #9b978e; margin-top: 2px; }
+  .happened { margin-top: 12px; font-size: 12.5px; color: #c9c6bf; display: flex; gap: 6px 16px; flex-wrap: wrap; }
+  .happened b { color: #fff; font-weight: 600; }
+  .happened .early { color: #8fe3b3; }
+  .happened .late { color: #ffcf9e; }
+  .happened .todo { color: #7d7a73; }
+
+  .live { margin-top: 22px; display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 22px; align-items: start; }
+  .live h3 { margin-bottom: 10px; font-size: 13px; color: var(--mute); font-weight: 600; letter-spacing: .06em; text-transform: uppercase; }
+  .stage { background: #f9fafb; border: 1px solid var(--line); border-radius: 16px; padding: 16px; display: flex; flex-direction: column; gap: 14px; }
+
+  /* production's rail card + the Campaign timeline tile, as in the prototype (pulse.css am-card, months.css nfm-tl) */
+  .am-card { background: #fff; border: 1px solid #e3e3e3; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 8px rgba(0,0,0,0.03); color: #1c1c1c; }
+  .am-card-head { display: flex; min-height: 56px; align-items: center; justify-content: space-between; gap: 12px; border-bottom: 1px solid #e3e3e3; padding: 10px 20px; background: #f8f9fa; }
+  .am-card-title { font-size: 14px; font-weight: 700; color: #000; }
+  .tl-body { padding: 16px 20px 6px; }
+  .tl-k { font-size: 13px; font-weight: 500; color: #717171; }
+  .tl-v { margin-top: 2px; font-size: 16px; font-weight: 600; letter-spacing: -.1px; line-height: 1.3; color: #1c1c1c; display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; }
+  .tl-v .val { border-radius: 6px; padding: 0 2px; margin: 0 -2px; }
+  .tl-v .val.flash { animation: flash 1.1s ease-out; }
+  @keyframes flash { 0% { background: #d9f7e5; } 100% { background: transparent; } }
+  .tl-was { font-size: 12.5px; font-weight: 500; color: #9a9a9a; text-decoration: line-through; }
+  .tl-early { display: inline-flex; align-items: center; min-height: 20px; padding: 0 8px; border-radius: 999px; background: #ebf7ef; color: #167245; font-size: 12px; font-weight: 600; line-height: 1; white-space: nowrap; align-self: center; }
+  /* the one status line: grey = neutral · amber = the brand's move. There is no green line. */
+  .tl-why { margin-top: 6px; display: flex; align-items: flex-start; gap: 6px; font-size: 12.5px; font-weight: 500; line-height: 1.4; color: #717171; }
+  .tl-why i { width: 6px; height: 6px; border-radius: 50%; background: #c2c5c4; flex: none; margin-top: 6px; }
+  .tl-why.is-you { color: #8a4a12; }
+  .tl-why.is-you i { background: #e88e2c; }
+  .tl-line { height: 6px; margin-top: 14px; border-radius: 999px; background: #f1f3f4; overflow: hidden; }
+  .tl-line span { display: block; height: 100%; border-radius: inherit; background: #7a5cfa; opacity: .7; transition: width .35s ease; }
+  .tl-phases { margin-top: 8px; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); }
+  .tl-phases span { font-size: 12px; font-weight: 500; color: #717171; text-align: center; letter-spacing: -.1px; white-space: nowrap; }
+  .tl-phases span.now { color: #1c1c1c; font-weight: 600; }
+  .tl-toggle { display: flex; align-items: center; justify-content: space-between; width: 100%; margin-top: 14px; padding: 12px 0 10px; border: 0; border-top: 1px solid #ebebeb; background: transparent; color: #5b5b5b; font: 600 13px/1.2 Inter, sans-serif; text-align: left; }
+  .tl-steps { list-style: none; padding: 4px 0 0; }
+  .tl-steps li { position: relative; display: grid; grid-template-columns: 12px minmax(0, 1fr); column-gap: 12px; padding-bottom: 14px; }
+  .tl-steps li::before { content: ""; position: absolute; left: 5px; top: 14px; bottom: -4px; width: 2px; border-radius: 1px; background: #f1f3f4; }
+  .tl-steps li.done::before { background: #7a5cfa; opacity: .3; }
+  .tl-steps li:last-child::before { display: none; }
+  .tl-dot { position: relative; z-index: 1; width: 12px; height: 12px; margin-top: 3px; border-radius: 50%; background: #fff; border: 2px solid #d5d7da; }
+  .tl-steps li.done .tl-dot { background: #c9bdfd; border-color: #c9bdfd; }
+  .tl-steps li.cur .tl-dot { background: #7a5cfa; border-color: #7a5cfa; box-shadow: 0 0 0 4px #f5f3ff; }
+  .tl-row { display: flex; align-items: center; gap: 8px; min-height: 18px; }
+  .tl-row b { font-size: 13.5px; font-weight: 600; color: #1c1c1c; }
+  .tl-steps li.done .tl-row b { color: #5b5b5b; }
+  .tl-nowpill { display: inline-flex; align-items: center; min-height: 18px; padding: 0 7px; border-radius: 999px; background: #f5f3ff; color: #7a5cfa; font-size: 11px; font-weight: 700; }
+  .tl-dates { margin-left: auto; font-size: 12px; color: #717171; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .tl-steps p { margin: 2px 0 0; font-size: 13px; line-height: 1.4; color: #717171; max-width: none; }
+  .tl-steps .early { color: #17663f; font-weight: 500; }
+  .ovw { background: #fff; border: 1px solid #e3e3e3; border-radius: 16px; padding: 16px 20px; }
+  .ovw .pill { display: inline-flex; gap: 4px; align-items: center; font-size: 12px; color: #5b5b5b; background: #f7f7f7; border: .5px solid #e3e3e3; border-radius: 999px; padding: 3px 10px; }
+  .ovw .pill b { color: #1c1c1c; font-weight: 600; }
+  .ovw h4 { font-size: 22px; font-weight: 800; letter-spacing: -.25px; margin-top: 8px; }
+  .ovw .meta { margin-top: 14px; font-size: 14px; font-weight: 500; color: #717171; }
+  .ovw .meta b { color: #1c1c1c; font-weight: 600; }
+  .ovw .meta .tl-early { margin-left: 8px; vertical-align: 1px; }
+  .ovw .bar { height: 6px; border-radius: 999px; background: #f1f3f4; margin-top: 10px; overflow: hidden; }
+  .ovw .bar span { display: block; height: 100%; background: #7a5cfa; opacity: .55; border-radius: inherit; transition: width .35s ease; }
+  .ovw .bar.is-live span { background: #17864f; opacity: 1; }
+
+  /* ---------- storyboard: every stage, early / on plan / late ---------- */
+  .board { margin-top: 20px; }
+  .board .colhead { display: grid; grid-template-columns: 150px repeat(3, minmax(0, 1fr)); gap: 16px; position: sticky; top: 0; z-index: 5; background: var(--paper); padding: 8px 0; }
+  .board .colhead span { font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--mute); }
+  .board .colhead .c-early { color: #17663f; }
+  .board .colhead .c-late { color: #8a4a12; }
+  .brow { display: grid; grid-template-columns: 150px repeat(3, minmax(0, 1fr)); gap: 16px; padding: 18px 0; border-top: 1px solid var(--line); align-items: start; }
+  .brow .stagename b { display: block; font-size: 15px; }
+  .brow .stagename span { display: block; margin-top: 2px; font-size: 12.5px; color: var(--mute); }
+  .cell { display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+  .cell .which { display: none; font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--mute); }
+  .shot .cap { margin-top: 8px; font-size: 12.5px; color: var(--ink2); }
+  .shot .cap b { color: var(--ink); font-weight: 600; }
+  .shot .when { font-size: 11.5px; color: var(--mute); margin-bottom: 6px; font-variant-numeric: tabular-nums; }
+  .shot .side { font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--warn); margin-bottom: 4px; }
+  .shot .side.hold { color: var(--mute); }
+  .cell .same { font-size: 12.5px; color: var(--mute); padding: 10px 0; }
+
+  table { width: 100%; border-collapse: collapse; font-size: 13px; background: var(--card); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; }
+  .tablewrap { margin-top: 16px; overflow-x: auto; border-radius: 14px; }
+  th { text-align: left; font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--mute); padding: 10px 14px; border-bottom: 1px solid var(--line); background: #faf9f7; white-space: nowrap; }
+  td { padding: 10px 14px; border-bottom: 1px solid rgba(26,26,26,0.07); vertical-align: top; }
+  tr:last-child td { border-bottom: 0; }
+  td.q { font-weight: 600; min-width: 200px; }
+  td.num { font-variant-numeric: tabular-nums; white-space: nowrap; }
+  tr.grp td { background: #faf9f7; font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--mute); padding: 8px 14px; }
+  .dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 6px; vertical-align: 0; }
+  .dot.n { background: #c2c5c4; } .dot.y { background: #e88e2c; }
+  .note { margin-top: 10px; color: var(--mute); font-size: 13px; }
+  .two { margin-top: 18px; display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: 20px; align-items: start; }
+  .box { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 18px 20px; }
+  .box h3 { margin-bottom: 10px; }
+  .steps { margin: 0 0 0 18px; color: var(--ink2); }
+  .steps li { margin-top: 6px; padding-left: 4px; }
+  .steps b { color: var(--ink); }
+  pre { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 12.5px; line-height: 1.6; background: #17171a; color: #e9e7e2; border-radius: 12px; padding: 16px 18px; overflow-x: auto; margin-top: 14px; }
+  pre .c { color: #9b978e; }
+  @media (max-width: 1000px) {
+    .two { grid-template-columns: minmax(0, 1fr); }
+    .readout { text-align: left; }
+    .board .colhead { display: none; }
+    .brow { grid-template-columns: minmax(0, 1fr); gap: 14px; }
+    .cell .which { display: block; }
+    .cell .which.c-early { color: #17663f; } .cell .which.c-late { color: #8a4a12; }
+  }
+  /* a narrow pane: the sticky bar stays three single rows that scroll sideways, so it never covers the tile */
+  @media (max-width: 760px) {
+    body { padding: 28px 16px 96px; }
+    .controls { top: 6px; padding: 10px 12px 12px; border-radius: 14px; }
+    .controls .row { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; gap: 6px; }
+    .controls .row::-webkit-scrollbar { display: none; }
+    .controls .row + .row { margin-top: 8px; }
+    .controls .k { width: auto; margin-right: 2px; }
+    .controls button, .controls .grp { flex: none; }
+    .scrub { min-width: 130px; height: 22px; }
+    .scrub .marks span { display: none; }
+    .readout { min-width: 0; white-space: nowrap; font-size: 12px; }
+    .readout small { display: none; }
+    .happened { display: none; }
+    .live { grid-template-columns: minmax(0, 1fr); }
+  }
+
+  .q { margin-top: 56px; padding-top: 24px; border-top: 1px solid var(--line); }
+  .q h2 { margin-top: 0; padding-top: 0; border-top: 0; }
+  .asked { margin-top: 8px; font-size: 13.5px; color: var(--mute); max-width: 820px; }
+  .ans { margin-top: 12px; max-width: 820px; }
+  .ans ul { margin: 8px 0 0 18px; color: var(--ink2); }
+  .ans li { margin-top: 4px; padding-left: 2px; }
+  .ans b { color: var(--ink); }
+  .shots { margin-top: 16px; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 360px)); gap: 18px; align-items: start; }
+  .shot .lbl { font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--mute); margin-bottom: 8px; }
+  .shot .stack { display: flex; flex-direction: column; gap: 12px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow">Campaign timeline card · answers for Nisarg · Oct 6, 2026</div>
+  <h1>Your five questions from running the card on real campaigns</h1>
+  <p class="intro">All five answers were decided by Julia on Oct 6. Every card below is drawn by the same rule as the <a href="index.html">study</a>, with example days.</p>
+
+  <section class="q" id="q1">
+    <h2>1. A past week on the overview card</h2>
+    <p class="asked">You asked: the first draft came in on day 44, so the card shows a week that is over, with a grey line. The overview card has no line. Is a past week OK there?</p>
+    <div class="ans">No. Once the week has passed, the overview card shows the card's grey line instead of the date.
+      <ul>
+        <li><b>When:</b> before the first post is live, once today's week is later than the week on the card, in the brand's time zone.</li>
+        <li><b>What:</b> "first content expected the week of ..." is replaced by whichever grey line the card shows, without its final period.</li>
+        <li><b>Ends:</b> once the first post is live, the overview goes back to "3 of 10 live · first on ...".</li>
+      </ul>
+    </div>
+    <div class="shots">
+      <div class="shot"><div class="lbl">Campaign card</div><div data-shot="q1-card"></div></div>
+      <div class="shot"><div class="lbl">Overview card</div><div data-shot="q1-ovw"></div></div>
+    </div>
+  </section>
+
+  <section class="q" id="q2">
+    <h2>2. Long tails</h2>
+    <p class="asked">You asked: past week 8 with posts missing (day 91, 2 of 5 live), the bar is full and nothing is marked Now. Is that right?</p>
+    <div class="ans">The bar stays full, but Post stays marked Now while posts are missing and the campaign is not complete.
+      <ul>
+        <li><b>Collapsed:</b> "Post" in the current-phase style (dark text, weight 600); the other four muted. The line under the date is unchanged: "2 of 5 posts live."</li>
+        <li><b>Expanded:</b> the Post row keeps the filled dot and the Now pill, dates unchanged. The "After week 8" row is also marked Now.</li>
+        <li><b>Nothing else:</b> no count of what is missing, no amber, no change to the overview card.</li>
+        <li><b>Ends:</b> once the campaign is complete, Post goes back to the done style and the "After week 8" row disappears.</li>
+      </ul>
+    </div>
+    <div class="shots">
+      <div class="shot"><div class="lbl">Collapsed</div><div data-shot="q2-card"></div></div>
+      <div class="shot"><div class="lbl">Expanded</div><div data-shot="q2-open"></div></div>
+    </div>
+  </section>
+
+  <section class="q" id="q3">
+    <h2>3. Campaigns that never complete</h2>
+    <p class="asked">You asked: every post has been live since May or June, and the campaigns are still active. Should someone complete them?</p>
+    <div class="ans">Yes, automatically. A campaign completes on its own <b>7 days after every post is live</b>, on top of today's two ways (every creator thanked, or by hand).
+      <ul>
+        <li>A campaign with posts still missing never completes on its own (see point 2).</li>
+        <li>Thank-yous stay possible after completion.</li>
+        <li>The campaigns you found complete the day this ships.</li>
+      </ul>
+    </div>
+    <div class="shots">
+      <div class="shot"><div class="lbl">Last post 3 days ago</div><div data-shot="q3-before"></div></div>
+      <div class="shot"><div class="lbl">7 days after the last post</div><div class="stack"><div data-shot="q3-after"></div><div data-shot="q3-ovw"></div></div></div>
+    </div>
+  </section>
+
+  <section class="q" id="q4">
+    <h2>4. Stalled campaigns</h2>
+    <p class="asked">You asked: 129 days in creator selection with no creators, and the date moves a day later every day. Cap it, or hide it?</p>
+    <div class="ans">Cap it at 4 weeks. Once the brand is more than 4 weeks past one of its steps, the card stops showing a date and says what first content waits for.
+      <ul>
+        <li><b>Creators not approved:</b> "5 weeks after you approve your creators"</li>
+        <li><b>Brand ships its own orders:</b> "3 weeks after the first order is delivered"</li>
+        <li><b>Brand reviews its own drafts:</b> "Once you approve the first draft"</li>
+        <li>The amber line stays under it. No crossed-out date. The overview card shows the amber line, as in point 1.</li>
+        <li>Flag the campaign to Katie's team at the same point.</li>
+      </ul>
+    </div>
+    <div class="shots">
+      <div class="shot"><div class="lbl">Campaign card</div><div data-shot="q4-card"></div></div>
+      <div class="shot"><div class="lbl">Overview card</div><div data-shot="q4-ovw"></div></div>
+    </div>
+  </section>
+
+  <section class="q" id="q5">
+    <h2>5. The completion date</h2>
+    <p class="asked">You asked: 6 campaigns were completed in one batch on Oct 1, but their last posts went live weeks earlier. Which date should the card show?</p>
+    <div class="ans">No date. The card says "Campaign complete" with the post count under it, and the overview reads "5 live · campaign complete". A campaign completed with no post live shows "Campaign complete" and nothing else.</div>
+    <div class="shots">
+      <div class="shot"><div class="lbl">Every post live</div><div class="stack"><div data-shot="q5-all"></div><div data-shot="q5-all-ovw"></div></div></div>
+      <div class="shot"><div class="lbl">Completed by hand, 2 posts missing</div><div class="stack"><div data-shot="q5-hand"></div><div data-shot="q5-hand-ovw"></div></div></div>
+    </div>
+  </section>
+</div>
+
+<script>
+const DAY = 86400000;
+let LAUNCH = new Date('2026-09-10T12:00:00');
+const SHORT = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+const dateOf = (d) => new Date(LAUNCH.getTime() + d * DAY);
+const fmt = (d) => { const x = dateOf(d); return `${SHORT[x.getMonth()]} ${x.getDate()}`; };
+const mondayOf = (d) => d - ((dateOf(d).getDay() + 6) % 7);
+const weekOf = (d) => `Week of ${fmt(mondayOf(d))}`;
+const daysWord = (n) => `${n} day${n === 1 ? '' : 's'}`;
+const range = (a, b) => { const x = dateOf(a), y = dateOf(b); return x.getMonth() === y.getMonth() ? `${fmt(a)} to ${y.getDate()}` : `${fmt(a)} to ${fmt(b)}`; };
+const PLAN = { accepted: 7, delivered: 21, draft: 35, post: 42, end: 56 };
+const ORDER = ['accepted', 'delivered', 'draft', 'post'];
+const REMAIN = { accepted: 35, delivered: 21, draft: 7, post: 0 };   /* days from that step to first content */
+const PHASES = [
+  { name: 'Match', line: "Katie's team matches creators for you to approve." },
+  { name: 'Ship', line: 'Product ships to creators.' },
+  { name: 'Film', line: 'Creators film with your product.' },
+  { name: 'Review', line: "Katie's team sends each creator feedback on their draft." },   /* the 3 business days are an internal rule, never shown (Julia, Oct 5) */
+  { name: 'Post', line: 'Creators post once their draft is approved.' },
+];
+/* every string on the tile lives here */
+const COPY = {
+  expected: 'First content expected', landed: 'First content landed', completed: 'Campaign complete',
+  allLive: (n) => `All ${n} posts are live`, tag: 'Early',
+  n_match: "Katie's team is filling the last spots.",
+  n_ship: 'The first order is on its way.',
+  n_review: "Katie's team is reviewing the first draft.",
+  n_approved: 'First draft approved, posting next.',
+  n_filming: 'Your creators are filming.',
+  wait: { accepted: '5 weeks after you approve your creators', delivered: '3 weeks after the first order is delivered', post: 'Once you approve the first draft' },   /* no date, more than 4 weeks past a brand step (copy desk, Oct 6) */
+  review_brand: "Katie's team pre-checks each draft, then you approve it or send feedback.",   /* Review row when the brand reviews its own drafts */
+  n_updated: (date, what) => `Updated ${date}, after ${what}.`,
+  n_count: (a, n) => `${a} of ${n} posts live.`,
+  n_live: (a) => `${a} post${a === 1 ? '' : 's'} live.`,   /* completed: no "of 10" (Julia, Oct 6) */
+  n_first: (a) => `First content landed ${a}.`,
+  n_all: (n) => `All ${n} posts are live.`,
+  y_approve: (n) => `${n} creator${n === 1 ? ' is' : 's are'} ready for your review.`,
+  y_ship: (n) => `${n} order${n === 1 ? ' is' : 's are'} ready for you to ship.`,
+  y_review: (n) => `${n} draft${n === 1 ? ' is' : 's are'} ready for your review.`,
+};
+const WHAT = { accepted: 'creators accepted', delivered: 'the first delivery', draft: 'the first draft' };
+const ON_PLAN_POSTS = [42, 44, 45, 47, 48, 49, 51, 52, 54, 55];
+/* a campaign: when each step really happened (null = never, within this story) and who holds the ball */
+const mk = (o = {}) => ({ acc: 7, del: 21, draft: 35, posts: ON_PLAN_POSTS, n: 10, matchOwner: 'benable', ships: 'auto', reviewer: 'benable', completed: null, ...o });
+const shiftPosts = (first) => ON_PLAN_POSTS.map((d) => d - 42 + first);
+
+const DUR = { accepted: 7, delivered: 14, draft: 14 };               /* the time each step is given; review is counted in business days */
+const FILM_AFTER_SHIP = 6;      /* filming opens 6 days after shipping opens (Julia, Oct 5) */
+const REVIEW_AFTER_FILM = 10;   /* review opens 10 days after filming opens (Julia, Oct 5) */
+const ENDS = [7, 21, 35, 49, 56];   /* when each window closes. Review runs a week into Post so the two overlap (Julia, Oct 5: "post can overlap with review") */
+const REVIEW_BIZ = 3;           /* Katie's team reviews (or pre-checks) each draft within 3 business days (Julia, Oct 5) */
+const BRAND_CAP = 28;           /* once the brand is 4 weeks past a step, the card stops giving a date (Julia, Oct 6) */
+const BRAND_REVIEW_BIZ = 3;     /* when the brand does the final review it gets 3 more business days (Julia, Oct 5) */
+const addBiz = (d, n) => { let x = d; for (let k = 0; k < n;) { x += 1; const wd = dateOf(x).getDay(); if (wd !== 0 && wd !== 6) k += 1; } return x; };
+/* who holds each step: the brand approves its creators / ships its own orders / reviews its own drafts */
+const ownerOf = (sc, k) => (k === 'accepted' ? sc.matchOwner : k === 'delivered' ? sc.ships : k === 'post' ? sc.reviewer : 'creator');
+
+/* the one rule (Julia, Oct 5): early moves the date in, only the brand's own delay moves it out */
+function compute(sc, t) {
+  const firstPost = Math.min(...sc.posts);
+  const ev = { accepted: sc.acc, delivered: sc.del, draft: sc.draft, post: firstPost };
+  const done = (k) => ev[k] != null && ev[k] <= t;
+  const reached = ORDER.filter(done);
+  const front = reached.length;                                       /* the furthest phase the first creator is in */
+  const next = ORDER.find((k) => !done(k)) || null;
+  const movers = reached.filter((k) => k !== 'accepted');
+  const latest = movers[movers.length - 1] || null;
+  const posted = done('post');
+  const live = sc.posts.filter((d) => d <= t).length;
+  const lastPost = Math.max(...sc.posts);
+  const allLive = Number.isFinite(lastPost) && lastPost <= t;
+  /* production marks a campaign completed when every creator is thanked, or when the team completes it by hand */
+  /* completed by the team, when every creator is thanked, or on its own 7 days after every post is live (Julia, Oct 6) */
+  const completed = (sc.completed != null && t >= sc.completed) || (allLive && t >= lastPost + 7);
+
+  /* 1. days lost while the ball was with the brand; cum[i] = the total after step i */
+  let bd = 0, brandHolds = null, brandStep = null, holdOver = 0;
+  const cum = ORDER.map((k, i) => {
+    if (ownerOf(sc, k) === 'brand' && (i === 0 || done(ORDER[i - 1]))) {
+      const prev = i ? ev[ORDER[i - 1]] : 0;
+      const end = done(k) ? ev[k] : t;
+      let over;
+      if (k === 'post') {
+        /* the draft is with the brand once Katie's team has pre-checked it. The brand has 3 business days of its
+           own; once past them, every day the draft has been with the brand counts */
+        const withBrand = addBiz(prev, REVIEW_BIZ);
+        over = end > addBiz(prev, REVIEW_BIZ + BRAND_REVIEW_BIZ) ? Math.max(0, end - Math.max(PLAN[k] + bd, withBrand)) : 0;
+      } else over = Math.max(0, end - Math.max(PLAN[k] + bd, prev + DUR[k]));
+      if (over) { bd += over; if (done(k)) brandStep = k; else { brandHolds = k; holdOver = over; } }
+    }
+    return bd;
+  });
+
+  /* 2. the realistic date, from the first creator */
+  const base = latest ? ev[latest] + REMAIN[latest] : Math.max(42, done('accepted') ? ev.accepted + REMAIN.accepted : 42);
+  const floor = posted ? ev.post : t + REMAIN[next];
+  const realistic = Math.max(base, floor);
+  const overdue = !posted && floor > base && realistic > 42;          /* the next step has run past its time */
+
+  /* 3. what the tile shows: early pulls it in, only the brand pushes it out */
+  const forecast = posted ? ev.post : Math.min(realistic, 42 + bd);
+  const early = mondayOf(forecast) < mondayOf(42);
+  const stale = !posted && mondayOf(t) > mondayOf(forecast);          /* the week on the tile has ended */
+
+  /* 4. the full timeline. Windows overlap (Julia, Oct 5): a phase opens when its first creators can start
+     and closes on the plan's end. A start follows the first creator when they are earlier; an end only
+     moves with the brand's own days. */
+  const open = [0, PLAN.accepted + cum[0]];
+  const st = [0];
+  for (let i = 1; i <= 3; i += 1) {
+    if (i > 1) open[i] = st[i - 1] + (i === 2 ? FILM_AFTER_SHIP : REVIEW_AFTER_FILM) + (cum[i - 1] - cum[i - 2]);
+    st.push(done(ORDER[i - 1]) ? Math.min(ev[ORDER[i - 1]], open[i]) : open[i]);
+  }
+  open[4] = 42 + bd;                                                  /* Post opens on the day first content is expected */
+  st.push(Math.max(Math.min(forecast, open[4]), st[3] + 1));
+  const en = ENDS.map((b, i) => Math.max(b + cum[Math.min(i, 3)], st[i] + 1));
+  const idx = front;
+  if (brandHolds) en[idx] = Math.max(en[idx], t + 1);
+  const earlyBy = st.map((d, i) => (i && done(ORDER[i - 1]) && open[i] - d >= 2 ? open[i] - d : 0));
+  const after = t >= en[4];
+  /* Now can sit on more than one phase (proposed): the furthest one reached, plus any earlier phase whose
+     window is still open, because the other creators are still in it. A closed window loses its Now. */
+  /* past week 8 with posts missing, Post stays Now while the campaign is open (Julia, Oct 6) */
+  const now = completed || allLive ? [] : after ? [4] : [0, 1, 2, 3, 4].filter((i) => i === idx || (i < idx && t < en[i]));
+  const frac = Math.min(.9, Math.max(.1, (t - st[idx]) / Math.max(1, en[idx] - st[idx])));
+  const pct = completed || allLive || after ? 100 : Math.round((idx + frac) * 20);
+
+  /* ---- what the tile says ---- */
+  let label = COPY.expected, value, was = '', tag = false, line = null, capped = false;
+  if (completed) {
+    /* the record: no Now, no tail row, and nothing about posts that never came */
+    label = ''; value = COPY.completed;   /* no date (Julia, Oct 6) */
+    tag = allLive && mondayOf(lastPost) < mondayOf(55);
+    line = live ? ['note', allLive ? COPY.n_all(sc.n) : COPY.n_live(live)] : null;   /* a row never shows a zero */
+  } else if (allLive) {
+    label = COPY.allLive(sc.n); value = fmt(lastPost);
+    tag = mondayOf(lastPost) < mondayOf(55);
+    line = ['note', COPY.n_first(fmt(ev.post))];
+  } else if (posted) {
+    label = COPY.landed; value = fmt(ev.post); tag = early;
+    line = ['note', COPY.n_count(live, sc.n)];
+  } else {
+    value = weekOf(forecast);
+    tag = early;
+    /* the old date, small and crossed out: always when the week is earlier (with the tag). When the brand's
+       delay made it later: up to Film, then gone, and again while a draft waits on the brand's own review
+       (Julia, Oct 5). */
+    if (early || (mondayOf(forecast) > mondayOf(42) && (front < 2 || brandHolds === 'post'))) was = fmt(mondayOf(42));
+    /* at most one line. Amber: the brand holds the step and the date is moving. Grey: a step on our side or the
+       creators' side is past its time, or the week on the tile has ended. Early has no line (Julia, Oct 5). */
+    if (brandHolds) line = ['you', brandHolds === 'accepted' ? COPY.y_approve(sc.n) : brandHolds === 'delivered' ? COPY.y_ship(sc.n) : COPY.y_review(1)];
+    else if (overdue || stale) {
+      const checked = next === 'post' && t >= addBiz(ev.draft, REVIEW_BIZ);            /* Katie's team has had its 3 business days */
+      line = next === 'post' && checked && sc.reviewer === 'brand' ? ['you', COPY.y_review(1)]   /* with the brand, still inside its own 3 days */
+        : ['note', next === 'accepted' ? COPY.n_match : next === 'delivered' ? COPY.n_ship : next === 'draft' ? COPY.n_filming : checked ? COPY.n_approved : COPY.n_review];
+    }
+    else if (was && !early && brandStep && WHAT[brandStep]) line = ['note', COPY.n_updated(fmt(ev[brandStep]), WHAT[brandStep])];
+    /* more than 4 weeks past a brand step: no date, say what first content waits for; the amber line stays */
+    if (brandHolds && holdOver > BRAND_CAP) { capped = true; value = COPY.wait[brandHolds]; was = ''; tag = false; }
+  }
+  return { sc, t, ev, done, reached, front, next, latest, posted, live, allLive, completed, capped, lastPost, forecast, realistic, bd, brandHolds, lateBy: bd, early, stale, open, st, en, earlyBy, idx, now, after, pct, week: Math.floor(t / 7) + 1, label, value, was, tag, line };
+}
+
+/* ---------- drawing ---------- */
+const CHEV = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" width="14" height="14" aria-hidden="true"><path d="M4 6l4 4 4-4"/></svg>';
+const prev = {};
+function tileHtml(c, { open = false, flashKey = null } = {}) {
+  const flash = flashKey && prev[flashKey] !== undefined && prev[flashKey] !== c.value ? ' flash' : '';
+  if (flashKey) prev[flashKey] = c.value;
+  const names = PHASES.map((p, i) => `<span class="${c.now.includes(i) ? 'now' : ''}">${p.name}</span>`).join('');
+  const lineHtml = c.line ? `<div class="tl-why${c.line[0] === 'you' ? ' is-you' : ''}"><i></i><span>${c.line[1]}</span></div>` : '';
+  let steps = '';
+  if (open) {
+    steps = PHASES.map((p, i) => {
+      const st = c.now.includes(i) ? 'cur' : c.completed || c.allLive || c.after || i < c.idx ? 'done' : 'next';
+      /* early = earlier than this row's own planned opening */
+      const startedEarly = c.earlyBy[i] ? ` <span class="early">Started ${daysWord(c.earlyBy[i])} early.</span>` : '';
+      return `<li class="${st}"><span class="tl-dot"></span><div><div class="tl-row"><b>${p.name}</b>${st === 'cur' ? '<span class="tl-nowpill">Now</span>' : ''}<span class="tl-dates">${range(c.st[i], c.en[i] - 1)}</span></div><p>${i === 3 && c.sc.reviewer === 'brand' ? COPY.review_brand : p.line}${startedEarly}</p></div></li>`;
+    }).join('');
+    const tailNow = c.after && !c.allLive;
+    /* stragglers get no mention: the team's follow-ups are logged but never shown (Julia, Oct 5) */
+    if (!c.completed) steps += `<li class="${c.allLive ? 'done' : tailNow ? 'cur' : 'next'}"><span class="tl-dot"></span><div><div class="tl-row"><b>${c.lateBy > 0 ? 'After that' : 'After week 8'}</b>${tailNow ? '<span class="tl-nowpill">Now</span>' : ''}<span class="tl-dates">From ${fmt(c.en[4])}</span></div><p>${c.allLive ? 'Every post is live.' : 'Any last posts go live.'}</p></div></li>`;
+  }
+  return `<section class="am-card" aria-label="Campaign timeline">
+    <div class="am-card-head"><span class="am-card-title">Campaign timeline</span></div>
+    <div class="tl-body">
+      <div class="tl-k">${c.label}</div>
+      <div class="tl-v"><span class="val${flash}">${c.value}</span>${c.was ? `<span class="tl-was">${c.was}</span>` : ''}${c.tag ? `<span class="tl-early">${COPY.tag}</span>` : ''}</div>${lineHtml}
+      <div class="tl-line" aria-hidden="true"><span style="width:${c.pct}%"></span></div>
+      <div class="tl-phases" aria-hidden="true">${names}</div>
+      <div class="tl-toggle"><span>${open ? 'Hide the full timeline' : 'See the full timeline'}</span>${open ? CHEV.replace('<svg', '<svg style="transform:rotate(180deg)"') : CHEV}</div>
+      ${open ? `<ol class="tl-steps">${steps}</ol>` : ''}
+    </div>
+  </section>`;
+}
+function ovwHtml(c) {
+  const tag = c.tag ? `<span class="tl-early">${COPY.tag}</span>` : '';
+  const wk = c.week <= 8 ? `Week ${c.week} of 8` : `Week ${c.week}`;
+  const meta = c.completed ? (c.live ? `<b>${c.live} live</b> · campaign complete` : '<b>Campaign complete</b>')   /* no "of 10", no date (Julia, Oct 5 and 6) */
+    : c.allLive ? `<b>${c.sc.n} of ${c.sc.n} live</b> · last on ${fmt(c.lastPost)}${tag}`
+    : c.posted ? `<b>${c.live} of ${c.sc.n} live</b> · first on ${fmt(c.ev.post)}${tag}`
+      /* the week has passed, or no date any more: the card's own line in place of the date (Julia, Oct 6) */
+      : (c.stale || c.capped) && c.line ? `<b>${wk}</b> · ${c.line[1].replace(/\.$/, '')}`
+        : `<b>${wk}</b> · first content expected the week of ${fmt(mondayOf(c.forecast))}${tag}`;
+  const pct = c.posted ? Math.round((c.live / c.sc.n) * 100) : Math.min(100, Math.round((Math.min(c.week, 8) / 8) * 100));
+  return `<div class="ovw"><span class="pill"><b>October content</b> · launched Sep 10</span><h4>Campaign 1</h4><div class="meta">${meta}</div><div class="bar${c.posted ? ' is-live' : ''}"><span style="width:${pct}%"></span></div></div>`;
+}
+
+
+const TODAY = '2026-10-06';
+const MONTHS_LONG = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+const INF = Infinity;
+function at(iso, fn) { LAUNCH = new Date(iso + 'T12:00:00'); return fn(); }
+const dayOn = (iso) => Math.round((new Date(TODAY + 'T12:00:00') - new Date(iso + 'T12:00:00')) / DAY);
+const cardFor = (iso, sc, t, open) => at(iso, () => tileHtml(compute(sc, t == null ? dayOn(iso) : t), { open: !!open }));
+function ovwFor(iso, number, sc, t) {
+  return at(iso, () => {
+    const c = compute(sc, t == null ? dayOn(iso) : t);
+    const month = MONTHS_LONG[dateOf(49).getMonth()];
+    const tag = c.tag ? `<span class="tl-early">${COPY.tag}</span>` : '';
+    const wk = c.week <= 8 ? `Week ${c.week} of 8` : `Week ${c.week}`;
+    const m = c.completed ? (c.live ? `<b>${c.live} live</b> · campaign complete` : '<b>Campaign complete</b>')
+      : c.allLive ? `<b>${c.sc.n} of ${c.sc.n} live</b> · last on ${fmt(c.lastPost)}${tag}`
+        : c.posted ? `<b>${c.live} of ${c.sc.n} live</b> · first on ${fmt(c.ev.post)}${tag}`
+          : (c.stale || c.capped) && c.line ? `<b>${wk}</b> · ${c.line[1].replace(/\.$/, '')}`
+            : `<b>${wk}</b> · first content expected the week of ${fmt(mondayOf(c.forecast))}${tag}`;
+    const pct = c.completed ? 100 : c.posted ? Math.round((c.live / c.sc.n) * 100) : Math.min(100, Math.round((Math.min(c.week, 8) / 8) * 100));
+    return `<div class="ovw"><span class="pill"><b>${month} content</b> · launched ${fmt(0)}</span><h4>Campaign ${number}</h4><div class="meta">${m}</div><div class="bar${c.posted ? ' is-live' : ''}"><span style="width:${pct}%"></span></div></div>`;
+  });
+}
+const put = (k, html) => { document.querySelector(`[data-shot="${k}"]`).innerHTML = html; };
+
+const Q1 = ['2026-08-23', mk({ acc: 7, del: 30, draft: 44, posts: [INF, INF, INF, INF, INF], n: 5 })];
+put('q1-card', cardFor(...Q1)); put('q1-ovw', ovwFor(Q1[0], 2, Q1[1]));
+
+const Q2 = ['2026-07-07', mk({ acc: 7, del: 24, draft: 40, posts: [47, 60, INF, INF, INF], n: 5 })];
+put('q2-card', cardFor(...Q2)); put('q2-open', cardFor(Q2[0], Q2[1], null, true));
+
+const Q3 = ['2026-04-08', mk({ acc: 7, del: 20, draft: 34, posts: [42, 45, 48, 52, 56], n: 5 })];
+put('q3-before', cardFor(Q3[0], Q3[1], 59)); put('q3-after', cardFor(Q3[0], Q3[1], 63)); put('q3-ovw', ovwFor(Q3[0], 1, Q3[1], 63));
+
+const Q4 = ['2026-05-30', mk({ acc: INF, del: INF, draft: INF, posts: [INF, INF, INF, INF, INF], n: 5, matchOwner: 'brand' })];
+put('q4-card', cardFor(...Q4)); put('q4-ovw', ovwFor(Q4[0], 1, Q4[1]));
+
+const Q5all = ['2026-07-01', mk({ acc: 7, del: 21, draft: 37, posts: [44, 50, 55, 60, 63], n: 5, completed: 92 })];
+put('q5-all', cardFor(...Q5all)); put('q5-all-ovw', ovwFor(Q5all[0], 1, Q5all[1]));
+const Q5hand = ['2026-07-01', mk({ acc: 7, del: 21, draft: 37, posts: [44, 50, 55, INF, INF], n: 5, completed: 92 })];
+put('q5-hand', cardFor(...Q5hand)); put('q5-hand-ovw', ovwFor(Q5hand[0], 1, Q5hand[1]));
+</script>
+</body>
+</html>
