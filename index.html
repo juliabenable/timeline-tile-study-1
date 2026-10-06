@@ -245,6 +245,8 @@
         <li><b>The crossed-out date</b> shows with the tag whenever the week is earlier. When the brand's delay made it later, it shows up to Film: once the first order is delivered, the tile just shows the new date. It shows again while a draft waits on the brand's own review.</li>
         <li><b>After the first post</b> the tile states the fact and counts posts. After the last one it says so. <span class="tag dec">Julia · Oct 5</span></li>
         <li><b>Complete:</b> once the campaign is completed, the tile reads "Campaign complete", with no date, and the post count under it. A campaign completes on its own 7 days after every post is live, when every creator is thanked, or when the team completes it by hand. <span class="tag dec">Julia · Oct 6</span></li>
+        <li><b>A brand step held more than 4 weeks:</b> the card stops giving a date and says what first content waits for, for example "5 weeks after you approve your creators", with the amber line under it. Katie's team is flagged at the same point. <span class="tag dec">Julia · Oct 6</span></li>
+        <li><b>The overview card</b> shows the card's own line in place of the date once the promised week has passed, or once there is no date: "Week 7 of 8 · Katie's team is reviewing the first draft". <span class="tag dec">Julia · Oct 6</span></li>
         <li><b>Past week 8 with posts missing:</b> the bar is full and Post stays marked Now until the campaign completes. <span class="tag dec">Julia · Oct 6</span></li>
       </ol>
       <h3 style="margin-top:22px">The full timeline, in words</h3>
@@ -324,7 +326,7 @@ now(phase)  = phase is the furthest reached || (reached &amp;&amp; today &lt; ph
       <tr><td class="q">Early by a few days only</td><td>The date is shown by week, so a small gain often stays in the same week. No tag, no crossed-out date: the tile does not change.</td><td><span class="tag dec">Julia · Oct 5</span></td></tr>
       <tr><td class="q">A small gain flips the week</td><td>A gain of 4 days can move the Monday. The tag says "Early" and nothing about how much, so it never overstates.</td><td><span class="tag dec">Julia · Oct 5</span></td></tr>
       <tr><td class="q">The expected week is the current week</td><td>The tile keeps its format: "Week of Oct 19". "This week" was considered and dropped at the copy desk: it reads as a promise, and it would not match the crossed-out date beside it.</td><td><span class="tag dec">Julia · Oct 5</span></td></tr>
-      <tr><td class="q">The expected week ends with nothing live</td><td>Brand's side alone: cannot happen, the date moves with every day they take. Creators' side: the tile keeps the planned week after it has ended, and always carries one grey line in that state. This is the only time the tile shows a week that has gone.</td><td><span class="tag dec">Julia · Oct 5</span></td></tr>
+      <tr><td class="q">The expected week ends with nothing live</td><td>Brand's side alone: cannot happen, the date moves with every day they take. Creators' side: the tile keeps the planned week after it has ended, and always carries one grey line in that state. On the overview card the line takes the place of the date: "Week 7 of 8 · Katie's team is reviewing the first draft". This is the only time the tile shows a week that has gone.</td><td><span class="tag dec">Julia · Oct 5</span></td></tr>
       <tr><td class="q">Early, then the next step is slow</td><td>The gain drains away day by day, back to the planned week, and stops there. The tag and the crossed-out date leave when it gets there. Scenario "Early, then filming drags".</td><td><span class="tag dec">Julia · Oct 5</span></td></tr>
       <tr><td class="q">A brand delay, then a fast step</td><td>The date comes back earlier. The crossed-out date leaves if it returns to the week promised at launch.</td><td><span class="tag dec">Julia · Oct 5</span></td></tr>
       <tr><td class="q">The date moved later</td><td>Only the brand can cause it. New week at normal size, no tag. The old date, small and crossed out, shows up to Film; once filming starts it goes and the tile just shows the new date. It shows again while a draft waits on the brand's own review. Amber line while they hold a step, grey line once they have acted.</td><td><span class="tag dec">Julia · Oct 5</span></td></tr>
@@ -334,6 +336,7 @@ now(phase)  = phase is the furthest reached || (reached &amp;&amp; today &lt; ph
 
       <tr class="grp"><td colspan="3">Who we are waiting on</td></tr>
       <tr><td class="q">The brand has not approved its creators</td><td>Amber: "10 creators are ready for your review." The date moves a day for every day past day 7.</td><td><span class="tag dec">Julia · Oct 5</span></td></tr>
+      <tr><td class="q">A brand step held more than 4 weeks</td><td>The date stops: "5 weeks after you approve your creators", "3 weeks after your orders arrive", or "Once you approve the first draft", with the amber line under it and no crossed-out date. The overview card reads "Week 19 · 5 creators are ready for your review". Katie's team is flagged. Wording pending the copy desk.</td><td><span class="tag dec">Julia · Oct 6</span></td></tr>
       <tr><td class="q">The brand ships its own orders and has not shipped</td><td>Amber: "10 orders are ready for you to ship." The date moves.</td><td><span class="tag dec">Julia · Oct 5</span></td></tr>
       <tr><td class="q">The brand reviews its own drafts and one is waiting</td><td>Amber: "1 draft is ready for your review." The brand gets 3 business days after Katie's team's 3-business-day pre-check. Past that, and past day 42, the date moves to today and keeps moving, and the old date shows crossed out while the draft waits. The amber line can show a little earlier, as soon as the draft is with them and the promised week is at risk.</td><td><span class="tag dec">Julia · Oct 5</span></td></tr>
       <tr><td class="q">Matching is still on us after week 1</td><td>Grey: "Katie's team is filling the last spots." The date holds.</td><td><span class="tag dec">Julia · Oct 5</span></td></tr>
@@ -442,6 +445,7 @@ const COPY = {
   n_review: "Katie's team is reviewing the first draft.",
   n_approved: 'First draft approved, posting next.',
   n_filming: 'Your creators are filming.',
+  wait: { accepted: '5 weeks after you approve your creators', delivered: '3 weeks after your orders arrive', post: 'Once you approve the first draft' },   /* no date, more than 4 weeks past a brand step (wording: copy desk pass pending) */
   review_brand: "Katie's team pre-checks each draft, then you approve it or send feedback.",   /* Review row when the brand reviews its own drafts */
   n_updated: (date, what) => `Updated ${date}, after ${what}.`,
   n_count: (a, n) => `${a} of ${n} posts live.`,
@@ -463,6 +467,7 @@ const FILM_AFTER_SHIP = 6;      /* filming opens 6 days after shipping opens (Ju
 const REVIEW_AFTER_FILM = 10;   /* review opens 10 days after filming opens (Julia, Oct 5) */
 const ENDS = [7, 21, 35, 49, 56];   /* when each window closes. Review runs a week into Post so the two overlap (Julia, Oct 5: "post can overlap with review") */
 const REVIEW_BIZ = 3;           /* Katie's team reviews (or pre-checks) each draft within 3 business days (Julia, Oct 5) */
+const BRAND_CAP = 28;           /* once the brand is 4 weeks past a step, the card stops giving a date (Julia, Oct 6) */
 const BRAND_REVIEW_BIZ = 3;     /* when the brand does the final review it gets 3 more business days (Julia, Oct 5) */
 const addBiz = (d, n) => { let x = d; for (let k = 0; k < n;) { x += 1; const wd = dateOf(x).getDay(); if (wd !== 0 && wd !== 6) k += 1; } return x; };
 /* who holds each step: the brand approves its creators / ships its own orders / reviews its own drafts */
@@ -487,7 +492,7 @@ function compute(sc, t) {
   const completed = (sc.completed != null && t >= sc.completed) || (allLive && t >= lastPost + 7);
 
   /* 1. days lost while the ball was with the brand; cum[i] = the total after step i */
-  let bd = 0, brandHolds = null, brandStep = null;
+  let bd = 0, brandHolds = null, brandStep = null, holdOver = 0;
   const cum = ORDER.map((k, i) => {
     if (ownerOf(sc, k) === 'brand' && (i === 0 || done(ORDER[i - 1]))) {
       const prev = i ? ev[ORDER[i - 1]] : 0;
@@ -499,7 +504,7 @@ function compute(sc, t) {
         const withBrand = addBiz(prev, REVIEW_BIZ);
         over = end > addBiz(prev, REVIEW_BIZ + BRAND_REVIEW_BIZ) ? Math.max(0, end - Math.max(PLAN[k] + bd, withBrand)) : 0;
       } else over = Math.max(0, end - Math.max(PLAN[k] + bd, prev + DUR[k]));
-      if (over) { bd += over; if (done(k)) brandStep = k; else brandHolds = k; }
+      if (over) { bd += over; if (done(k)) brandStep = k; else { brandHolds = k; holdOver = over; } }
     }
     return bd;
   });
@@ -539,7 +544,7 @@ function compute(sc, t) {
   const pct = completed || allLive || after ? 100 : Math.round((idx + frac) * 20);
 
   /* ---- what the tile says ---- */
-  let label = COPY.expected, value, was = '', tag = false, line = null;
+  let label = COPY.expected, value, was = '', tag = false, line = null, capped = false;
   if (completed) {
     /* the record: no Now, no tail row, and nothing about posts that never came */
     label = ''; value = COPY.completed;   /* no date (Julia, Oct 6) */
@@ -568,8 +573,10 @@ function compute(sc, t) {
         : ['note', next === 'accepted' ? COPY.n_match : next === 'delivered' ? COPY.n_ship : next === 'draft' ? COPY.n_filming : checked ? COPY.n_approved : COPY.n_review];
     }
     else if (was && !early && brandStep && WHAT[brandStep]) line = ['note', COPY.n_updated(fmt(ev[brandStep]), WHAT[brandStep])];
+    /* more than 4 weeks past a brand step: no date, say what first content waits for; the amber line stays */
+    if (brandHolds && holdOver > BRAND_CAP) { capped = true; value = COPY.wait[brandHolds]; was = ''; tag = false; }
   }
-  return { sc, t, ev, done, reached, front, next, latest, posted, live, allLive, completed, lastPost, forecast, realistic, bd, brandHolds, lateBy: bd, early, stale, open, st, en, earlyBy, idx, now, after, pct, week: Math.floor(t / 7) + 1, label, value, was, tag, line };
+  return { sc, t, ev, done, reached, front, next, latest, posted, live, allLive, completed, capped, lastPost, forecast, realistic, bd, brandHolds, lateBy: bd, early, stale, open, st, en, earlyBy, idx, now, after, pct, week: Math.floor(t / 7) + 1, label, value, was, tag, line };
 }
 
 /* ---------- drawing ---------- */
@@ -610,7 +617,9 @@ function ovwHtml(c) {
   const meta = c.completed ? (c.live ? `<b>${c.live} live</b> · campaign complete` : '<b>Campaign complete</b>')   /* no "of 10", no date (Julia, Oct 5 and 6) */
     : c.allLive ? `<b>${c.sc.n} of ${c.sc.n} live</b> · last on ${fmt(c.lastPost)}${tag}`
     : c.posted ? `<b>${c.live} of ${c.sc.n} live</b> · first on ${fmt(c.ev.post)}${tag}`
-      : `<b>${wk}</b> · first content expected the week of ${fmt(mondayOf(c.forecast))}${tag}`;
+      /* the week has passed, or no date any more: the card's own line in place of the date (Julia, Oct 6) */
+      : (c.stale || c.capped) && c.line ? `<b>${wk}</b> · ${c.line[1].replace(/\.$/, '')}`
+        : `<b>${wk}</b> · first content expected the week of ${fmt(mondayOf(c.forecast))}${tag}`;
   const pct = c.posted ? Math.round((c.live / c.sc.n) * 100) : Math.min(100, Math.round((Math.min(c.week, 8) / 8) * 100));
   return `<div class="ovw"><span class="pill"><b>October content</b> · launched Sep 10</span><h4>Campaign 1</h4><div class="meta">${meta}</div><div class="bar${c.posted ? ' is-live' : ''}"><span style="width:${pct}%"></span></div></div>`;
 }
